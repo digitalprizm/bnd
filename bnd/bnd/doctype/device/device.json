@@ -3,7 +3,7 @@
  "allow_guest_to_view": 0, 
  "allow_import": 0, 
  "allow_rename": 0, 
- "autoname": "field:device_name", 
+ "autoname": "DE-.####", 
  "beta": 0, 
  "creation": "2018-03-05 11:11:39.744918", 
  "custom": 0, 
@@ -101,7 +101,7 @@
    "reqd": 0, 
    "search_index": 0, 
    "set_only_once": 0, 
-   "unique": 0
+   "unique": 1
   }, 
   {
    "allow_bulk_edit": 0, 
@@ -234,7 +234,7 @@
  "issingle": 0, 
  "istable": 1, 
  "max_attachments": 0, 
- "modified": "2018-03-05 11:31:46.848606", 
+ "modified": "2018-03-05 14:04:14.967978", 
  "modified_by": "Administrator", 
  "module": "BnD", 
  "name": "Device", 
