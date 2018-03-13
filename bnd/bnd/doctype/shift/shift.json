@@ -43,6 +43,7 @@
    "reqd": 0, 
    "search_index": 0, 
    "set_only_once": 0, 
+   "translatable": 0, 
    "unique": 0
   }, 
   {
@@ -76,6 +77,7 @@
    "reqd": 1, 
    "search_index": 0, 
    "set_only_once": 1, 
+   "translatable": 0, 
    "unique": 0
   }, 
   {
@@ -109,6 +111,7 @@
    "reqd": 1, 
    "search_index": 1, 
    "set_only_once": 0, 
+   "translatable": 0, 
    "unique": 0
   }, 
   {
@@ -141,6 +144,7 @@
    "reqd": 0, 
    "search_index": 0, 
    "set_only_once": 0, 
+   "translatable": 0, 
    "unique": 0
   }, 
   {
@@ -150,7 +154,7 @@
    "collapsible": 0, 
    "columns": 0, 
    "fieldname": "employee_id", 
-   "fieldtype": "Data", 
+   "fieldtype": "Read Only", 
    "hidden": 0, 
    "ignore_user_permissions": 0, 
    "ignore_xss_filter": 0, 
@@ -171,6 +175,7 @@
    "reqd": 0, 
    "search_index": 0, 
    "set_only_once": 0, 
+   "translatable": 0, 
    "unique": 0
   }, 
   {
@@ -205,6 +210,7 @@
    "reqd": 1, 
    "search_index": 1, 
    "set_only_once": 0, 
+   "translatable": 0, 
    "unique": 0
   }, 
   {
@@ -239,6 +245,7 @@
    "reqd": 0, 
    "search_index": 0, 
    "set_only_once": 0, 
+   "translatable": 0, 
    "unique": 0
   }, 
   {
@@ -269,6 +276,7 @@
    "reqd": 0, 
    "search_index": 0, 
    "set_only_once": 0, 
+   "translatable": 0, 
    "unique": 0, 
    "width": "50%"
   }, 
@@ -302,6 +310,7 @@
    "reqd": 1, 
    "search_index": 0, 
    "set_only_once": 0, 
+   "translatable": 0, 
    "unique": 0
   }, 
   {
@@ -335,6 +344,7 @@
    "reqd": 1, 
    "search_index": 0, 
    "set_only_once": 0, 
+   "translatable": 0, 
    "unique": 0
   }, 
   {
@@ -344,7 +354,7 @@
    "collapsible": 0, 
    "columns": 0, 
    "fieldname": "store", 
-   "fieldtype": "Data", 
+   "fieldtype": "Link", 
    "hidden": 0, 
    "ignore_user_permissions": 0, 
    "ignore_xss_filter": 0, 
@@ -355,6 +365,7 @@
    "label": "Store", 
    "length": 0, 
    "no_copy": 0, 
+   "options": "Store", 
    "permlevel": 0, 
    "precision": "", 
    "print_hide": 0, 
@@ -365,6 +376,7 @@
    "reqd": 0, 
    "search_index": 0, 
    "set_only_once": 0, 
+   "translatable": 0, 
    "unique": 0
   }, 
   {
@@ -395,6 +407,7 @@
    "reqd": 0, 
    "search_index": 0, 
    "set_only_once": 0, 
+   "translatable": 0, 
    "unique": 0
   }, 
   {
@@ -425,6 +438,7 @@
    "reqd": 0, 
    "search_index": 0, 
    "set_only_once": 0, 
+   "translatable": 0, 
    "unique": 0
   }, 
   {
@@ -455,6 +469,7 @@
    "reqd": 0, 
    "search_index": 0, 
    "set_only_once": 0, 
+   "translatable": 0, 
    "unique": 0
   }
  ], 
@@ -469,7 +484,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2018-03-05 17:32:20.022634", 
+ "modified": "2018-03-13 19:22:28.497375", 
  "modified_by": "Administrator", 
  "module": "BnD", 
  "name": "Shift", 
