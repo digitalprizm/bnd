@@ -6,9 +6,9 @@ def get_data():
 	return [
 		{
 			"module_name": "BnD",
-			"color": "grey",
-			"icon": "octicon octicon-file-directory",
+			"color": "#019941",
+			"icon": "fa fa-subway",
 			"type": "module",
-			"label": _("BnD")
+			"label": _("BND")
 		}
 	]
