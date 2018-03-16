@@ -2,15 +2,15 @@
 // rename this file from _test_[name] to test_[name] to activate
 // and remove above this line
 
-QUnit.test("test: Roaster", function (assert) {
+QUnit.test("test: Upload Shift Schedule", function (assert) {
 	let done = assert.async();
 
 	// number of asserts
 	assert.expect(1);
 
 	frappe.run_serially([
-		// insert a new Roaster
-		() => frappe.tests.make('Roaster', [
+		// insert a new Upload Shift Schedule
+		() => frappe.tests.make('Upload Shift Schedule', [
 			// values to be set
 			{key: 'value'}
 		]),

@@ -18,11 +18,24 @@ def get_data():
 				},
 				{
 					"type": "doctype",
-					"name": "Shift",
+					"name": "Shift Time",
 					"description": _("Information about shift attendance."),
 				},
-				
-				
+				{
+					"type": "doctype",
+					"name": "Shift Schedule",
+					"description": _("Information about shift attendance."),
+				},
+				{
+					"type": "doctype",
+					"name": "Shift Schedule Exception",
+					"description": _("Information about shift attendance."),
+				},
+				{
+					"type": "doctype",
+					"name": "Attendance Violation",
+					"description": _("Information about shift attendance."),
+				},				
 			]
 		},
 		

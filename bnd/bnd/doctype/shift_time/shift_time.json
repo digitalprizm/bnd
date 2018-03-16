@@ -41,7 +41,6 @@
    "reqd": 1, 
    "search_index": 0, 
    "set_only_once": 0, 
-   "translatable": 0, 
    "unique": 0
   }, 
   {
@@ -72,7 +71,6 @@
    "reqd": 1, 
    "search_index": 0, 
    "set_only_once": 0, 
-   "translatable": 0, 
    "unique": 0
   }, 
   {
@@ -103,7 +101,6 @@
    "reqd": 1, 
    "search_index": 0, 
    "set_only_once": 0, 
-   "translatable": 0, 
    "unique": 0
   }, 
   {
@@ -133,7 +130,6 @@
    "reqd": 0, 
    "search_index": 0, 
    "set_only_once": 0, 
-   "translatable": 0, 
    "unique": 0
   }, 
   {
@@ -164,7 +160,6 @@
    "reqd": 0, 
    "search_index": 0, 
    "set_only_once": 0, 
-   "translatable": 0, 
    "unique": 0
   }, 
   {
@@ -174,7 +169,7 @@
    "collapsible": 0, 
    "columns": 0, 
    "fieldname": "end_time_on_next_day", 
-   "fieldtype": "Select", 
+   "fieldtype": "Check", 
    "hidden": 0, 
    "ignore_user_permissions": 0, 
    "ignore_xss_filter": 0, 
@@ -185,7 +180,7 @@
    "label": "End time on next day", 
    "length": 0, 
    "no_copy": 0, 
-   "options": "\nYes\nNo", 
+   "options": "", 
    "permlevel": 0, 
    "precision": "", 
    "print_hide": 0, 
@@ -196,7 +191,6 @@
    "reqd": 0, 
    "search_index": 0, 
    "set_only_once": 0, 
-   "translatable": 0, 
    "unique": 0
   }
  ], 
@@ -210,7 +204,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2018-03-13 18:15:51.983504", 
+ "modified": "2018-03-15 12:27:39.828656", 
  "modified_by": "Administrator", 
  "module": "BnD", 
  "name": "Shift Time", 
