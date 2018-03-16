@@ -20,6 +20,9 @@ def get_data(filters):
 		shift_type, shift_id, eligible_week_off_days, store, enroll_number, weekly_off_day1, weekly_off_day2
 	    from `tabEmployee` """
 	
+	if filters.get("Store"):
+		query += """ where store = '{0}' 
+			""".format(filters.get("Store"))
 	
 	dl = frappe.db.sql(query,as_list=1,debug=1)
 	return dl
