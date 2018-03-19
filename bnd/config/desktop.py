@@ -24,7 +24,7 @@ def get_data():
 			"module_name": "Device",
 			"_doctype": "Device",
 			"color": "#cb3fcd",
-			"icon": "fa fa-user-circle-o",
+			"icon": "fa fa-server",
 			"type": "link",
 			"link": "List/Device"
 		},
@@ -32,7 +32,15 @@ def get_data():
 			"module_name": "Shift Time",
 			"_doctype": "Shift Time",
 			"color": "#600080",
-			"icon": "fa fa-user",
+			"icon": "fa fa-calendar-plus-o",
+			"type": "link",
+			"link": "List/Shift Time"
+		},
+		{
+			"module_name": "Shift Schedule",
+			"_doctype": "Shift Schedule",
+			"color": "#4dab9e",
+			"icon": "fa fa-calendar",
 			"type": "link",
 			"link": "List/Shift Time"
 		},
