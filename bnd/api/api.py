@@ -77,3 +77,31 @@ def get_attendance_violation_list():
 	    from `tabAttendance Violation`""",as_dict=1)
 
 	return attendance_violation_list
+
+@frappe.whitelist(allow_guest=True)
+def get_shift_time_list():
+	shift_time_list = frappe.db.sql("""select  shift_name, start_time, end_time, no_of_hours, end_time_on_next_day
+	    from `tabShift Time`""",as_dict=1)
+
+	return shift_time_list
+
+@frappe.whitelist(allow_guest=True)
+def get_shift_time_details(shift_name=None):
+	shift_time_details = frappe.db.sql("""select  shift_name, start_time, end_time, no_of_hours, end_time_on_next_day
+	    from `tabShift Time` WHERE shift_name='{0}' """.format(shift_name),as_dict=1)
+
+	return shift_time_details
+
+@frappe.whitelist(allow_guest=True)
+def get_shift_schedule_list():
+	shift_schedule_list = frappe.db.sql("""select  shift_name, start_time, end_time, no_of_hours, end_time_on_next_day
+	    from `tabShift Time`""",as_dict=1)
+
+	return shift_schedule_list
+
+@frappe.whitelist(allow_guest=True)
+def get_shift_schedule_details(shift_name=None):
+	shift_schedule_details = frappe.db.sql("""select  shift_name, start_time, end_time, no_of_hours, end_time_on_next_day
+	    from `tabShift Time` WHERE shift_name='{0}'""".format(shift_name),as_dict=1)
+
+	return shift_schedule_details
