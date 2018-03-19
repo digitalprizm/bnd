@@ -77,3 +77,4 @@ def get_attendance_violation_list():
 	    from `tabAttendance Violation`""",as_dict=1)
 
 	return attendance_violation_list
+
