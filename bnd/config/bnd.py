@@ -61,12 +61,12 @@ def get_data():
 			"label": _("Reports"),
 			"icon": "fa fa-list",
 			"items": [
-				# {
-				# 	"type": "report",
-				# 	"is_query_report": True,
-				# 	"name": "Statement Of Account",
-				# 	"doctype": "Payment Entry"
-				# },
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Attendance Sheet",
+					"doctype": "Attendance"
+				},
 				
 			]
 		},
