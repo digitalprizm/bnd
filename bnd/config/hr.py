@@ -38,6 +38,18 @@ def get_data():
 				},				
 			]
 		},
-		
+		{
+			"label": _("Reports"),
+			"icon": "fa fa-list",
+			"items": [
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Attendance Sheet",
+					"doctype": "Attendance"
+				},
+				
+			]
+		},
 		]
 	
