@@ -21,15 +21,15 @@ def get_data():
 		{
 			"module_name": "Shift Schedule Exception",
 			"_doctype": "Shift Schedule Exception",
-			"color": "#0061A8",
-			"icon": "fa fa-exclamation-triangle",
+			"color": "#0085A8",
+			"icon": "fa fa-calendar-o",
 			"type": "link",
 			"link": "List/Shift Schedule Exception"
 		},
 		{
 			"module_name": "Upload Shift Schedule",
 			"_doctype": "Upload Shift Schedule",
-			"color": "#0061A8",
+			"color": "#0091A8",
 			"icon": "fa fa-upload",
 			"type": "link",
 			"link": "List/Upload Shift Schedule"
@@ -61,7 +61,7 @@ def get_data():
 		{
 			"module_name": "Shift Time",
 			"_doctype": "Shift Time",
-			"color": "#0061A8",
+			"color": "#0351A8",
 			"icon": "fa fa-calendar-plus-o",
 			"type": "link",
 			"link": "List/Shift Time"
