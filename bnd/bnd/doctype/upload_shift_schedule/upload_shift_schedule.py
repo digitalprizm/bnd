@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-.
 # Copyright (c) 2018, Digitalprizm and contributors
 # For license information, please see license.txt
 
@@ -33,11 +33,8 @@ def get_template():
 def add_header(w):
 	w.writerow(["Notes:"])
 	w.writerow(["Please do not change the template headings"])
-	w.writerow(["ID", "Date", "Customer Ref", "Address Line 1", "Address Line 2", "Address Line 3",
-		 "Contact Person Name", "Mobile No", 
-		 "Contact No", "Delivery Note No", "Email",
-		 "Lorry No",  "Trip","Remarks",
-		 "Pin Code","Is Return"])
+	w.writerow(["ID", "Emp Id", "Name", "Store", "Day 1","Day 2", "Day 3",
+		  "Day 4", "Day 5", "Day 6", "Day 7", "Attendance date", "Employee"])
 	# w.writerow(["ID", "Date", "Customer Ref", "Delivery Note No", "Lorry No", "Trip",
 	# 	 "Contact Person Name", "Address Line 1", "Address Line 2", "Address Line 3", 
 	# 	 "Pin Code", "Contact No", "Mobile No", "Email", "Remarks"])
@@ -112,11 +109,11 @@ def upload():
 		d = frappe._dict(zip(columns, row))
 		d["doctype"] = "Shift Schedule"
 		d["customer_ref"] = row[2]
-		d["is_return"] = row[15]
+		d["is_return"] = row[10]
 
-		import datetime
-		new_date = datetime.datetime.strptime(row[1],'%d-%b-%y').strftime('%d-%m-%Y')
-		d["date"] = new_date
+		# import datetime
+		# new_date = datetime.datetime.strptime(row[11],'%d-%b-%y').strftime('%d-%m-%Y')
+		# d["date"] = new_date
 
 		if d.name:
 			d["docstatus"] = frappe.db.get_value("Shift Schedule", d.name, "docstatus")
