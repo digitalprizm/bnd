@@ -52,6 +52,14 @@ def get_data():
 			"link": "List/Attendance Violation"
 		},
 		{
+			"module_name": "Device",
+			"_doctype": "Device",
+			"color": "#cb3fcd",
+			"icon": "fa fa-server",
+			"type": "link",
+			"link": "List/Device"
+		},
+		{
 			"module_name": "Shift Time",
 			"_doctype": "Shift Time",
 			"color": "#0061A8",
@@ -75,6 +83,4 @@ def get_data():
 			"type": "link",
 			"link": "List/Store"
 		}
-
-		
 	]
