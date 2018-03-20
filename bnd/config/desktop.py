@@ -13,7 +13,6 @@ def get_data():
 		},
 		{
 			"module_name": "Human Resource",
-			"_doctype": "Human Resource",
 			"color": "#0061A8",
 			"icon": "fa fa-users",
 			"type": "link",
