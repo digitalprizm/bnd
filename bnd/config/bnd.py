@@ -19,11 +19,6 @@ def get_data():
 				},
 				{
 					"type": "doctype",
-					"name": "Shift Time",
-					"description": _("Shift Time"),
-				},
-				{
-					"type": "doctype",
 					"name": "Shift Schedule",
 					"description": _("Shift Schedule"),
 				},

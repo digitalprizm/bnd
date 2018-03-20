@@ -11,11 +11,6 @@ app_color = "grey"
 app_email = "contact@digitalprizm.net"
 app_license = "MIT"
 
-
-
-
-
-
 fixtures = ['Custom Field', 'Property Setter',"Print Format"]
 # Includes in <head>
 # ------------------
@@ -30,7 +25,12 @@ fixtures = ['Custom Field', 'Property Setter',"Print Format"]
 
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
-
+doctype_js = {
+    "Employee":["custom_script/employee.js"],
+    "Shift Schedule" : ["custom_script/shift_schedule.js"],
+    "Shift Schedule Exception" : ["custom_script/shift_schedule_exception.js"],
+    "Attendance" : ["custom_script/attendance.js"]
+}
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
