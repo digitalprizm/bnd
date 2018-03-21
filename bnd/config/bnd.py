@@ -7,16 +7,7 @@ def get_data():
 			"label": _("Documents"),
 			"icon": "fa fa-star",
 			"items": [
-				{
-					"type": "doctype",
-					"name": "Store",
-					"description": _("Store"),
-				},
-				{
-					"type": "doctype",
-					"name": "Device",
-					"description": _("Device"),
-				},
+				
 				{
 					"type": "doctype",
 					"name": "Shift Schedule",
@@ -27,12 +18,6 @@ def get_data():
 					"name": "Shift Schedule Exception",
 					"description": _("Shift Schedule Exception"),
 				},
-				{
-					"type": "doctype",
-					"name": "Shift Time",
-					"description": _("Shift Time"),
-				},
-
 				{
 					"type": "doctype",
 					"name": "Attendance",
@@ -52,6 +37,32 @@ def get_data():
 			]
 		},
 		{
+			"label": _("Master"),
+			"icon": "fa fa-star",
+			"items": [
+				{
+					"type": "doctype",
+					"name": "Store",
+					"description": _("Store"),
+				},
+				{
+					"type": "doctype",
+					"name": "Device",
+					"description": _("Device"),
+				},
+								{
+					"type": "doctype",
+					"name": "Shift Time",
+					"description": _("Shift Time"),
+				},
+				{
+					"type": "doctype",
+					"name": "HR Parameter",
+					"description": ""
+				},			
+			]
+		},
+		{
 			"label": _("Tools"),
 			"icon": "fa fa-star",
 			"items": [
@@ -59,7 +70,8 @@ def get_data():
 					"type": "doctype",
 					"name": "Upload Shift Schedule",
 					"description": _("Upload Shift Schedule"),
-				},			
+				},
+								
 			]
 		},
 		{
@@ -72,7 +84,14 @@ def get_data():
 					"name": "Attendance Sheet",
 					"doctype": "Attendance"
 				},
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Employee Details",
+					"doctype": "Employee"
+				},
 				
 			]
 		},
+		
 	]
