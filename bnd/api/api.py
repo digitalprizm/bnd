@@ -45,20 +45,20 @@ def get_store_list(store_name=None):
 #name pass or enrollment no
 
 @frappe.whitelist(allow_guest=True)
-def get_employee_details(id=None,enroll_number=None):
+def get_employee_list(id=None,enroll_number=None):
 	if id:
-		employee_details = frappe.db.sql("""select  name, employee_name, company, user_id, date_of_joining, date_of_birth, gender, 
+		employee_list = frappe.db.sql("""select  name, employee_name, company, user_id, date_of_joining, date_of_birth, gender, 
 			shift_type, shift_id, eligible_week_off_days, store, enroll_number, weekly_off_day1, weekly_off_day2
 	    	from `tabEmployee` WHERE name='{0}' """.format(id),as_dict=1)
 	elif enroll_number:
-		employee_details = frappe.db.sql("""select  name, employee_name, company, user_id, date_of_joining, date_of_birth, gender, 
+		employee_list = frappe.db.sql("""select  name, employee_name, company, user_id, date_of_joining, date_of_birth, gender, 
 			shift_type, shift_id, eligible_week_off_days, store, enroll_number, weekly_off_day1, weekly_off_day2
 	    	from `tabEmployee` WHERE enroll_number='{0}'""".format(enroll_number),as_dict=1)
 	else:
-		employee_details = frappe.db.sql("""select name, employee_name, company, user_id, date_of_joining, date_of_birth, gender, 
+		employee_list = frappe.db.sql("""select name, employee_name, company, user_id, date_of_joining, date_of_birth, gender, 
 			shift_type, shift_id, eligible_week_off_days, store, enroll_number, weekly_off_day1, weekly_off_day2
 	    	from `tabEmployee`""", as_dict=1)
-	return employee_details
+	return employee_list
 
 #end emp
 
