@@ -28,6 +28,11 @@ def get_data():
 					"type": "doctype",
 					"name": "Attendance Violation",
 					"description": _("Attendance Violation"),
+				},
+				{
+					"type": "doctype",
+					"name": "HR Parameter",
+					"description": _("HR Parameter"),
 				},								
 			]
 		},
