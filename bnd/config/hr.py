@@ -56,5 +56,18 @@ def get_data():
 				
 			]
 		},
+		{
+			"label": _("Tools"),
+			"icon": "fa fa-list",
+			"items": [
+				{
+					"type": "doctype",
+					"name": "HR Parameter",
+					"description": "HR Parameter"
+				},
+				
+			]
+		},
+
 		]
 	
