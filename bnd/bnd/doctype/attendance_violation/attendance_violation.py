@@ -28,6 +28,7 @@ class AttendanceViolation(Document):
 		attendance_doc.employee_name = self.employee_name
 		attendance_doc.attendance_date = self.attendance_date
 		attendance_doc.company = self.company
+		attendance_doc.attendance_violation = self.name
 		attendance_doc.insert()
 		attendance_doc.save()
 		attendance_doc.submit()
