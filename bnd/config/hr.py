@@ -35,7 +35,12 @@ def get_data():
 					"type": "doctype",
 					"name": "Attendance Violation",
 					"description": _("Information about shift attendance."),
-				},				
+				},
+				{
+					"type": "doctype",
+					"name": "HR Parameter",
+					"description": _("Information about hr parameter"),
+				},					
 			]
 		},
 		{
@@ -51,5 +56,18 @@ def get_data():
 				
 			]
 		},
+		{
+			"label": _("Tools"),
+			"icon": "fa fa-list",
+			"items": [
+				{
+					"type": "doctype",
+					"name": "HR Parameter",
+					"description": "HR Parameter"
+				},
+				
+			]
+		},
+
 		]
 	
