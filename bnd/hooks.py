@@ -27,9 +27,7 @@ fixtures = ['Custom Field', 'Property Setter',"Print Format"]
 # page_js = {"page" : "public/js/file.js"}
 doctype_js = {
     "Employee":["custom_script/employee.js"],
-    "Shift Schedule" : ["custom_script/shift_schedule.js"],
-    "Shift Schedule Exception" : ["custom_script/shift_schedule_exception.js"],
-    "Attendance" : ["custom_script/attendance.js"]
+    "Attendance" : ["custom_script/attendance.js"]   
 }
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
