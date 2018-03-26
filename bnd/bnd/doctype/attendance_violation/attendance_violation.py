@@ -32,4 +32,6 @@ class AttendanceViolation(Document):
 		attendance_doc.insert()
 		attendance_doc.save()
 		attendance_doc.submit()
+		self.attendance = attendance_doc.name 
+
 		frappe.msgprint("New Attendance {0} is created".format(attendance_doc.name))
