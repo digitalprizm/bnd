@@ -37,7 +37,7 @@ def get_data():
 		{
 			"module_name": "Attendance",
 			"_doctype": "Attendance",
-			"color": "#F3F1C7",
+			"color": "#25a090",
 			"icon": "fa fa-check-square",
 			"type": "link",
 			"link": "List/Attendance"
@@ -61,7 +61,7 @@ def get_data():
 		{
 			"module_name": "Shift Time",
 			"_doctype": "Shift Time",
-			"color": "#D4CFCA",
+			"color": "#94693e",
 			"icon": "fa fa-calendar-plus-o",
 			"type": "link",
 			"link": "List/Shift Time"
@@ -69,7 +69,7 @@ def get_data():
 		{
 			"module_name": "Shift Schedule",
 			"_doctype": "Shift Schedule",
-			"color": "#83D3B3",
+			"color": "#0da066",
 			"icon": "fa fa-calendar",
 			"type": "link",
 			"link": "List/Shift Schedule"
@@ -77,7 +77,7 @@ def get_data():
 		{
 			"module_name": "Store",
 			"_doctype": "Store",
-			"color": "#83B8D3",
+			"color": "#157914",
 			"icon": "fa fa-building",
 			"type": "link",
 			"link": "List/Store"
