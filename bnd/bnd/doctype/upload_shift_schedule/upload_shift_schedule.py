@@ -35,9 +35,8 @@ def add_header(w):
 	w.writerow(["Please do not change the template headings"])
 	w.writerow(["ID", "Emp Id", "Name", "Store", "Day 1","Day 2", "Day 3",
 		  "Day 4", "Day 5", "Day 6", "Day 7", "Attendance date", "Employee"])
-	# w.writerow(["ID", "Date", "Customer Ref", "Delivery Note No", "Lorry No", "Trip",
-	# 	 "Contact Person Name", "Address Line 1", "Address Line 2", "Address Line 3", 
-	# 	 "Pin Code", "Contact No", "Mobile No", "Email", "Remarks"])
+	w.writerow(["#", "#", "#" ,"ST-0006", "21-03-2018","22-03-2018", "23-03-2018",
+		  "24-03-2018", "25-03-2018", "26-03-2018", "27-03-2018", "22-03-2018", "EMP/0003"])
 	return w
 
 def add_data(w, args):
@@ -56,7 +55,7 @@ def add_data(w, args):
 			existing_attendance and existing_attendance.leave_type or "", customer.first_name,
 			existing_attendance and existing_attendance.naming_series or get_naming_series(),
 		]
-		w.writerow(row)
+		#w.writerow(row)
 	return w
 
 def get_active_customers():
@@ -109,7 +108,7 @@ def upload():
 		d = frappe._dict(zip(columns, row))
 		d["doctype"] = "Shift Schedule"
 		d["customer_ref"] = row[2]
-		d["is_return"] = row[10]
+		d["is_return"] = row[5]
 
 		# import datetime
 		# new_date = datetime.datetime.strptime(row[11],'%d-%b-%y').strftime('%d-%m-%Y')
