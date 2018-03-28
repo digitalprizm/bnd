@@ -19,14 +19,18 @@ bnd.bnd.UploadCn = frappe.ui.form.Controller.extend({
 		cur_frm.add_custom_button(__('<i class="fa fa-home" title="Back" style="margin-left: 10px;background-color: red;padding: 6px;margin: -10px;border-radius: 5px;color: white;"> Cancel</i>'),
 			function () { frappe.set_route("/"); }, 'fa fa-home btn-default', 'btn-danger');
 	},
-
+	from_date: function() {
+		cur_frm.set_value("to_date",frappe.datetime.add_days(cur_frm.doc.from_date,6));
+	},
 	get_template:function() {
-
 		window.location.href = repl(frappe.request.url +
-			'?cmd=%(cmd)s', {
+			'?cmd=%(cmd)s&from_date=%(from_date)s&to_date=%(to_date)s', {
 				cmd: "bnd.bnd.doctype.upload_shift_schedule.upload_shift_schedule.get_template",
+				from_date: this.frm.doc.from_date,
+				to_date: this.frm.doc.to_date,
 			});
 	},
+
 
 	show_upload: function() {
 		var me = this;

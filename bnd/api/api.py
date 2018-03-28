@@ -83,10 +83,10 @@ def get_shift_time_list(shift_name=None):
 def get_shift_schedule_list(attendance_date=None):
 	if attendance_date:
 		shift_schedule_details = frappe.db.sql("""select  employee_name, 
-			employee_id, 
+			employee, 
 			case when (1=1)
 				then (select enroll_number from `tabEmployee` 
-				where `tabEmployee`.name = `tabShift Schedule`.employee_id)
+				where `tabEmployee`.name = `tabShift Schedule`.employee)
 				else 0
 				end as enroll_number,
 			leave_type, attendance_date, company, store, shift_time, start_time, end_time, amended_from\
@@ -94,10 +94,10 @@ def get_shift_schedule_list(attendance_date=None):
 	    	WHERE attendance_date='{0}'""".format(attendance_date),as_dict=1)
 	else:
 		shift_schedule_details = frappe.db.sql("""select  employee_name, 
-			employee_id, 
+			employee, 
 			case when (1=1)
 				then (select enroll_number from `tabEmployee` 
-				where `tabEmployee`.name = `tabShift Schedule`.employee_id)
+				where `tabEmployee`.name = `tabShift Schedule`.employee)
 				else 0
 				end as enroll_number,
 			leave_type, attendance_date, company, store, shift_time, start_time, end_time, amended_from\
@@ -110,10 +110,10 @@ def get_shift_schedule_list(attendance_date=None):
 def get_shift_schedule_exception_list(attendance_date=None):
 	if attendance_date:
 		shift_schedule_exception_details = frappe.db.sql("""select  employee_name, 
-			employee_id, 
+			employee, 
 			case when (1=1)
 				then (select enroll_number from `tabEmployee` 
-				where `tabEmployee`.name = `tabShift Schedule Exception`.employee_id)
+				where `tabEmployee`.name = `tabShift Schedule Exception`.employee)
 				else 0
 				end as enroll_number,
 			attendance_date, company, amended_from, shift_schedule_old_time, old_store_location, shift_schedule, shift_schedule__new_time, 
@@ -121,10 +121,10 @@ def get_shift_schedule_exception_list(attendance_date=None):
 	    	from `tabShift Schedule Exception` WHERE attendance_date='{0}'""".format(attendance_date),as_dict=1)
 	else:
 		shift_schedule_exception_details = frappe.db.sql("""select  employee_name, 
-			employee_id, 
+			employee, 
 			case when (1=1)
 				then (select enroll_number from `tabEmployee` 
-				where `tabEmployee`.name = `tabShift Schedule Exception`.employee_id)
+				where `tabEmployee`.name = `tabShift Schedule Exception`.employee)
 				else 0
 				end as enroll_number,
 			attendance_date, company, amended_from, shift_schedule_old_time, old_store_location, shift_schedule, shift_schedule__new_time, 
