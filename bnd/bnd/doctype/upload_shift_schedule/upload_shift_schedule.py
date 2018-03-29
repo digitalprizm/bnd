@@ -41,28 +41,6 @@ def add_header(w, args):
 	print(dates)
 	w.writerow(["Notes:"])
 	w.writerow(["Please do not change the template headings"])
-	w.writerow(["ID", "Emp Id", "Name", "Store", "Day 1","Day 2", "Day 3",
-		  "Day 4", "Day 5", "Day 6", "Day 7", "Attendance date", "Employee"])
-	w.writerow(["#", "#", "#" ,"ST-0006", "21-03-2018","22-03-2018", "23-03-2018",
-		  "24-03-2018", "25-03-2018", "26-03-2018", "27-03-2018", "22-03-2018", "EMP/0003"])
-	return w
-
-def add_data(w, args):
-	customers = get_active_customers()
-	existing_attendance_records = get_existing_attendance_records(args)
-	date = ""
-	for customer in customers:
-		existing_attendance = {}
-		if existing_attendance_records \
-			and tuple([date, customer.name]) in existing_attendance_records:
-				existing_attendance = existing_attendance_records[tuple([date, customer.name])]
-		row = [
-			existing_attendance and existing_attendance.name or "",
-			customer.name, customer.first_name,
-			existing_attendance and existing_attendance.status or "",
-			existing_attendance and existing_attendance.leave_type or "", customer.first_name,
-			existing_attendance and existing_attendance.naming_series or get_naming_series(),
-		]
 	
 	date_range = ["","","","-"]
 	for i in dates:
@@ -75,8 +53,22 @@ def add_data(w, args):
 	return w
 
 def add_data(w, args):
-	
-
+	# customers = get_active_customers()
+	# existing_attendance_records = get_existing_attendance_records(args)
+	# date = ""
+	# for customer in customers:
+	# 	existing_attendance = {}
+	# 	if existing_attendance_records \
+	# 		and tuple([date, customer.name]) in existing_attendance_records:
+	# 			existing_attendance = existing_attendance_records[tuple([date, customer.name])]
+	# 	row = [
+	# 		existing_attendance and existing_attendance.name or "",
+	# 		customer.name, customer.first_name,
+	# 		existing_attendance and existing_attendance.status or "",
+	# 		existing_attendance and existing_attendance.leave_type or "", customer.first_name,
+	# 		existing_attendance and existing_attendance.naming_series or get_naming_series(),
+	# 	]
+	# 	w.writerow(row)
 	return w
 
 def get_active_customers():
@@ -134,22 +126,6 @@ def upload():
 		row_idx = i + 3
 		d = frappe._dict(zip(columns, row))
 		d["doctype"] = "Shift Schedule"
-		d["customer_ref"] = row[2]
-		d["is_return"] = row[5]
-
-		
-
-		if d.name:
-			d["docstatus"] = frappe.db.get_value("Shift Schedule", d.name, "docstatus")
-
-		try:
-			check_record(d)
-			ret.append(import_doc(d, "Shift Schedule", 1, row_idx, submit=False))
-		except Exception, e:
-			error = True
-			ret.append('Error for row (#%d) %s : %s' % (row_idx,
-				len(row)>1 and row[1] or "", cstr(e)))
-			frappe.errprint(frappe.get_traceback())
 		d["employee"] = row[1]
 		d["store"] = row[3]
 		# d["attendance_date"] = rows[3][4]
@@ -162,11 +138,14 @@ def upload():
 		for i in rows[3]:
 			new_date_list.append(i)
 		new_date_list=new_date_list[4:]
+
+
 		new_shift_time_list=row[4:]
 		print("\n new new_date_list",new_date_list)
 		print("\n new new_shift_time_list",new_shift_time_list)
 		print(len(new_shift_time_list),"new_shift_time_list\n")
-		
+		# print(row[1])
+		# length_of_dates=len(new_shift_time_list)
 		length_of_dates=8
 
 		for i in range(length_of_dates-1):
@@ -177,7 +156,8 @@ def upload():
 			d["shift_time"] = new_shift_time_list[i]			
 
 			import datetime
-			
+			# new_date = datetime.datetime.strptime(row[11],'%d-%b-%y').strftime('%d-%m-%Y')
+			# d["date"] = new_date
 
 			if d.name:
 				d["docstatus"] = frappe.db.get_value("Shift Schedule", d.name, "docstatus")
@@ -196,7 +176,3 @@ def upload():
 	else:
 		frappe.db.commit()
 	return {"messages": ret, "error": error}
-
-
-
-
