@@ -164,7 +164,7 @@ def upload():
 
 			try:
 				check_record(d)
-				ret.append(import_doc(d, "Shift Schedule", 1, row_idx, submit=False))
+				ret.append(import_doc(d, "Shift Schedule", 1, row_idx, submit=True))
 			except Exception, e:
 				error = True
 				ret.append('Error for row (#%d) %s : %s' % (row_idx,
