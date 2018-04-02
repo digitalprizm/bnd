@@ -84,12 +84,12 @@ doctype_js = {
 # Hook on document methods and events
 
 # doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-#	}
+# 	"Attendance Violation": {
+# 		"on_cancel": "bnd.custom_method.cancel_attedance_violation",
+		
+# 	}
 # }
+
 
 # Scheduled Tasks
 # ---------------
