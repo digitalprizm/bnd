@@ -35,6 +35,8 @@ class AttendanceViolation(Document):
 
 		frappe.msgprint("New Attendance {0} is created".format(attendance_doc.name))
 
+	def on_cancel(self):
+		pass
 
 	def validate_duplicate_record(self):
 		res = frappe.db.sql("""select name 
