@@ -80,8 +80,8 @@ def get_shift_time_list(shift_name=None):
 #date filter most imp
 #employee filter
 @frappe.whitelist(allow_guest=True)
-def get_shift_schedule_list(attendance_date=None):
-	if attendance_date:
+def get_shift_schedule_list(attendance_date=None,store=None,employee=None):
+	if attendance_date and store:
 		shift_schedule_details = frappe.db.sql("""select  employee_name, 
 			employee, 
 			case when (1=1)
@@ -91,7 +91,18 @@ def get_shift_schedule_list(attendance_date=None):
 				end as enroll_number,
 			leave_type, attendance_date, company, store, shift_time, start_time, end_time, amended_from\
 	    	FROM `tabShift Schedule` 
-	    	WHERE attendance_date='{0}'""".format(attendance_date),as_dict=1)
+	    	WHERE attendance_date='{0}' and store='{1}'""".format(attendance_date,store),as_dict=1)
+	if attendance_date and employee:
+		shift_schedule_details = frappe.db.sql("""select  employee_name, 
+			employee, 
+			case when (1=1)
+				then (select enroll_number from `tabEmployee` 
+				where `tabEmployee`.name = `tabShift Schedule`.employee)
+				else 0
+				end as enroll_number,
+			leave_type, attendance_date, company, store, shift_time, start_time, end_time, amended_from\
+	    	FROM `tabShift Schedule` 
+	    	WHERE attendance_date='{0}' and employee='{1}'""".format(attendance_date,employee),as_dict=1)
 	else:
 		shift_schedule_details = frappe.db.sql("""select  employee_name, employee, 
 			case when (1=1)
@@ -103,6 +114,9 @@ def get_shift_schedule_list(attendance_date=None):
 	    	FROM `tabShift Schedule`""".format(attendance_date),as_dict=1)
 
 	return shift_schedule_details
+
+@frappe.whitelist(allow_guest=True)
+
 #end shift schedule
 #shift schedule exception list
 @frappe.whitelist(allow_guest=True)
