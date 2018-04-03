@@ -1,3 +1,4 @@
+cur_frm.add_fetch('area', 'multi_unit_manager', 'multi_unit_manager');
 frappe.ui.form.on("Store", "validate", function(frm) {
        
    	size=cur_frm.doc.operational_day.length;

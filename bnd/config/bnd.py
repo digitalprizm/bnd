@@ -57,6 +57,11 @@ def get_data():
 				},
 				{
 					"type": "doctype",
+					"name": "Area",
+					"description": _("Area"),
+				},
+				{
+					"type": "doctype",
 					"name": "HR Parameter",
 					"description": ""
 				},			
