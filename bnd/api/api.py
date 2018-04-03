@@ -27,10 +27,10 @@ def get_device_list(device_no=None):
 @frappe.whitelist(allow_guest=True)
 def get_store_list(store_name=None):
 	if store_name:
-		store_list = frappe.db.sql("""select store_name, store_id, multi_unit_manager, store_address
+		store_list = frappe.db.sql("""select store_name, store_id, area,multi_unit_manager, store_address
 			from `tabStore` WHERE store_name='{0}' """.format(store_name),as_dict=1)
 	else:
-		store_list = frappe.db.sql("""select store_name, store_id, multi_unit_manager, store_address
+		store_list = frappe.db.sql("""select store_name, store_id,area, multi_unit_manager, store_address
 			from `tabStore`""".format(store_name), as_dict=1)
 
 	return store_list
