@@ -168,10 +168,11 @@ def get_hr_parameter():
 @frappe.whitelist(allow_guest=True)
 def get_attendance_list(attendance_date=None):
 	if attendance_date:
-		attendance_list = frappe.db.sql("""select employee, employee_name, status, leave_type, attendance_date, company, in_store, in_time, out_time, out_store, amended_from
+		attendance_list = frappe.db.sql("""select employee, employee_name, status, leave_type, attendance_date,
+		new_in_time,new_out_time, company, in_store, in_time, out_time, out_store, amended_from
 			from `tabAttendance` WHERE attendance_date='{0}' """.format(attendance_date),as_dict=1)
 	else:
-		attendance_list = frappe.db.sql("""select employee, employee_name, status, leave_type, attendance_date, company, in_store, in_time, out_time, out_store, amended_from
+		attendance_list = frappe.db.sql("""select employee, employee_name, status, new_in_time, new_out_time, leave_type, attendance_date, company, in_store, in_time, out_time, out_store, amended_from
 			from `tabAttendance`""".format(attendance_date),as_dict=1)
 
 	return attendance_list
