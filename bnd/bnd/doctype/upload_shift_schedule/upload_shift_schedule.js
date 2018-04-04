@@ -31,7 +31,6 @@ bnd.bnd.UploadCn = frappe.ui.form.Controller.extend({
 			});
 	},
 	get_template_with_data:function(){
-		frappe.msgprint("In JS");
 		window.location.href = repl(frappe.request.url +
 			'?cmd=%(cmd)s&from_date=%(from_date)s&to_date=%(to_date)s', {
 				cmd: "bnd.bnd.doctype.upload_shift_schedule.upload_shift_schedule.get_template_with_data",

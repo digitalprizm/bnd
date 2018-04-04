@@ -34,7 +34,7 @@ def get_template():
 def get_template_with_data():
 	args = frappe.local.form_dict
 	print("adsasd args",args)
-	print("\n\n\n\n\nin python")
+	
 	w = UnicodeWriter()
 	w = add_header_get_data(w, args)
 
@@ -79,9 +79,7 @@ def add_header_get_data(w, args):
 		  "Day 4", "Day 5", "Day 6", "Day 7"])
 	w.writerow(date_range)
 	start_date = date_range[4]
-	print("\n\n\n\n start date=",start_date)
 	end_date = date_range[10]
-	print("\n\n\n\n end date =",end_date)
 	# get data from shift schedule
 	data=frappe.db.sql("""select employee, employee_name,store 
 			from `tabShift Schedule` 
