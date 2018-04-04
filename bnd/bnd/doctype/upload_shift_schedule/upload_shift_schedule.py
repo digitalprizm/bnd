@@ -30,6 +30,21 @@ def get_template():
 	frappe.response['type'] = 'csv'
 	frappe.response['doctype'] = "Shift Schedule"
 
+@frappe.whitelist()
+def get_template_with_data():
+	args = frappe.local.form_dict
+	print("adsasd args",args)
+	print("\n\n\n\n\nin python")
+	w = UnicodeWriter()
+	w = add_header_get_data(w, args)
+
+	w = add_data(w, args)
+
+	# write out response as a type csv
+	frappe.response['result'] = cstr(w.getvalue())
+	frappe.response['type'] = 'csv'
+	frappe.response['doctype'] = "Shift Schedule"
+
 def get_dates(args):
 	"""get list of dates in between from date and to date"""
 	no_of_days = date_diff(add_days(args["to_date"], 1), args["from_date"])
@@ -49,9 +64,34 @@ def add_header(w, args):
 	w.writerow(["ID", "Employee", "Name", "Store", "Day 1","Day 2", "Day 3",
 		  "Day 4", "Day 5", "Day 6", "Day 7"])
 	w.writerow(date_range)
+	return w
+def add_header_get_data(w, args):
+	dates = get_dates(args)
+	print(dates)
+	w.writerow(["Notes:"])
+	w.writerow(["Please do not change the template headings"])
+	
+	date_range = ["","","","-"]
+	for i in dates:
+		date_range.append(i)
+	# date_range.append(dates)
+	w.writerow(["ID", "Employee", "Name", "Store", "Day 1","Day 2", "Day 3",
+		  "Day 4", "Day 5", "Day 6", "Day 7"])
+	w.writerow(date_range)
+	start_date = date_range[4]
+	print("\n\n\n\n start date=",start_date)
+	end_date = date_range[10]
+	print("\n\n\n\n end date =",end_date)
+	# get data from shift schedule
+	data=frappe.db.sql("""select employee, employee_name,store 
+			from `tabShift Schedule` 
+			where (attendance_date between '{0}' 
+			and '{0}')  limit 7""", as_dict=1)
+	if data:
+		w.writerow(["",data[0].employee,data[0].employee_name,data[0].store ])
+	w.writerow(["","EMP-0003","Mahesh","ST-0006","5AM-15PM","4AM-11AM","1AM-6PM","2AM-9AM","3AM-6PM","12AM-6PM","11AM-6PM"])
 
 	return w
-
 def add_data(w, args):
 	# customers = get_active_customers()
 	# existing_attendance_records = get_existing_attendance_records(args)
