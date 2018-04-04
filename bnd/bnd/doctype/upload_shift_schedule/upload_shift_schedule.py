@@ -86,11 +86,11 @@ def add_header_get_data(w, args):
 	data=frappe.db.sql("""select employee, employee_name,store 
 			from `tabShift Schedule` 
 			where (attendance_date between '{0}' 
-			and '{0}')  limit 7""", as_dict=1)
-	if data:
-		w.writerow(["",data[0].employee,data[0].employee_name,data[0].store ])
-	w.writerow(["","EMP-0003","Mahesh","ST-0006","5AM-15PM","4AM-11AM","1AM-6PM","2AM-9AM","3AM-6PM","12AM-6PM","11AM-6PM"])
-
+			and '{1}') group by employee""".format(start_date,end_date), as_dict=1)
+	
+	for i in range(len(data)):
+		w.writerow(["",data[i].employee,data[i].employee_name,data[i].store ])
+		
 	return w
 def add_data(w, args):
 	# customers = get_active_customers()
