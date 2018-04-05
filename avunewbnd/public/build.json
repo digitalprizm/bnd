@@ -1,0 +1,6 @@
+{
+	"js/avunewbnd.min.js": [
+		"public/js/templates/device_list.html"
+	]
+}
+
