@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include avunewbnd *.css
+recursive-include avunewbnd *.csv
+recursive-include avunewbnd *.html
+recursive-include avunewbnd *.ico
+recursive-include avunewbnd *.js
+recursive-include avunewbnd *.json
+recursive-include avunewbnd *.md
+recursive-include avunewbnd *.png
+recursive-include avunewbnd *.py
+recursive-include avunewbnd *.svg
+recursive-include avunewbnd *.txt
+recursive-exclude avunewbnd *.pyc
