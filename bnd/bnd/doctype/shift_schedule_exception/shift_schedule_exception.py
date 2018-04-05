@@ -20,4 +20,4 @@ class ShiftScheduleException(Document):
 			self.old_store_location = data[0].store
 			self.shift_schedule_old_time = data[0].shift_time
 		else :
-			frappe.throw("Shift schedule is Not found")
+			frappe.msgprint("Shift schedule is Not found")
