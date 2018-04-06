@@ -81,5 +81,13 @@ def get_data():
 			"icon": "fa fa-building",
 			"type": "link",
 			"link": "List/Store"
+		},
+		{
+			"module_name": "Area",
+			"_doctype": "Area",
+			"color": "#EF3078",
+			"icon": "fa fa-map-marker",
+			"type": "link",
+			"link": "List/Area"
 		}
 	]

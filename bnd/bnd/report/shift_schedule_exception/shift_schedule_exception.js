@@ -1,7 +1,8 @@
 // Copyright (c) 2016, Digitalprizm and contributors
 // For license information, please see license.txt
+/* eslint-disable */
 
-frappe.query_reports["Shift Schedule Exception Details"] = {
+frappe.query_reports["shift schedule exception"] = {
 	"filters": [
 		{
 			"fieldname":"from_date",
@@ -31,5 +32,4 @@ frappe.query_reports["Shift Schedule Exception Details"] = {
 		}
 
 	]
-
 }
