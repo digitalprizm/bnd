@@ -30,6 +30,21 @@ def get_template():
 	frappe.response['type'] = 'csv'
 	frappe.response['doctype'] = "Shift Schedule"
 
+@frappe.whitelist()
+def get_template_with_data():
+	args = frappe.local.form_dict
+	print("adsasd args",args)
+	
+	w = UnicodeWriter()
+	w = add_header_get_data(w, args)
+
+	w = add_data(w, args)
+
+	# write out response as a type csv
+	frappe.response['result'] = cstr(w.getvalue())
+	frappe.response['type'] = 'csv'
+	frappe.response['doctype'] = "Shift Schedule"
+
 def get_dates(args):
 	"""get list of dates in between from date and to date"""
 	no_of_days = date_diff(add_days(args["to_date"], 1), args["from_date"])
@@ -49,9 +64,32 @@ def add_header(w, args):
 	w.writerow(["ID", "Employee", "Name", "Store", "Day 1","Day 2", "Day 3",
 		  "Day 4", "Day 5", "Day 6", "Day 7"])
 	w.writerow(date_range)
-
 	return w
-
+def add_header_get_data(w, args):
+	dates = get_dates(args)
+	print(dates)
+	w.writerow(["Notes:"])
+	w.writerow(["Please do not change the template headings"])
+	
+	date_range = ["","","","-"]
+	for i in dates:
+		date_range.append(i)
+	# date_range.append(dates)
+	w.writerow(["ID", "Employee", "Name", "Store", "Day 1","Day 2", "Day 3",
+		  "Day 4", "Day 5", "Day 6", "Day 7"])
+	w.writerow(date_range)
+	start_date = date_range[4]
+	end_date = date_range[10]
+	# get data from shift schedule
+	data=frappe.db.sql("""select employee, employee_name,store 
+			from `tabShift Schedule` 
+			where (attendance_date between '{0}' 
+			and '{1}') group by employee""".format(start_date,end_date), as_dict=1)
+	
+	for i in range(len(data)):
+		w.writerow(["",data[i].employee,data[i].employee_name,data[i].store ])
+		
+	return w
 def add_data(w, args):
 	# customers = get_active_customers()
 	# existing_attendance_records = get_existing_attendance_records(args)
@@ -164,7 +202,7 @@ def upload():
 
 			try:
 				check_record(d)
-				ret.append(import_doc(d, "Shift Schedule", 1, row_idx, submit=False))
+				ret.append(import_doc(d, "Shift Schedule", 1, row_idx, submit=True))
 			except Exception, e:
 				error = True
 				ret.append('Error for row (#%d) %s : %s' % (row_idx,
