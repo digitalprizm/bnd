@@ -3,6 +3,6 @@
 cur_frm.add_fetch('employee', 'employee_name', 'employee_name');
 frappe.ui.form.on('Attendance Violation', {
 	refresh: function(frm) {
-
+	cur_frm.add_fetch('employee', 'employee_name', 'employee_name');
 	}
 });
