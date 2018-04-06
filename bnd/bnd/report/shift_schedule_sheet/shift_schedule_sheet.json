@@ -1,0 +1,29 @@
+{
+ "add_total_row": 0, 
+ "apply_user_permissions": 1, 
+ "creation": "2018-04-04 08:43:34.256430", 
+ "disabled": 0, 
+ "docstatus": 0, 
+ "doctype": "Report", 
+ "idx": 0, 
+ "is_standard": "Yes", 
+ "modified": "2018-04-04 08:43:37.893341", 
+ "modified_by": "Administrator", 
+ "module": "BnD", 
+ "name": "Shift Schedule Sheet", 
+ "owner": "Administrator", 
+ "ref_doctype": "Shift Schedule", 
+ "report_name": "Shift Schedule Sheet", 
+ "report_type": "Script Report", 
+ "roles": [
+  {
+   "role": "System Manager"
+  }, 
+  {
+   "role": "HR User"
+  }, 
+  {
+   "role": "HR Manager"
+  }
+ ]
+}

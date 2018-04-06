@@ -53,7 +53,18 @@ def get_data():
 					"name": "Attendance Sheet",
 					"doctype": "Attendance"
 				},
-				
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Shift Schedule Details",
+					"doctype": "Shift Schedule"
+				},
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Shift Schedule Exception Details",
+					"doctype": "Shift Schedule Exception"
+				},
 			]
 		},
 		{

@@ -21,7 +21,7 @@ def get_data():
 		{
 			"module_name": "Shift Schedule Exception",
 			"_doctype": "Shift Schedule Exception",
-			"color": "#0085A8",
+			"color": "#92A422",
 			"icon": "fa fa-calendar-o",
 			"type": "link",
 			"link": "List/Shift Schedule Exception"
@@ -29,7 +29,7 @@ def get_data():
 		{
 			"module_name": "Upload Shift Schedule",
 			"_doctype": "Upload Shift Schedule",
-			"color": "#0091A8",
+			"color": "#D13E29",
 			"icon": "fa fa-upload",
 			"type": "link",
 			"link": "List/Upload Shift Schedule"
@@ -37,7 +37,7 @@ def get_data():
 		{
 			"module_name": "Attendance",
 			"_doctype": "Attendance",
-			"color": "#0061A8",
+			"color": "#25a090",
 			"icon": "fa fa-check-square",
 			"type": "link",
 			"link": "List/Attendance"
@@ -45,7 +45,7 @@ def get_data():
 		{
 			"module_name": "Attendance Violation",
 			"_doctype": "Attendance Violation",
-			"color": "#0061A8",
+			"color": "#F6A1AD",
 			"icon": "fa fa-minus-square",
 			"type": "link",
 			"link": "List/Attendance Violation"
@@ -53,7 +53,7 @@ def get_data():
 		{
 			"module_name": "Device",
 			"_doctype": "Device",
-			"color": "#cb3fcd",
+			"color": "#6A106A",
 			"icon": "fa fa-server",
 			"type": "link",
 			"link": "List/Device"
@@ -61,7 +61,7 @@ def get_data():
 		{
 			"module_name": "Shift Time",
 			"_doctype": "Shift Time",
-			"color": "#0351A8",
+			"color": "#94693e",
 			"icon": "fa fa-calendar-plus-o",
 			"type": "link",
 			"link": "List/Shift Time"
@@ -69,7 +69,7 @@ def get_data():
 		{
 			"module_name": "Shift Schedule",
 			"_doctype": "Shift Schedule",
-			"color": "#0061A8",
+			"color": "#0da066",
 			"icon": "fa fa-calendar",
 			"type": "link",
 			"link": "List/Shift Schedule"
@@ -77,9 +77,17 @@ def get_data():
 		{
 			"module_name": "Store",
 			"_doctype": "Store",
-			"color": "#0061A8",
+			"color": "#157914",
 			"icon": "fa fa-building",
 			"type": "link",
 			"link": "List/Store"
+		},
+		{
+			"module_name": "Area",
+			"_doctype": "Area",
+			"color": "#EF3078",
+			"icon": "fa fa-map-marker",
+			"type": "link",
+			"link": "List/Area"
 		}
 	]
