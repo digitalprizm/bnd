@@ -8,6 +8,7 @@ from frappe.model.document import Document
 
 class ShiftScheduleException(Document):
 	def validate(self):
+		self.validate_duplicate_record()
 		self.get_shift_schedule()
 
 	def get_shift_schedule(self):
@@ -21,3 +22,11 @@ class ShiftScheduleException(Document):
 			self.shift_schedule_old_time = data[0].shift_time
 		else :
 			frappe.msgprint("Shift schedule is Not found")
+	def validate_duplicate_record(self):
+		res = frappe.db.sql("""select name from `tabShift Schedule Exception` where employee = %s and attendance_date = %s
+			and name != %s and docstatus = 1""",
+			(self.employee, self.attendance_date, self.name))
+		if res:
+			frappe.throw(("Shift schedule exception for employee {0} is already created").format(self.employee))
+
+		
