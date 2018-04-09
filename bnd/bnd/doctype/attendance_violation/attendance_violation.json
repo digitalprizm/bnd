@@ -1108,15 +1108,6 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
-<<<<<<< HEAD
- "modified": "2018-04-04 10:50:27.647889", 
-=======
-<<<<<<< HEAD
- "modified": "2018-04-02 15:51:00.151366", 
-=======
- "modified": "2018-04-03 18:36:42.234672", 
->>>>>>> 9c6981fc0886489df5a493910efbc424fb4e4797
->>>>>>> cf0e73daad51679b43d09eddd0c8004f76012471
  "modified_by": "Administrator", 
  "module": "BnD", 
  "name": "Attendance Violation", 
