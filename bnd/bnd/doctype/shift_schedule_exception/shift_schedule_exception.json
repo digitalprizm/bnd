@@ -643,13 +643,6 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
-<<<<<<< HEAD
- "modified": "2018-04-04 10:23:57.583946", 
- "modified_by": "Administrator", 
-=======
- "modified": "2018-04-07 12:43:41.318396", 
- "modified_by": "demo@digitalprizm.net", 
->>>>>>> cf0e73daad51679b43d09eddd0c8004f76012471
  "module": "BnD", 
  "name": "Shift Schedule Exception", 
  "name_case": "", 
