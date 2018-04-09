@@ -3,7 +3,8 @@
 cur_frm.add_fetch('employee', 'employee_name', 'employee_name');
 cur_frm.add_fetch('shift_time', 'start_time', 'start_time');
 cur_frm.add_fetch('shift_time', 'end_time', 'end_time');
-
+cur_frm.add_fetch("employee","shift_id","shift_time");
+cur_frm.add_fetch("employee","store","store");
 frappe.ui.form.on('Shift Schedule', {
 	refresh: function(frm) {
 
