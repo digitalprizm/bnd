@@ -11,7 +11,7 @@ def ping():
 @frappe.whitelist(allow_guest=True)
 def get_device_list(device_no=None):
 	if device_no:
-		device_details = frappe.db.sql("""select device_name, device_model, device_no, store, ip_address, port, common_key
+		device_details = frappe.db.sql("""select device_name, device_model, device_no, store,store_name, ip_address, port, common_key
 			from `tabDevice` WHERE device_no='{0}' """.format(device_no),as_dict=1)
 	else:
 		device_details = frappe.db.sql("""select device_name, device_model, device_no, store, ip_address, port, common_key
@@ -25,10 +25,45 @@ def get_device_list(device_no=None):
 #store api
 
 @frappe.whitelist(allow_guest=True)
+def get_store_details_list(store_name=None):
+	if store_name:
+		store_list = frappe.db.sql("""select store_name, store_id, 
+			area,multi_unit_manager,
+			od.operating_days,od.shift_timing1,od.shift_timing2,od.shift_timing3 
+			store_address
+			from `tabStore`, `tabOperational Day` od 
+			WHERE store_name='{0}' and od.parent=tabStore.name""".format(store_name),as_dict=1)
+	else:
+		store_list = frappe.db.sql("""select store_name, store_id, 
+			area,multi_unit_manager,
+			od.operating_days,od.shift_timing1,od.shift_timing2,od.shift_timing3 ,
+			store_address
+			from `tabStore`, `tabOperational Day` od 
+			where od.parent=tabStore.name""".format(store_name), as_dict=1)
+
+	import itertools 
+	category_details = {}
+	a_list = store_list
+	a_dict = {}
+	for i in a_list:
+		a_dict[i['store_name']] = []
+		#a_dict[i['store_name']].append({"store_id":"store_id","multi_unit_manager":"multi_unit_manager","area":"area","store_name":"store_name"})
+
+	for i in a_list:
+		mydict = {"operating_days":i['operating_days'],"shift_timing1":i['shift_timing1'],"shift_timing2":i['shift_timing2'],"shift_timing3":i['shift_timing3']}
+		print i
+		a_dict[i['store_name']].append(mydict)
+
+	return a_dict
+
+@frappe.whitelist(allow_guest=True)
 def get_store_list(store_name=None):
 	if store_name:
-		store_list = frappe.db.sql("""select store_name, store_id, area,multi_unit_manager, store_address
-			from `tabStore` WHERE store_name='{0}' """.format(store_name),as_dict=1)
+		store_list = frappe.db.sql("""select store_name, store_id, 
+			area,multi_unit_manager,
+			store_address
+			from `tabStore`,
+			WHERE store_name='{0}' """.format(store_name),as_dict=1)
 	else:
 		store_list = frappe.db.sql("""select store_name, store_id,area, multi_unit_manager, store_address
 			from `tabStore`""".format(store_name), as_dict=1)
@@ -42,25 +77,29 @@ def get_store_list(store_name=None):
 #name pass or enrollment no
 @frappe.whitelist(allow_guest=True)
 def get_employee_list(id=None,enroll_number=None):
+
 	if id:
 		employee_list = frappe.db.sql("""select  name, employee_name, company, user_id, date_of_joining, date_of_birth, gender, 
-			shift_type, shift_id, eligible_week_off_days, store, enroll_number, weekly_off_day1, weekly_off_day2
-	    	from `tabEmployee` WHERE name='{0}' and `tabEmployee`.employee = `tabStore`.multi_unit_manager """.format(id),as_dict=1)
+			shift_type, shift_id, eligible_week_off_days, store, enroll_number, weekly_off_day1, weekly_off_day2,
+			subscriber_no, gosi_no, nationality, national_id_no, country, iqama_no, iqama_issue_date, iqama_expiry_hijri, iqama_expiry_english,
+			driving_license_no, driving_license_issue_date, driving_license_expiry_date, baladiya_card_no, exam_date, training_expiry_date, baladiya_medical_center,muqeem_status, muqeem_status, store,
+			passport_number, date_of_issue
+			from `tabEmployee` WHERE name='{0}'and where `tabEmployee`.user_id = `tabStore`.multi_unit_manager """.format(id),as_dict=1)
 	elif enroll_number:
 		employee_list = frappe.db.sql("""select  name, employee_name, company, user_id, date_of_joining, date_of_birth, gender, 
-			shift_type, shift_id, eligible_week_off_days, store, enroll_number, weekly_off_day1, weekly_off_day2
+			shift_type, shift_id, eligible_week_off_days, store, enroll_number, weekly_off_day1, weekly_off_day2,
+			subscriber_no, gosi_no, nationality, national_id_no, country, iqama_no, iqama_issue_date, iqama_expiry_hijri, iqama_expiry_english,
+			driving_license_no, driving_license_issue_date, driving_license_expiry_date, baladiya_card_no, exam_date, training_expiry_date, baladiya_medical_center,muqeem_status, muqeem_status, store,
+			passport_number, date_of_issue
 	    	from `tabEmployee` WHERE enroll_number='{0}'""".format(enroll_number),as_dict=1)
 	else:
-		employee_list = frappe.db.sql("""select  employee_name, 
-			employee, 
-			case when (1=1)
-				then (select store_name from `tabEmployee` 
-				where `tabEmployee`.employee = `tabStore`.multi_unit_manager)
-				else 0
-				end as store_name,
-			name, employee_name, company, user_id, date_of_joining, date_of_birth, gender, 
-			shift_type, shift_id, eligible_week_off_days, store, enroll_number, weekly_off_day1, weekly_off_day2
-	    	from `tabEmployee` WHERE attendance_date='{0}'""".format(id),as_dict=1)
+		employee_list = frappe.db.sql("""select  name, employee_name, company, user_id, date_of_joining, date_of_birth, gender, 
+			shift_type, shift_id, eligible_week_off_days, store, enroll_number, weekly_off_day1, weekly_off_day2,
+			subscriber_no, gosi_no, nationality, national_id_no, country, iqama_no, iqama_issue_date, iqama_expiry_hijri, iqama_expiry_english,
+			driving_license_no, driving_license_issue_date, driving_license_expiry_date, baladiya_card_no, exam_date, training_expiry_date, baladiya_medical_center,muqeem_status, muqeem_status, store,
+			passport_number, date_of_issue
+	    	from `tabEmployee` """,as_dict=1)
+
 	return employee_list
 
 #end emp
@@ -252,7 +291,7 @@ def get_leave_application(employee='',date=''):
 def create_attendance_violation(employee=None, attendance_date='',company='',store='',deduction_days='',
 	in_date='',violation_type='',in_time='', out_time='',out_date='',out_store='',violation_remark='',
 	amended_in_date='',amended_in_time='',amended_out_time='', amended_out_store='',amended_out_date='',working_hours='',attendance_status='',
-	amended_status='',deduction_amount='',approver_comment=''):
+	amended_status='',deduction_amount='',approver_comment='',status1='',status2='',total_working_hours='',ot_hours='',schedule_store='',schedule_status='',schedule_time=''):
 
 	attendance_doc = frappe.new_doc("Attendance Violation")
 	attendance_doc.employee = employee
@@ -279,6 +318,14 @@ def create_attendance_violation(employee=None, attendance_date='',company='',sto
 	attendance_doc.amended_status = amended_status
 	attendance_doc.deduction_amount = deduction_amount
 	attendance_doc.approver_comment = approver_comment
+
+	attendance_doc.status1 = status1
+	attendance_doc.status2 = status2
+	attendance_doc.total_working_hours = total_working_hours
+	attendance_doc.ot_hours = ot_hours
+	attendance_doc.schedule_store = schedule_store
+	attendance_doc.schedule_status = schedule_status
+	attendance_doc.schedule_time = schedule_time
 
 	attendance_doc.insert(ignore_permissions=True)
 	attendance_doc.save(ignore_permissions=True)
