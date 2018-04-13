@@ -181,7 +181,8 @@ def get_attendance_list(attendance_date=None):
 	return attendance_list
 
 @frappe.whitelist(allow_guest=True)
-def create_attendance(employee=None, attendance_date='',in_store='',out_store='',in_time='',out_time='',company=''):
+def create_attendance(employee=None, attendance_date='',in_store='',out_store='',in_time='',out_time='',company='',
+						status1='',status2='',total_working_hours='',ot_hours='',schedule_store='',schedule_status='',schedule_time=''):
 
 	attendance_doc = frappe.new_doc("Attendance")
 	attendance_doc.employee = employee
@@ -191,6 +192,13 @@ def create_attendance(employee=None, attendance_date='',in_store='',out_store=''
 	attendance_doc.in_time = in_time
 	attendance_doc.out_time = out_time
 	attendance_doc.company = company
+	attendance_doc.status1 = status1
+	attendance_doc.status2 = status2
+	attendance_doc.total_working_hours = total_working_hours
+	attendance_doc.ot_hours = ot_hours
+	attendance_doc.schedule_store = schedule_store
+	attendance_doc.schedule_status = schedule_status
+	attendance_doc.schedule_time = schedule_time
 	attendance_doc.insert(ignore_permissions=True)
 	attendance_doc.save(ignore_permissions=True)
 	frappe.db.commit()
