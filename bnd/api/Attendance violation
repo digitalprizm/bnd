@@ -1,0 +1,10 @@
+Attendance violation
+
+http://0.0.0.0:8000/api/method/bnd.api.api.create_attendance_violation?employee=EMP/1510&&store=ST-0059&&deduction_days=2&&attendance_date=2018-03-17&&company=Bafakih%20-%20Dakkak%20Co.%20Ltd.&&in_date=2018-03-17&&violation_type=OT&&in_time=18:04:21.494105&&out_time=18:04:21.494105&&out_date=2018-03-17&&out_store=ST-0059&&violation_remark=test&&amended_in_date=2018-03-17&&amended_in_time=18:04:21.494105&&amended_out_time=18:04:21.494105&&amended_out_store=ST-0059&&amended_out_date=2018-03-17&&working_hours=2&&attendance_status=Present&&amended_status=Absent&&deduction_amount=test&&approver_comment=test&&status1=P&&status2=SL&&total_working_hours=9.30&&ot_hours=5.30&&schedule_store=ST-10&&schedule_status=Present&&schedule_time=10.30
+
+
+
+
+attendance
+
+http://0.0.0.0:8000/api/method/bnd.api.api.create_attendance?employee=EMP/1510&&attendance_date=2018-03-17&&in_store=ST-0059&&out_store=ST-0059&&in_time=10:50:30&&out_time=20:30:10&&company=Bafakih%20-%20Dakkak%20Co.%20Ltd.&&status1=P&&status2=SL&&total_working_hours=9.30&&ot_hours=5.30&&schedule_store=ST-10&&schedule_status=Present&&schedule_time=10.30
