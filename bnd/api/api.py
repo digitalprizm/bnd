@@ -14,7 +14,7 @@ def get_device_list(device_no=None):
 		device_details = frappe.db.sql("""select device_name, device_model, device_no, store,store_name, ip_address, port, common_key
 			from `tabDevice` WHERE device_no='{0}' """.format(device_no),as_dict=1)
 	else:
-		device_details = frappe.db.sql("""select device_name, device_model, device_no, store, ip_address, port, common_key
+		device_details = frappe.db.sql("""select device_name, device_model, device_no, store,store_name, ip_address, port, common_key
 			from `tabDevice`""".format(device_no),as_dict=1)
 
 	return device_details
@@ -28,14 +28,14 @@ def get_device_list(device_no=None):
 def get_store_details_list(store_name=None):
 	if store_name:
 		store_list = frappe.db.sql("""select store_name, store_id, 
-			area,multi_unit_manager,
+			area,multi_unit_manager,store_open_time, store_close_time, total_no_of_hours,
 			od.operating_days,od.shift_timing1,od.shift_timing2,od.shift_timing3 
 			store_address
 			from `tabStore`, `tabOperational Day` od 
 			WHERE store_name='{0}' and od.parent=tabStore.name""".format(store_name),as_dict=1)
 	else:
 		store_list = frappe.db.sql("""select store_name, store_id, 
-			area,multi_unit_manager,
+			area,multi_unit_manager, store_open_time, store_close_time, total_no_of_hours,
 			od.operating_days,od.shift_timing1,od.shift_timing2,od.shift_timing3 ,
 			store_address
 			from `tabStore`, `tabOperational Day` od 
@@ -60,12 +60,12 @@ def get_store_details_list(store_name=None):
 def get_store_list(store_name=None):
 	if store_name:
 		store_list = frappe.db.sql("""select store_name, store_id, 
-			area,multi_unit_manager,
+			area,multi_unit_manager,store_open_time, store_close_time, total_no_of_hours,
 			store_address
 			from `tabStore`,
 			WHERE store_name='{0}' """.format(store_name),as_dict=1)
 	else:
-		store_list = frappe.db.sql("""select store_name, store_id,area, multi_unit_manager, store_address
+		store_list = frappe.db.sql("""select store_name, store_id,area, multi_unit_manager, store_open_time, store_close_time, total_no_of_hours,store_address
 			from `tabStore`""".format(store_name), as_dict=1)
 
 	return store_list
