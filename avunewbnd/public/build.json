@@ -1,6 +1,9 @@
 {
 	"js/avunewbnd.min.js": [
-		"public/js/templates/device_list.html"
+		"public/js/templates/device_list.html",
+                "public/js/templates/data_list.html"
 	]
 }
+
+
 

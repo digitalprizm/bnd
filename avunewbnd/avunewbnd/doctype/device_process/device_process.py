@@ -7,6 +7,7 @@ import frappe
 from frappe.model.document import Document
 from avunewbnd.api.devicelist import load_devices
 
+
 class DeviceProcess(Document):
 	def onload(self):
 		device_list = load_devices(self.process_date)

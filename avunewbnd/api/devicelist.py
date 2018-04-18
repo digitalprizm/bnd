@@ -12,9 +12,9 @@ import json
 def load_devices(process_date):
     """Loads Devices list in `__onload`"""
     #Get devices
-    datastore = json.loads('[{"device":"hello","date":"2018-04-04"},{"device":"try","date":"2018-04-01"}]')
-    frappe.msgprint(str(datastore));
-    frappe.msgprint(str(len(datastore)));
+    datastore = json.loads('[{"device":"hello","date":"2018-04-04"},{"device":"try","date":"2018-04-01"},{"device":"demo","date":"2018-04-03"},{"device":"avu","date":"2018-04-05"}]')
+    #frappe.msgprint(str(datastore));
+    #frappe.msgprint(str(len(datastore)));
     #frappe.msgprint("HII"+process_date);
     vdict = frappe.db.sql("SELECT device_no,device_name,ip_address FROM `tabDevice` ;", as_dict=1)
     #frappe.msgprint(str(vdict[0]['device_name']))
@@ -24,13 +24,12 @@ def load_devices(process_date):
     		
     		vdict[i].update({'scanned_date': datastore[i]['date'] })
     		a=frappe.utils.data.date_diff (datastore[i]['date'], process_date );
-    		frappe.msgprint("a!=0 a=  "+str(a)+" i= "+str(i));
+    		#frappe.msgprint("a!=0 a=  "+str(a)+" i= "+str(i));
     		if a>=2:
     			vdict[i].update({'status': "Ready to process" })
     		else:
     			vdict[i].update({'status': "Not ready to process" })
-    	else:
-    		frappe.msgprint("Something went wrong.");
+    	
     		
     		#vdict[i].update({'scanned_date': datastore[i]['date']})
     #frappe.msgprint(str(vdict[i]['status']))

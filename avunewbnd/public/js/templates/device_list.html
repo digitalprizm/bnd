@@ -118,14 +118,24 @@
     </div>
 
 {% } %}
-</div>
 
 <script>
     $(document).ready(function(){
     $(".btn_fetch").click(function(e){
                 console.log($(e.target).data("dvno"));
-
+      alert("Button was clicked.")
     });
 });
+
+
+
+
+    $(".trygetdata").change(function(){
+    alert("The text has been changed.");
+    frappe.msgprint("script")
+
+    
+});
+    
 
 </script>

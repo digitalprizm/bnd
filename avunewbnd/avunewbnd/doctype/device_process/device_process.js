@@ -25,7 +25,7 @@ cur_frm.add_custom_button("Fetch All Device Data",function(){
 
 		
 		frappe.call({
-			"method": "bnd.bnd.doctype.device_process.device_process.load_devicelist",
+			"method": "avunewbnd.avunewbnd.doctype.device_process.device_process.load_devicelist",
 			args: { 
 				
 				"process_date": cur_frm.doc.process_date

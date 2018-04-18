@@ -79,15 +79,13 @@ app_include_js = "/assets/js/avunewbnd.min.js"
 # Document Events
 # ---------------
 # Hook on document methods and events
-
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-#	}
-# }
-
+"""
+doc_events = {
+ 	"abc": {
+		"validate": "avunewbnd.avunewbnd.doctype.abc.abc.creating_entry_in_xyz"
+	}
+ }
+"""
 # Scheduled Tasks
 # ---------------
 

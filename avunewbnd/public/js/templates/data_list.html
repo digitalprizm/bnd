@@ -1,0 +1,326 @@
+<div class="page-form flex">
+<div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+<div class="link-field ui-front" style="position: relative; line-height: 1;">     
+<div class="awesomplete">
+<input type="date" id="from" name="fromdate" class="filterdate input-with-feedback form-control bold input-sm" placeholder="From Date" >
+</div>          
+</div></div>
+<div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+<div class="link-field ui-front" style="position: relative; line-height: 1;">     
+<div class="awesomplete">
+<input type="date" id="to" name="todate" class="filterdate input-with-feedback form-control bold input-sm" placeholder="To Date">
+</div>          
+</div></div>
+</div>
+
+
+
+
+
+
+<div class="page-form flex">
+<div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+<div class="link-field ui-front" style="position: relative; line-height: 1;">     
+<div class="awesomplete">
+<input type="date" id="fromdate" name="fromdate" class="newdate input-with-feedback form-control bold input-sm" placeholder="From Date" >
+</div>          
+</div></div>
+<div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+<div class="link-field ui-front" style="position: relative; line-height: 1;">     
+<div class="awesomplete">
+<input type="date" id="todate" name="todate" class="newdate input-with-feedback form-control bold input-sm" placeholder="To Date">
+</div>          
+</div></div>
+<div>
+<button id="BtnSubmit" type="button" >Fetch Data</button>
+</div>
+
+</div>
+
+
+
+
+
+
+
+<div class="report-wrapper" style="display: block;">
+            <style></style>
+            <div class="data-table datatable-instance-1">
+                <table id="maintable" class="data-table-header" style="margin: 0px;">
+                <thead>
+            <tr class="data-table-row">
+            <td class="data-table-cell noselect">
+              <div class="content ellipsis" style="width: 120px;">
+                Employee id
+              </div>
+              </td>
+              <td class="data-table-cell noselect">
+              <div class="content ellipsis" style="width: 120px;">
+                Employee
+              </div>
+              </td>
+              <td class="data-table-cell noselect">
+              <div class="content ellipsis" style="width: 120px;">
+                Company
+              </div>
+              </td>
+              <td class="data-table-cell noselect">
+              <div class="content ellipsis" style="width: 120px;">
+                Store
+              </div>
+              </td>
+            </tr>
+                </thead>
+                </table>
+        <div class="body-scrollable" style="width: 1837px; margin-top: 34px;">
+
+          <table id="maintables" class="data-table-body" style="margin: 0px;">
+                    
+            <tbody tabindex="0" style="counter-increment: clusterize-counter -1;">
+           
+{% for (var i=0,l=data_list["emp"].length; i<l; i++) { %}
+
+          <tr class="data-table-row">
+          <td class="empid data-table-cell noselect" style="background-color: rgb(245, 247, 250);" >
+          <div class="content ellipsis" style="width: 120px;" >
+         {{  data_list["emp"][i]["name"] }}
+          </div>
+          </td>
+
+
+          <td class="emp data-table-cell noselect" style="background-color: rgb(245, 247, 250);" data-emp="{{  data_list["emp"][i]["employee_name"] }}" >
+          <div class="content ellipsis" style="width: 120px;" >
+         {{  data_list["emp"][i]["employee_name"] }}
+          </div>
+          </td>
+
+          <td class="company data-table-cell noselect" style="background-color: rgb(245, 247, 250);" >
+          <div class="content ellipsis" style="width: 120px;" >
+         {{  data_list["emp"][i]["company"] }}
+          </div>
+          </td>
+
+
+
+
+
+            <td>
+       
+
+        <select type="text" autocomplete="off" class="store" data-store=" {{  data_list[\"store\"][i]  }} ">
+<option selected>Select Store</option>
+
+       {% for (var t=0, z=data_list["store"].length; t<z; t++) { %}
+<option>{{  data_list["store"][t][0] }}</option>
+         {% } %}
+
+</select>
+          
+
+          </td>
+
+    
+    
+
+         
+          </tr>
+                  
+ {% } %}
+   
+
+          </tbody>
+        </table>
+
+        </div>
+        </div>
+        </div>
+        
+        <button type="button" onclick="_GetData()">Upload</button>
+        <button type="button" onclick="_SetData({{ data_list[\"lastweek\"] }})">Set Data</button>
+
+
+
+<br>
+
+
+
+          
+
+
+<script>  
+var employee="";
+var store="";
+var shift="";
+
+ $(document).ready(function(){
+  
+ 
+$(".filterdate").change(function(e){
+      
+         
+         
+         var fdate=$("#from").val();
+         
+         var tdate=$("#to").val();
+      if (fdate!="" && tdate!="") {
+          generatetable(fdate,tdate);
+          
+      }   
+      
+
+    });
+
+var newfdate,newtdate;
+$(".newdate").change(function(e){
+      
+         
+         
+         newfdate=$("#fromdate").val();
+         
+         newtdate=$("#todate").val();
+      
+    });
+
+$("#BtnSubmit").click(function (){
+ var sdate=$("#from").val();
+call_python_function(newfdate,newtdate,sdate);
+console.log("calling python function and seting values.;");
+
+});
+
+
+
+});
+
+
+function call_python_function(_datefrom, _dateto,_datestart)
+{
+
+ frappe.call({
+            method:"avunewbnd.avunewbnd.doctype.shift_schedule_manual.shift_schedule_manual.load_existing_data",
+            args: {
+           "from_date": new Date(_datefrom),
+           "to_date": new Date(_dateto),
+           "start_date": new Date(_datestart),
+
+            },
+            callback: function(r){
+        console.log(r);
+        _SetData(r.message);
+            }
+
+        });
+
+  
+}
+
+
+
+
+
+
+
+
+ function generatetable(_datefrom, _dateto)
+ {
+    var _from = new Date(_datefrom);
+    var _to = new  Date(_dateto);
+
+    var columns = [];
+    
+    $("#maintables td.dynamic-td,#maintable td.dynamic-td").remove();
+    while(_from <= _to)
+    { var _month= _from.getMonth()+1;
+      var _year =_from.getFullYear(); 
+      var _day = _from.getDate();
+      var _date = _from.getDate()+ "-" +_month + "-" +_from.getFullYear();
+      $("#maintable thead tr").append("<td class=dynamic-td><div>" + _date +"</div></td>");
+      columns.push(_date);
+      _from.setDate(_from.getDate() + 1);
+    }
+ 
+   var classname ="shift";
+    for(var i=0;i<columns.length;i++)
+    { 
+      
+      $("#maintables tbody tr").append("<td class=dynamic-td ><div><select class=\"+classname+\" data-day=\"+columns[i]+\" ><option selected> Select Shift</option>{% for (var t=0, l=data_list[\"shift\"].length; t<l; t++) { %}<option value=\'{{  data_list[\"shift\"][t][0] }}\'>{{  data_list[\"shift\"][t][0] }}</option>{% } %}</select></div></td>");
+    }
+    $("td").addClass("data-table-cell noselect");
+    $("#maintable thead tr td div").addClass("content ellipsis");
+    $("#maintables tbody tr td div").addClass("content ellipsis");
+    $("#maintables tbody tr td div select").addClass("input-with-feedback form-control input-sm");
+
+
+ call_python_function(_datefrom, _dateto,_datefrom);
+ }
+
+
+ function _GetData()
+ {
+
+    var _data = [];
+
+    $.each($(".shift"),function(Idx,Item){
+      
+
+      var _emp, _store, _shift, _day, _row;
+
+      _shift = $(Item).val();
+      _day = $(Item).data("day");
+      _row = $(Item).parents("tr");
+      _emp = $(".emp",_row).text().trim();
+      _empid = $(".empid",_row).text().trim();
+      _company = $(".company",_row).text().trim();
+      _store = $(".store",_row).val();
+
+      _data.push({"Shift":_shift,"Day":_day,"Employee":_emp,"Store":_store,"Empid":_empid,"Company":_company});
+    });
+
+    console.log(_data);
+    
+ frappe.call({
+            method:"avunewbnd.avunewbnd.doctype.shift_schedule_manual.shift_schedule_manual.passing_templatedata_to_python",
+            args: {
+           "data" : _data
+            },
+            callback: function(r){
+        console.log(r); 
+            }
+
+        });
+}
+
+
+
+function _SetData(_data)  {
+   $.each(_data,function(Idx,Item){
+console.log(_data);
+
+
+ 
+    var rowww = $(".emp[data-emp="+Item.employee_name+"]").parents("tr");
+    $(".store",rowww).val(Item.store);
+    
+    $(".shift[data-day="+Item.attendance_date+"]",rowww).val(Item.shift_time);
+
+
+    
+   });
+}
+
+
+</script>
+<style type="text/css">
+  td{
+    background-color: rgb(245, 247, 250);
+    width: 120px;
+    text-align: center;
+  }
+  .ellipsis{
+    width: 120px;
+  }
+  .form-page{
+    background-color: rgb(245, 247, 250);
+  }
+
+</style>
