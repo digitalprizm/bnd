@@ -306,8 +306,8 @@ def get_leave_application(employee='',date=''):
 @frappe.whitelist(allow_guest=True)
 def create_attendance_violation(employee=None, attendance_date='',company='',store='',deduction_days='',
 	in_date='',violation_type='',in_time='', out_time='',out_date='',out_store='',violation_remark='',
-	amended_in_date='',amended_in_time='',amended_out_time='', amended_out_store='',amended_out_date='',working_hours='',attendance_status='',
-	amended_status='',deduction_amount='',approver_comment='',status1='',status2='',total_working_hours='',ot_hours='',schedule_store='',schedule_status='',schedule_time=''):
+	amended_in_date='',amended_in_time='',amended_out_time='', amended_out_store='',amended_out_date='',attendance_status='',amended_in_store='',amended_status1='',amended_status2='',
+	amended_status='',deduction_amount='',approver_comment='',status1='',status2='',ot_hours='',schedule_store='',schedule_status='',schedule_time=''):
 
 	attendance_doc = frappe.new_doc("Attendance Violation")
 	attendance_doc.employee = employee
@@ -329,15 +329,17 @@ def create_attendance_violation(employee=None, attendance_date='',company='',sto
 	attendance_doc.amended_out_time  = amended_out_time
 	attendance_doc.amended_out_store = amended_out_store
 	attendance_doc.amended_out_date = amended_out_date
-	attendance_doc.working_hours = working_hours
 	attendance_doc.attendance_status = attendance_status
 	attendance_doc.amended_status = amended_status
 	attendance_doc.deduction_amount = deduction_amount
 	attendance_doc.approver_comment = approver_comment
+	attendance_doc.amended_in_store = amended_in_store
+	attendance_doc.amended_status1 = amended_status1
+	attendance_doc.amended_status2 = amended_status2
+
 
 	attendance_doc.status1 = status1
 	attendance_doc.status2 = status2
-	attendance_doc.total_working_hours = total_working_hours
 	attendance_doc.ot_hours = ot_hours
 	attendance_doc.schedule_store = schedule_store
 	attendance_doc.schedule_status = schedule_status
