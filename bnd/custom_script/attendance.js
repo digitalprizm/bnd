@@ -56,6 +56,15 @@ frappe.ui.form.on("Attendance", "validate", function(frm) {
       total_second = total_second - 60;
       total_minute = total_minute +1;
     }
+    minute_length = total_minute.toString().length;
+    total_length = total.toString().length;;
+    if(minute_length==1){
+      total_minute = "0" + total_minute;
+    }
+    if(total_length==1){
+
+      total = "0" + total;
+    }
     
     total=total+":"+total_minute;
     frm.set_value("total_working_hours", total);
