@@ -1,46 +1,64 @@
 cur_frm.add_fetch('area', 'multi_unit_manager', 'multi_unit_manager');
 frappe.ui.form.on("Store", "validate", function(frm) {
-
     let start_time = cur_frm.doc.store_open_time;    
     let end_time = cur_frm.doc.store_close_time;
-    var m = start_time.split(':');
-    var n = end_time.split(':');
+    var start = start_time.split(':');
+    var end = end_time.split(':');
 
-    var start_hours = m[0];
-    var start_minute = m[1];
-    var start_second = m[2];
-    var end_hours = n[0];
-    var end_minute = n[1];
-    var end_second = n[2];
+    var start_hours = start[0];
+    var end_hours = end[0];
+
+    var start_minute = start[1];
+    var end_minute = end[1];
+
+    var start_second = start[2];
+    var end_second = end[2];
+
     var total_minute = parseInt(start_minute) + parseInt(end_minute);
 
     var total_second = parseInt(start_second) + parseInt(end_second);
 
-    total = end_hours - start_hours;
-    if (end_hours < start_hours){
-      var add_start=24-start_hours;
-      var add_end=end_hours;
-      total=parseInt(add_start)  + parseInt(add_end);
+    total = 0;
+    if (start_hours > end_hours){
+      var start_hours= 24-start_hours;
+      total=parseInt(start_hours)  + parseInt(end_hours);
     }
-
-    if(total_minute >=60){
-      total_minute = total_minute - 60;
-      /*total = total + 1;*/
+    else{
+      total = end_hours - start_hours;
     }
-    /* new calculation*/
     if(start_minute>=1){
-      end_minute = end_minute - start_minute;
-      if (end_minute <0){
-        total = total -1;
+      if(end_minute > start_minute){
+        total_minute = end_minute - start_minute;
+      }
+      else{
+        total_minute = 60  - start_minute ;
+      }
+      end_minute = (60 - start_minute) + parseInt(end_minute);
+      if(end_minute < 60){
+        total = total - 1;
+      }
+      if ( end_minute < 0){
+        total_minute = 60 - end_minute;
       }
     }
-    /* calculation end here*/
+    if(total_minute >=60){
+      total_minute = total_minute - 60;
+        }
     if(total_second >= 60){
       total_second = total_second - 60;
       total_minute = total_minute +1;
     }
+    minute_length = total_minute.toString().length;
+    total_length = total.toString().length;;
+    if(minute_length==1){
+      total_minute = "0" + total_minute;
+    }
+    if(total_length==1){
+
+      total = "0" + total;
+    }
     
-    total=total+":"+total_minute+":"+total_second;
+    total=total+":"+total_minute;
     frm.set_value("total_no_of_hours", total);
 
 
