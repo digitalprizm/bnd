@@ -27,10 +27,12 @@ class ShiftScheduleManual(Document):
 def passing_templatedata_to_python(data):
 	#frappe.msgprint("function is working")
 	d=ast.literal_eval(data)
+	action=""
 	#frappe.msgprint(str(d))
 	
+	
 	for i in range(0,len(d)):
-		#date= frappe.utils.data.formatdate (d[i]["Day"], "yyyy-MM-dd")
+	#date= frappe.utils.data.formatdate (d[i]["Day"], "yyyy-MM-dd")
 		doc = frappe.get_doc({
 
   "doctype": "Shift Schedule",
@@ -43,14 +45,30 @@ def passing_templatedata_to_python(data):
      "naming_series" : "SHT-"
      
 	})
-		doc.insert(ignore_permissions=True)
-		doc.submit()
+		existing_data=frappe.get_all("Shift Schedule",fields=["name","attendance_date","employee_name","shift_time"],filters= {"attendance_date": d[i]["Day"],"employee_name":d[i]["Employee"]})
+		if len(existing_data)!=0:
+			store= d[i]["Store"]
+			shift =d[i]["Shift"]
+			emp=d[i]["Employee"]
+			attendance_date=d[i]["Day"]
+			frappe.db.sql("UPDATE `tabShift Schedule`set store=%s, shift_time=%s where employee_name=%s and attendance_date=%s",(store,shift,emp,attendance_date))
+			action= "Updated"
+		else:
+			doc.insert()
+			doc.submit()
+			action= "Inserted"
+
 	
 	
-	frappe.msgprint("Done");
+	frappe.msgprint("Record "+action+" Sucessfully");
 	return "Done"
 	
 	
+
+
+
+
+
 
 
 @frappe.whitelist()

@@ -1,5 +1,5 @@
 <div class="page-form flex">
-<div>Create New Shift Schedule :</div>
+<div>Schedule For :</div>
 
 <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
 <div class="link-field ui-front" style="position: relative; line-height: 1;">     
@@ -22,7 +22,7 @@
 
 
 <div class="page-form flex">
-<div> Previous Shift Schedule: </div>
+<div> Copy Schedule: </div>
 <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
 <div class="link-field ui-front" style="position: relative; line-height: 1;">    
 <div class="awesomplete"> 
@@ -113,7 +113,7 @@
        
 
         <select type="text" autocomplete="off" class="store" data-store=" {{  data_list[\"store\"][i]  }} ">
-<option selected>Select Store</option>
+<option selected value="0">Select Store</option>
 
        {% for (var t=0, z=data_list["store"].length; t<z; t++) { %}
 <option>{{  data_list["store"][t][0] }}</option>
@@ -246,7 +246,7 @@ function call_python_function(_datefrom, _dateto,_datestart)
     for(var i=0;i<columns.length;i++)
     { 
       
-      $("#maintables tbody tr").append("<td class=dynamic-td ><div><select class=\"+classname+\" data-day=\"+columns[i]+\" ><option selected> Select Shift</option>{% for (var t=0, l=data_list[\"shift\"].length; t<l; t++) { %}<option value=\'{{  data_list[\"shift\"][t][0] }}\'>{{  data_list[\"shift\"][t][0] }}</option>{% } %}</select></div></td>");
+      $("#maintables tbody tr").append("<td class=dynamic-td ><div><select class=\"+classname+\" data-day=\"+columns[i]+\" ><option selected value=0> Select Shift</option>{% for (var t=0, l=data_list[\"shift\"].length; t<l; t++) { %}<option value=\'{{  data_list[\"shift\"][t][0] }}\'>{{  data_list[\"shift\"][t][0] }}</option>{% } %}</select></div></td>");
     }
     $("td").addClass("data-table-cell noselect");
     $("#maintable thead tr td div").addClass("content ellipsis");
@@ -276,10 +276,13 @@ function call_python_function(_datefrom, _dateto,_datestart)
       _company = $(".company",_row).text().trim();
       _store = $(".store",_row).val();
 
+ if(_shift!=0 && _store!=0) {
+
       _data.push({"Shift":_shift,"Day":moment(_day).format("YYYY-MM-DD"),"Employee":_emp,"Store":_store,"Empid":_empid,"Company":_company});
+    }
     });
 
-    console.log(_data);
+    console.log("Sent Data>",_data);
     
  frappe.call({
             method:"avunewbnd.avunewbnd.doctype.shift_schedule_manual.shift_schedule_manual.passing_templatedata_to_python",
