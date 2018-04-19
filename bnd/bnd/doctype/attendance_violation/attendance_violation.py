@@ -40,6 +40,9 @@ class AttendanceViolation(Document):
 		attendance_doc.total_working_hours = self.total_working_hours
 		attendance_doc.status1 = self.amended_status1
 		attendance_doc.status2 = self.amended_status2
+		attendance_doc.ot_hours = self.ot_hours
+		attendance_doc.schedule_time = self.schedule_time
+		attendance_doc.schedule_store = self.schedule_store
 		attendance_doc.insert()
 		attendance_doc.save()
 		attendance_doc.submit()
