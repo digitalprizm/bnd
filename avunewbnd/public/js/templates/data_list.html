@@ -1,13 +1,16 @@
 <div class="page-form flex">
+<div>Create New Shift Schedule :</div>
+
 <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
 <div class="link-field ui-front" style="position: relative; line-height: 1;">     
-<div class="awesomplete">
+<div class="awesomplete"> 
 <input type="date" id="from" name="fromdate" class="filterdate input-with-feedback form-control bold input-sm" placeholder="From Date" >
+
 </div>          
 </div></div>
 <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
 <div class="link-field ui-front" style="position: relative; line-height: 1;">     
-<div class="awesomplete">
+<div class="awesomplete"> 
 <input type="date" id="to" name="todate" class="filterdate input-with-feedback form-control bold input-sm" placeholder="To Date">
 </div>          
 </div></div>
@@ -19,15 +22,17 @@
 
 
 <div class="page-form flex">
+<div> Previous Shift Schedule: </div>
 <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-<div class="link-field ui-front" style="position: relative; line-height: 1;">     
-<div class="awesomplete">
+<div class="link-field ui-front" style="position: relative; line-height: 1;">    
+<div class="awesomplete"> 
+
 <input type="date" id="fromdate" name="fromdate" class="newdate input-with-feedback form-control bold input-sm" placeholder="From Date" >
 </div>          
 </div></div>
 <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
 <div class="link-field ui-front" style="position: relative; line-height: 1;">     
-<div class="awesomplete">
+<div class="awesomplete">   
 <input type="date" id="todate" name="todate" class="newdate input-with-feedback form-control bold input-sm" placeholder="To Date">
 </div>          
 </div></div>
@@ -136,7 +141,7 @@
         </div>
         
         <button type="button" onclick="_GetData()">Upload</button>
-        <button type="button" onclick="_SetData({{ data_list[\"lastweek\"] }})">Set Data</button>
+        
 
 
 
@@ -182,6 +187,7 @@ $(".newdate").change(function(e){
     });
 
 $("#BtnSubmit").click(function (){
+
  var sdate=$("#from").val();
 call_python_function(newfdate,newtdate,sdate);
 console.log("calling python function and seting values.;");
@@ -223,20 +229,17 @@ function call_python_function(_datefrom, _dateto,_datestart)
 
  function generatetable(_datefrom, _dateto)
  {
-    var _from = new Date(_datefrom);
-    var _to = new  Date(_dateto);
-
+    var _from = moment(_datefrom);
+    var _to = moment(_dateto);
+    console.log(_from);
     var columns = [];
     
     $("#maintables td.dynamic-td,#maintable td.dynamic-td").remove();
     while(_from <= _to)
-    { var _month= _from.getMonth()+1;
-      var _year =_from.getFullYear(); 
-      var _day = _from.getDate();
-      var _date = _from.getDate()+ "-" +_month + "-" +_from.getFullYear();
-      $("#maintable thead tr").append("<td class=dynamic-td><div>" + _date +"</div></td>");
-      columns.push(_date);
-      _from.setDate(_from.getDate() + 1);
+    { 
+      $("#maintable thead tr").append("<td class=dynamic-td><div>" + _from.format("DD-MM-YYYY") +"</div></td>");
+      columns.push(_from.format("YYYY-MM-DD"));
+      _from.add(1,"days");
     }
  
    var classname ="shift";
@@ -273,7 +276,7 @@ function call_python_function(_datefrom, _dateto,_datestart)
       _company = $(".company",_row).text().trim();
       _store = $(".store",_row).val();
 
-      _data.push({"Shift":_shift,"Day":_day,"Employee":_emp,"Store":_store,"Empid":_empid,"Company":_company});
+      _data.push({"Shift":_shift,"Day":moment(_day).format("YYYY-MM-DD"),"Employee":_emp,"Store":_store,"Empid":_empid,"Company":_company});
     });
 
     console.log(_data);
