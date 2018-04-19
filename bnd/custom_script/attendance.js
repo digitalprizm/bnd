@@ -6,11 +6,9 @@ frappe.ui.form.on("Attendance", "validate", function(frm) {
 	out_time=cur_frm.doc.out_time;
 	cur_frm.set_value("new_in_time",in_time);
 	cur_frm.set_value("new_out_time",out_time);
-
-	let start_time = cur_frm.doc.in_time;    
-    let end_time = cur_frm.doc.out_time;
-    var start = start_time.split(':');
-    var end = end_time.split(':');
+	 
+    var start = in_time.split(':');
+    var end = out_time.split(':');
 
     var start_hours = start[0];
     var end_hours = end[0];
@@ -29,7 +27,6 @@ frappe.ui.form.on("Attendance", "validate", function(frm) {
     if (start_hours > end_hours){
       var start_hours= 24-start_hours;
       total=parseInt(start_hours)  + parseInt(end_hours);
-      console.log("basic total ",total);
     }
     else{
       total = end_hours - start_hours;
@@ -66,7 +63,7 @@ frappe.ui.form.on("Attendance", "validate", function(frm) {
       total = "0" + total;
     }
     
-    total=total+":"+total_minute;
+    total= total +":"+ total_minute ;
     frm.set_value("total_working_hours", total);
  });
 
