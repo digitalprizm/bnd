@@ -139,7 +139,7 @@
    "collapsible": 0, 
    "columns": 0, 
    "fieldname": "no_of_hours", 
-   "fieldtype": "Data", 
+   "fieldtype": "Read Only", 
    "hidden": 0, 
    "ignore_user_permissions": 0, 
    "ignore_xss_filter": 0, 
@@ -204,7 +204,7 @@
  "issingle": 0, 
  "istable": 0, 
  "max_attachments": 0, 
- "modified": "2018-04-03 12:34:15.521480", 
+ "modified": "2018-04-18 15:56:43.197580", 
  "modified_by": "demo@digitalprizm.net", 
  "module": "BnD", 
  "name": "Shift Time", 
@@ -232,7 +232,7 @@
    "write": 1
   }
  ], 
- "quick_entry": 1, 
+ "quick_entry": 0, 
  "read_only": 0, 
  "read_only_onload": 0, 
  "show_name_in_global_search": 0, 
