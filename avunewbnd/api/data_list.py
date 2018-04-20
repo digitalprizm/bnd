@@ -26,8 +26,8 @@ def load_data():
         # frappe.throw(str(lastweekdetails)
 
         
-    #frappe.msgprint(str(employee[0]["employee_name"]));
-    #frappe.msgprint(str(len(employee)));
+    
+    
     #{'emp': [['test'], ['Pranali'], ['suvarna'], ['suresh']], 'store': [['andheri'], ['dadar'], ['ghatkopar']], 'shift': [['Morning'], ['night']]}
     vdict["emp"] = employee
     vdict["store"] = storelist
