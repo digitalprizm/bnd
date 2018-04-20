@@ -234,7 +234,7 @@ def create_attendance(employee=None,employee_name='', attendance_date='',in_stor
 
 	attendance_doc = frappe.new_doc("Attendance")
 	attendance_doc.employee = employee
-	attendance_doc.employee = employee_name
+	attendance_doc.employee_name = employee_name
 	attendance_doc.attendance_date = attendance_date
 	attendance_doc.in_store = in_store
 	attendance_doc.out_store = out_store
