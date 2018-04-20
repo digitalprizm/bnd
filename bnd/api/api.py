@@ -229,11 +229,12 @@ def get_attendance_list(attendance_date=None):
 	return attendance_list
 
 @frappe.whitelist(allow_guest=True)
-def create_attendance(employee=None, attendance_date='',in_store='',out_store='',in_time='',out_time='',company='',new_in_time='',new_out_time='',
+def create_attendance(employee=None,employee_name='', attendance_date='',in_store='',out_store='',in_time='',out_time='',company='',new_in_time='',new_out_time='',
 						status1='',status2='',total_working_hours='',ot_hours='',schedule_store='',schedule_status='',schedule_time=''):
 
 	attendance_doc = frappe.new_doc("Attendance")
 	attendance_doc.employee = employee
+	attendance_doc.employee = employee_name
 	attendance_doc.attendance_date = attendance_date
 	attendance_doc.in_store = in_store
 	attendance_doc.out_store = out_store
@@ -264,14 +265,14 @@ def create_attendance(employee=None, attendance_date='',in_store='',out_store=''
 @frappe.whitelist(allow_guest=True)
 def get_attendance_violation_list(employee=None):
 	if employee:
-		attendance_violation_list = frappe.db.sql("""select  store, in_date, violation_type, in_time, out_time, out_date, out_store, 
+		attendance_violation_list = frappe.db.sql("""select  employee,employee_name,store, in_date, violation_type, in_time, out_time, out_date, out_store, 
 			deduction_days, violation_remark, amended_in_date, amended_in_time, amended_out_time, amended_out_store, amended_out_date,
 			working_hours, status, amended_status, deduction_amount, approver_comment, amended_from,
 			status1, status2, ot_hours, schedule_time, schedule_store, schedule_status, total_working_hours,
 			new_in_time, new_out_time
 	    	from `tabAttendance Violation` WHERE employee='{0}' """.format(employee),as_dict=1)
 	else:
-		attendance_violation_list = frappe.db.sql("""select  store, in_date, violation_type, in_time, out_time, out_date, out_store, 
+		attendance_violation_list = frappe.db.sql("""select  employee,employee_name,store, in_date, violation_type, in_time, out_time, out_date, out_store, 
 			deduction_days, violation_remark, amended_in_date, amended_in_time, amended_out_time, amended_out_store, amended_out_date,
 			working_hours, status, amended_status, deduction_amount, approver_comment, amended_from,
 			status1, status2, ot_hours, schedule_time, schedule_store, schedule_status, total_working_hours,
@@ -304,13 +305,14 @@ def get_leave_application(employee='',date=''):
 # end leave Application
 
 @frappe.whitelist(allow_guest=True)
-def create_attendance_violation(employee=None, attendance_date='',company='',store='',deduction_days='',
+def create_attendance_violation(employee=None,employee_name='', attendance_date='',company='',store='',deduction_days='',
 	in_date='',violation_type='',in_time='', out_time='',out_date='',out_store='',violation_remark='',
 	amended_in_date='',amended_in_time='',amended_out_time='', amended_out_store='',amended_out_date='',attendance_status='',amended_in_store='',amended_status1='',amended_status2='',
 	amended_status='',deduction_amount='',approver_comment='',status1='',status2='',ot_hours='',schedule_store='',schedule_status='',schedule_time=''):
 
 	attendance_doc = frappe.new_doc("Attendance Violation")
 	attendance_doc.employee = employee
+	attendance_doc.employee_name = employee_name
 	attendance_doc.attendance_date = attendance_date
 	attendance_doc.company = company
 
