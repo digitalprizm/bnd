@@ -1,19 +1,30 @@
 <div class="page-form flex">
 <div>Schedule For :</div>
-
+&nbsp;&nbsp;&nbsp;
 <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
 <div class="link-field ui-front" style="position: relative; line-height: 1;">     
 <div class="awesomplete"> 
 <input type="date" id="from" name="fromdate" class="filterdate input-with-feedback form-control bold input-sm" placeholder="From Date" >
-
 </div>          
 </div></div>
+
 <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
 <div class="link-field ui-front" style="position: relative; line-height: 1;">     
 <div class="awesomplete"> 
 <input type="date" id="to" name="todate" class="filterdate input-with-feedback form-control bold input-sm" placeholder="To Date">
 </div>          
 </div></div>
+
+<div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+<div class="link-field ui-front" style="position: relative; line-height: 1;">     
+<div class="awesomplete"> 
+ 
+ <button class="btn btn-primary btn-sm primary-action" type="button" onclick="_GetData()"><i class="visible-xs octicon octicon-check"></i><span class="hidden-xs">Upload New Data</span></button>
+</div>          
+</div></div>
+
+
+
 </div>
 
 
@@ -23,22 +34,28 @@
 
 <div class="page-form flex">
 <div> Copy Schedule: </div>
+
 <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
 <div class="link-field ui-front" style="position: relative; line-height: 1;">    
 <div class="awesomplete"> 
-
 <input type="date" id="fromdate" name="fromdate" class="newdate input-with-feedback form-control bold input-sm" placeholder="From Date" >
 </div>          
 </div></div>
+
+
 <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
 <div class="link-field ui-front" style="position: relative; line-height: 1;">     
 <div class="awesomplete">   
 <input type="date" id="todate" name="todate" class="newdate input-with-feedback form-control bold input-sm" placeholder="To Date">
 </div>          
 </div></div>
-<div>
-<button id="BtnSubmit" type="button" >Fetch Data</button>
-</div>
+
+<div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+<div class="link-field ui-front" style="position: relative; line-height: 1;">     
+<div class="awesomplete"> 
+<button class="btn btn-primary btn-sm primary-action"  id="BtnSubmit" type="button" ><i class="visible-xs octicon octicon-check"></i><span class="hidden-xs">Fetch Previous Data</span></button>
+</div>          
+</div></div>
 
 </div>
 
@@ -140,7 +157,7 @@
         </div>
         </div>
         
-        <button type="button" onclick="_GetData()">Upload</button>
+       
         
 
 
