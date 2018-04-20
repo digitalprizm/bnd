@@ -33,8 +33,8 @@ class AttendanceViolation(Document):
 		attendance_doc.attendance_date = self.attendance_date
 		attendance_doc.company = self.company
 		attendance_doc.attendance_violation = self.name
-		attendance_doc.in_time = self.amended_in_time
-		attendance_doc.out_time = self.amended_out_time
+		attendance_doc.new_in_time = self.amended_in_time
+		attendance_doc.new_out_time = self.amended_out_time
 		attendance_doc.in_store = self.amended_in_store
 		attendance_doc.out_store = self.amended_out_store
 		attendance_doc.total_working_hours = self.total_working_hours
