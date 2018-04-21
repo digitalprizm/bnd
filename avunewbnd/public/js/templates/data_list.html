@@ -1,3 +1,6 @@
+
+
+
 <div class="page-form flex">
 <div>Schedule For :</div>
 &nbsp;&nbsp;&nbsp;
@@ -24,6 +27,25 @@
 </div></div>
 
 
+
+</div>
+
+
+
+
+
+
+
+<div class="page-form flex">
+<div>Search Store :</div>
+&nbsp;&nbsp;&nbsp;
+&nbsp;
+<div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+<div class="link-field ui-front" style="position: relative; line-height: 1;">     
+<div class="awesomplete"> 
+<input type="text" id="filter-store" name="employee-filter" class="input-with-feedback form-control bold input-sm" placeholder="Store Name" >
+</div>          
+</div></div>
 
 </div>
 
@@ -104,14 +126,14 @@
 
           <tr class="data-table-row">
           <td class="empid data-table-cell noselect" style="background-color: rgb(245, 247, 250);" >
-          <div class="content ellipsis" style="width: 120px;" >
+          <div class="content ellipsis" style="width: 120px;"  >
          {{  data_list["emp"][i]["name"] }}
           </div>
           </td>
 
 
-          <td class="emp data-table-cell noselect" style="background-color: rgb(245, 247, 250);" data-emp="{{  data_list["emp"][i]["employee_name"] }}" >
-          <div class="content ellipsis" style="width: 120px;" >
+          <td class="emp data-table-cell noselect" style="background-color: rgb(245, 247, 250);" data-emp="{{  data_list["emp"][i]["employee_name"] }}"  >
+          <div class="content ellipsis" style="width: 120px;">
          {{  data_list["emp"][i]["employee_name"] }}
           </div>
           </td>
@@ -157,12 +179,11 @@
         </div>
         </div>
         
-       
         
 
 
 
-<br>
+
 
 
 
@@ -170,13 +191,31 @@
 
 
 <script>  
+
+
+
+
+
+
+
+
 var employee="";
 var store="";
 var shift="";
 
  $(document).ready(function(){
-  
- 
+  var _org_data ;
+frappe.call({
+            method:"avunewbnd.api.data_list.load_data",
+           
+            callback: function(r){
+        
+        _org_data=r.message;
+        console.log("originaldata>",_org_data);
+            }
+        });
+
+
 $(".filterdate").change(function(e){
       
          
@@ -191,6 +230,31 @@ $(".filterdate").change(function(e){
       
 
     });
+
+$("#filter-store").change(function(e){
+	var store_filter=$("#filter-store").val();
+	var not_matching_row=[];
+
+
+
+var notmatchData =$.grep( _org_data.emp, function(element, index) {
+  return element.store!=store_filter;
+  
+  });
+
+  console.log(notmatchData);
+  $.each(notmatchData,function(Idx,Item){
+   not_matching_row.push($(".emp[data-emp="+Item.employee_name+"]").parents("tr"));
+   
+});
+  $.each(not_matching_row,function(Idx,Item){
+$(Item.hide());
+  });
+  if (store_filter==""){
+$(".emp").parents("tr").show();
+}
+
+});
 
 var newfdate,newtdate;
 $(".newdate").change(function(e){
@@ -340,6 +404,8 @@ function _SetData(_data)  {
 
 
 </script>
+
+
 <style type="text/css">
   td{
     background-color: rgb(245, 247, 250);

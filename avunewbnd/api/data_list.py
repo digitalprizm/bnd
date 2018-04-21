@@ -9,12 +9,12 @@ from datetime import datetime
 
 
 
-
+@frappe.whitelist()
 def load_data():
     """Loads Devices list in `__onload`"""
     #Get devices
     vdict = {}
-    employee = frappe.db.sql("SELECT name,employee_name,company FROM `tabEmployee` ;", as_dict=1)
+    employee = frappe.db.sql("SELECT name,store,employee_name,company FROM `tabEmployee` ;", as_dict=1)
     storelist = frappe.db.sql("SELECT name FROM `tabStore` ;", as_list=1)
     shiftlist = frappe.db.sql("SELECT shift_name FROM `tabShift Time` ;", as_list=1)
     # frappe.throw(lastweekdetails)

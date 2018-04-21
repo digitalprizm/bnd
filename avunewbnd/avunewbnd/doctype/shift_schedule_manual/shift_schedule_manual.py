@@ -18,6 +18,11 @@ class ShiftScheduleManual(Document):
 
 
 
+@frappe.whitelist()
+def passing_filterdata_to_python(data):
+	frappe.msgprint(data)
+	employee = frappe.db.sql("SELECT employee_name FROM `tabEmployee` where employee_name='%s';",(data), as_dict=1)
+	return employee
 
 
 
