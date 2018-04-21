@@ -3,10 +3,7 @@
 cur_frm.add_fetch('employee', 'employee_name', 'employee_name');
 frappe.ui.form.on('Attendance Violation', {
 	refresh: function(frm) {
-	in_time= cur_frm.doc.in_time;
-	out_time=cur_frm.doc.out_time;
-	cur_frm.set_value("amended_in_time",in_time);
-	cur_frm.set_value("amended_out_time",out_time);
+
 
 	let start_time = cur_frm.doc.in_time;    
     let end_time = cur_frm.doc.out_time;
