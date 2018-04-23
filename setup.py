@@ -7,6 +7,9 @@ import re, ast
 _version_re = re.compile(r'__version__\s+=\s+(.*)')
 
 with open('bnd/__init__.py', 'rb') as f:
+# get version from __version__ variable in avunewbnd/__init__.py
+_version_re = re.compile(r'__version__\s+=\s+(.*)')
+
     version = str(ast.literal_eval(_version_re.search(
         f.read().decode('utf-8')).group(1)))
 
@@ -18,6 +21,7 @@ setup(
 	description='manages attendance ',
 	author='Digitalprizm',
 	author_email='contact@digitalprizm.net',
+
 	packages=find_packages(),
 	zip_safe=False,
 	include_package_data=True,
