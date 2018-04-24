@@ -180,7 +180,7 @@ def get_shift_schedule_exception_list(attendance_date=None):
 				else 0
 				end as enroll_number,
 			attendance_date, company, amended_from, shift_schedule_old_time, 
-			old_store_location, shift_schedule, shift_schedule__new_time, 
+			old_store_location, shift_schedule, shift_schedule__new_time,new_shift_start_time, new_shift_end_time, 
 			store_location, store_location_out, new_store_location, reason, comment\
 	    	from `tabShift Schedule Exception` WHERE attendance_date='{0}'""".format(attendance_date),as_dict=1)
 	else:
@@ -192,7 +192,7 @@ def get_shift_schedule_exception_list(attendance_date=None):
 				else 0
 				end as enroll_number,
 			attendance_date, company, amended_from, shift_schedule_old_time,
-			old_store_location, shift_schedule, shift_schedule__new_time, 
+			old_store_location, shift_schedule, shift_schedule__new_time, new_shift_start_time, new_shift_end_time,
 			store_location, store_location_out, new_store_location, reason, comment\
 	    	from `tabShift Schedule Exception`""".format(attendance_date),as_dict=1)
 
