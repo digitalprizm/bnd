@@ -2,9 +2,8 @@
 // For license information, please see license.txt
 /* eslint-disable */
 
-frappe.query_reports["EMP_DETAILS"] = {
+frappe.query_reports["Employee Details Summery"] = {
 	"filters": [
-     
-		
+
 	]
 }
