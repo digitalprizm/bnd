@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 import frappe, os, json
+from frappe.utils import cstr, now_datetime, cint, flt, get_time
 
 
 @frappe.whitelist(allow_guest=True)
@@ -229,7 +230,7 @@ def get_attendance_list(attendance_date=None):
 	return attendance_list
 
 @frappe.whitelist(allow_guest=True)
-def create_attendance(employee=None,employee_name='', attendance_date='',in_store='',out_store='',in_time='',out_time='',company='',new_in_time='',new_out_time='',
+def create_attendance(employee=None,employee_name='', attendance_date='',in_store='',out_store='',in_time='00:00',out_time='00:00',company='',new_in_time='00:00',new_out_time='00:00',
 						status1='',status2='',total_working_hours='',ot_hours='',schedule_store='',schedule_status='',schedule_time=''):
 
 	attendance_doc = frappe.new_doc("Attendance")
@@ -238,11 +239,11 @@ def create_attendance(employee=None,employee_name='', attendance_date='',in_stor
 	attendance_doc.attendance_date = attendance_date
 	attendance_doc.in_store = in_store
 	attendance_doc.out_store = out_store
-	attendance_doc.in_time = in_time
-	attendance_doc.out_time = out_time
+	attendance_doc.in_time = get_time(in_time)
+	attendance_doc.out_time = get_time(out_time)
 	attendance_doc.company = company
-	attendance_doc.new_in_time = new_in_time
-	attendance_doc.new_out_time =new_out_time
+	attendance_doc.new_in_time = get_time(new_in_time)
+	attendance_doc.new_out_time = get_time(new_out_time )
 	attendance_doc.status1 = status1
 	attendance_doc.status2 = status2
 	attendance_doc.total_working_hours = total_working_hours
@@ -250,12 +251,20 @@ def create_attendance(employee=None,employee_name='', attendance_date='',in_stor
 	attendance_doc.schedule_store = schedule_store
 	attendance_doc.schedule_status = schedule_status
 	attendance_doc.schedule_time = schedule_time
-	attendance_doc.insert(ignore_permissions=True)
-	attendance_doc.save(ignore_permissions=True)
-	attendance_doc.submit()
-	frappe.db.commit()
-	return { "message":"New Attendance {0} Is Created".format(employee),
+
+	try:
+		attendance_doc.insert(ignore_permissions=True)
+		attendance_doc.save(ignore_permissions=True)
+		attendance_doc.submit()
+		frappe.db.commit()
+		return { "message":"New Attendance {0} Is Created".format(employee),
 			"status": "success","user_message":"New Attendance {0} Is Created".format(employee)}
+	except Exception as e:
+		error = True
+		return { "message":"New Attendance  Is Not Created",
+			"status": "failed",
+			"user_message":"New Attendance Is Not Created",
+			"error": e }
 
 
 # end attendance
@@ -306,53 +315,61 @@ def get_leave_application(employee='',date=''):
 
 @frappe.whitelist(allow_guest=True)
 def create_attendance_violation(employee=None,employee_name='', attendance_date='',company='',store='',deduction_days='',
-	in_date='',violation_type='',in_time='', out_time='',out_date='',out_store='',violation_remark='',
-	amended_in_date='',amended_in_time='',amended_out_time='', amended_out_store='',amended_out_date='',attendance_status='',amended_in_store='',amended_status1='',amended_status2='',
+	in_date='',violation_type='',in_time='00:00', out_time='00:00',out_date='',out_store='',violation_remark='',
+	amended_in_date='',amended_in_time='00:00',amended_out_time='00:00', amended_out_store='',amended_out_date='',attendance_status='',amended_in_store='',amended_status1='',amended_status2='',
 	amended_status='',deduction_amount='',approver_comment='',status1='',status2='',ot_hours='',schedule_store='',schedule_status='',schedule_time=''):
+# 
+	attendance_violation_doc = frappe.new_doc("Attendance Violation")
+	attendance_violation_doc.employee = employee
+	attendance_violation_doc.employee_name = employee_name
+	attendance_violation_doc.attendance_date = attendance_date
+	attendance_violation_doc.company = company
 
-	attendance_doc = frappe.new_doc("Attendance Violation")
-	attendance_doc.employee = employee
-	attendance_doc.employee_name = employee_name
-	attendance_doc.attendance_date = attendance_date
-	attendance_doc.company = company
+	attendance_violation_doc.store= store
+	attendance_violation_doc.deduction_days = deduction_days
+	attendance_violation_doc.in_date = in_date
+	attendance_violation_doc.violation_type = violation_type
+	attendance_violation_doc.in_time = get_time(in_time)
+	attendance_violation_doc.out_time = get_time(out_time)
+	attendance_violation_doc.out_date = out_date
+	attendance_violation_doc.out_store = out_store
+	attendance_violation_doc.violation_remark = violation_remark
 
-	attendance_doc.store= store
-	attendance_doc.deduction_days = deduction_days
-	attendance_doc.in_date = in_date
-	attendance_doc.violation_type = violation_type
-	attendance_doc.in_time = in_time
-	attendance_doc.out_time = out_time
-	attendance_doc.out_date = out_date
-	attendance_doc.out_store = out_store
-	attendance_doc.violation_remark = violation_remark
-
-	attendance_doc.amended_in_date = amended_in_date
-	attendance_doc.amended_in_time = amended_in_time
-	attendance_doc.amended_out_time  = amended_out_time
-	attendance_doc.amended_out_store = amended_out_store
-	attendance_doc.amended_out_date = amended_out_date
-	attendance_doc.attendance_status = attendance_status
-	attendance_doc.amended_status = amended_status
-	attendance_doc.deduction_amount = deduction_amount
-	attendance_doc.approver_comment = approver_comment
-	attendance_doc.amended_in_store = amended_in_store
-	attendance_doc.amended_status1 = amended_status1
-	attendance_doc.amended_status2 = amended_status2
+	attendance_violation_doc.amended_in_date = amended_in_date
+	attendance_violation_doc.amended_in_time = get_time(amended_in_time)
+	attendance_violation_doc.amended_out_time  = get_time(amended_out_time)
+	attendance_violation_doc.amended_out_store = amended_out_store
+	attendance_violation_doc.amended_out_date = amended_out_date
+	attendance_violation_doc.attendance_status = attendance_status
+	attendance_violation_doc.amended_status = amended_status
+	attendance_violation_doc.deduction_amount = deduction_amount
+	attendance_violation_doc.approver_comment = approver_comment
+	attendance_violation_doc.amended_in_store = amended_in_store
+	attendance_violation_doc.amended_status1 = amended_status1
+	attendance_violation_doc.amended_status2 = amended_status2
 
 
-	attendance_doc.status1 = status1
-	attendance_doc.status2 = status2
-	attendance_doc.ot_hours = ot_hours
-	attendance_doc.schedule_store = schedule_store
-	attendance_doc.schedule_status = schedule_status
-	attendance_doc.schedule_time = schedule_time
+	attendance_violation_doc.status1 = status1
+	attendance_violation_doc.status2 = status2
+	attendance_violation_doc.ot_hours = ot_hours
+	attendance_violation_doc.schedule_store = schedule_store
+	attendance_violation_doc.schedule_status = schedule_status
+	attendance_violation_doc.schedule_time = schedule_time
 
-	attendance_doc.insert(ignore_permissions=True)
-	attendance_doc.save(ignore_permissions=True)
-	frappe.db.commit()
-	return { "message":"New Attendance {0} Is Created".format(employee),
-			"status": "success","user_message":"New Attendance {0} Is Created".format(employee)}
+	try:
+		attendance_violation_doc.insert(ignore_permissions=True)
+		attendance_violation_doc.save(ignore_permissions=True)
+		frappe.db.commit()
+		# frappe.msgprint( " Employee attedance created successfull")
+		return { "message":"New Attendance Violation {0} Is Created".format(employee),
+				"status": "success","user_message":"New Attendance {0} Is Created".format(employee)}
 
+	except Exception as e:
+		error = True
+		return { "message":"New Attendance Violation Is Not Created",
+				"status": "failed",
+				"user_message":"New Attendance Is Not Created",
+				"error": e }
 
 #end attendance violation
 
