@@ -107,6 +107,12 @@ def get_data():
 					"name": "Shift Schedule Exception Details",
 					"doctype": "Shift Schedule Exception"
 				},
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Employee Details Summery",
+					"doctype": "Employee"
+				},
 			]
 		},
 		
