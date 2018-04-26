@@ -85,14 +85,29 @@ def get_employee_list(id=None,enroll_number=None):
 			subscriber_no, gosi_no, nationality, national_id_no, country, iqama_no, iqama_issue_date, iqama_expiry_hijri, iqama_expiry_english,
 			driving_license_no, driving_license_issue_date, driving_license_expiry_date, baladiya_card_no, exam_date, training_expiry_date, baladiya_medical_center,muqeem_status, muqeem_status, store,
 			passport_number, date_of_issue,
+			case when (1=1)
+				then (select  '1'
+				from `tabHas Role` 
+				where `tabHas Role`.parent=`tabEmployee`.user_id 
+				and `tabHas Role`.role = 'Multi Unit Manager')
+				else '0'
+				end as mum,
 			branch, department, salary_mode, designation, occupation, company_email, notice_number_of_days,
 			status, employment_type, holiday_list, scheduled_confirmation_date, final_confirmation_date, contract_end_date, date_of_retirement
-			from `tabEmployee` WHERE name='{0}'and where `tabEmployee`.user_id = `tabStore`.multi_unit_manager """.format(id),as_dict=1)
+			from `tabEmployee` WHERE name='{0}'""".format(id),as_dict=1)
 	elif enroll_number:
 		employee_list = frappe.db.sql("""select  name, employee_name, company, user_id, date_of_joining, date_of_birth, gender, 
 			shift_type, shift_id, eligible_week_off_days, store, enroll_number, weekly_off_day1, weekly_off_day2,
 			subscriber_no, gosi_no, nationality, national_id_no, country, iqama_no, iqama_issue_date, iqama_expiry_hijri, iqama_expiry_english,
-			driving_license_no, driving_license_issue_date, driving_license_expiry_date, baladiya_card_no, exam_date, training_expiry_date, baladiya_medical_center,muqeem_status, muqeem_status, store,
+			driving_license_no, driving_license_issue_date, 
+			case when (1=1)
+				then (select  '1'
+				from `tabHas Role` 
+				where `tabHas Role`.parent=`tabEmployee`.user_id 
+				and `tabHas Role`.role = 'Multi Unit Manager')
+				else '0'
+				end as mum,
+			driving_license_expiry_date, baladiya_card_no, exam_date, training_expiry_date, baladiya_medical_center,muqeem_status, muqeem_status, store,
 			passport_number, date_of_issue,
 			branch, department, salary_mode, designation, occupation, company_email, notice_number_of_days,
 			status, employment_type, holiday_list, scheduled_confirmation_date, final_confirmation_date, contract_end_date, date_of_retirement
@@ -100,7 +115,15 @@ def get_employee_list(id=None,enroll_number=None):
 	else:
 		employee_list = frappe.db.sql("""select  name, employee_name, company, user_id, date_of_joining, date_of_birth, gender, 
 			shift_type, shift_id, eligible_week_off_days, store, enroll_number, weekly_off_day1, weekly_off_day2,
-			subscriber_no, gosi_no, nationality, national_id_no, country, iqama_no, iqama_issue_date, iqama_expiry_hijri, iqama_expiry_english,
+			subscriber_no, gosi_no, 
+			case when (1=1)
+				then (select  '1'
+				from `tabHas Role` 
+				where `tabHas Role`.parent=`tabEmployee`.user_id 
+				and `tabHas Role`.role = 'Multi Unit Manager')
+				else '0'
+				end as mum,
+			nationality, national_id_no, country, iqama_no, iqama_issue_date, iqama_expiry_hijri, iqama_expiry_english,
 			driving_license_no, driving_license_issue_date, driving_license_expiry_date, baladiya_card_no, exam_date, training_expiry_date, baladiya_medical_center,muqeem_status, muqeem_status, store,
 			passport_number, date_of_issue,
 			branch, department, salary_mode, designation, occupation, company_email, notice_number_of_days,
