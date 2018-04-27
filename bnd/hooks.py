@@ -27,14 +27,18 @@ fixtures = ['Custom Field', 'Property Setter',"Print Format"]
 # page_js = {"page" : "public/js/file.js"}
 doctype_js = {
     "Employee":["custom_script/employee.js"],
-    "Attendance" : ["custom_script/attendance.js"]   
+    "Attendance" : ["custom_script/attendance.js"]
 }
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
-
+doc_events = {
+	"Salary Slip": {
+		"validate": "bnd.custom_methods.hello",
+			}
+}
 # Home Pages
 # ----------
 
