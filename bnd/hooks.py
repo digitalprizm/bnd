@@ -36,7 +36,7 @@ doctype_js = {
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 doc_events = {
 	"Salary Slip": {
-		"validate": "bnd.custom_methods.hello",
+		"validate": "bnd.custom_methods.salary_slip",
 			}
 }
 # Home Pages
