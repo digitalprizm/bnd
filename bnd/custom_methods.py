@@ -5,22 +5,14 @@ from frappe.utils import flt, time_diff_in_hours, get_datetime, getdate, today, 
 from frappe import _
 
 @frappe.whitelist()
-def hello(doc,method):
-	# query="""Select deduction_days, deduction_amount
-	# from `tabAttendance Violation` where (attendance_date between '{0}' and '{1}')""".format(("start_date"),("end_date"))
+def salary_slip(doc,method):
+	query="""Select deduction_days, deduction_amount
+	from `tabAttendance Violation` where (attendance_date between '{0}' and '{1}') and employee='{2}'""".format(doc.start_date, doc.end_date, doc.employee)
 
-	query="""Select deduction_days
-	from `tabAttendance Violation`"""
-	
-	query1="""Select deduction_amount
-	from `tabAttendance Violation`"""
-
-	dl = frappe.db.sql(query,as_list=1,debug=1)
-	d = frappe.db.sql(query1,as_list=1,debug=1)
-
-	# print ("\n\n\n\n")
-	# frappe.msgprint (dl)
-	# frappe.msgprint (d)
-
-	frappe.msgprint('Deduction days:'+str(dl[0]))
-	frappe.msgprint('Deduction amount:'+str(d[0]))
+	deduction_data = frappe.db.sql(query,as_list=1,debug=1)
+	if deduction_data:
+		deduction = deduction_data[0]
+		doc.deduction_days = deduction[0]
+		doc.deduction_amount = deduction[1]
+		frappe.msgprint('Deduction days:'+ str(deduction[0]))
+		frappe.msgprint('Deduction amount:'+ str(deduction[1]))
