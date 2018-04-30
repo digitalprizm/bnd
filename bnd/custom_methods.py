@@ -9,18 +9,11 @@ def hello(doc,method):
 	# query="""Select deduction_days, deduction_amount
 	# from `tabAttendance Violation` where (attendance_date between '{0}' and '{1}')""".format(("start_date"),("end_date"))
 
-	query="""Select deduction_days
-	from `tabAttendance Violation`"""
-	
-	query1="""Select deduction_amount
-	from `tabAttendance Violation`"""
+	query="""Select deduction_days, deduction_amount
+	from `tabAttendance Violation` where (attendance_date between '{0}' and '{1}') and employee='{2}'""".format(doc.start_date, doc.end_date, doc.employee)
 
 	dl = frappe.db.sql(query,as_list=1,debug=1)
-	d = frappe.db.sql(query1,as_list=1,debug=1)
-
-	# print ("\n\n\n\n")
-	# frappe.msgprint (dl)
-	# frappe.msgprint (d)
-
-	frappe.msgprint('Deduction days:'+str(dl[0]))
-	frappe.msgprint('Deduction amount:'+str(d[0]))
+	if dl:
+		a = dl[0]
+		frappe.msgprint('Deduction days:'+ str(a[0]))
+		frappe.msgprint('Deduction amount:'+ str(a[1]))
