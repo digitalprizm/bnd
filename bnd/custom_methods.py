@@ -15,3 +15,16 @@ def salary_slip(doc,method):
 		doc.deduction_amount = deduction[1]
 		frappe.msgprint('Deduction days:'+ str(doc.deduction_days) )
 		frappe.msgprint('Deduction amount:'+ str(doc.deduction_amount) )
+
+	mycheck = False
+	for i in doc.deductions:
+		if i.salary_component == "Attendance Violation":
+			mycheck = True
+			i.amount = doc.deduction_amount
+	if mycheck:
+		pass
+	else:
+		row = doc.append('deductions', {})
+		row.salary_component = "Attendance Violation"
+		row.amount =doc.deduction_amount
+	doc.reload()
