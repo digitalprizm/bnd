@@ -281,13 +281,13 @@ def create_attendance(employee=None,employee_name='', attendance_date='',in_stor
 		attendance_doc.submit()
 		frappe.db.commit()
 		return { "message":"New Attendance {0} Is Created".format(employee),
-			"status": "success","user_message":"New Attendance {0} Is Created".format(employee)}
+			"status": "success"
+			}
 	except Exception as e:
-		error = True
+		
 		return { "message":"New Attendance  Is Not Created",
-			"status": "failed",
-			"user_message":"New Attendance Is Not Created",
-			"error": e }
+			"status": "failed"
+			}
 
 
 # end attendance
@@ -385,14 +385,14 @@ def create_attendance_violation(employee=None,employee_name='', attendance_date=
 		frappe.db.commit()
 		# frappe.msgprint( " Employee attedance created successfull")
 		return { "message":"New Attendance Violation {0} Is Created".format(employee),
-				"status": "success","user_message":"New Attendance {0} Is Created".format(employee)}
+				"status": "success"
+				}
 
 	except Exception as e:
 		error = True
 		return { "message":"New Attendance Violation Is Not Created",
-				"status": "failed",
-				"user_message":"New Attendance Is Not Created",
-				"error": e }
+				"status": "failed"
+				 }
 
 #end attendance violation
 
