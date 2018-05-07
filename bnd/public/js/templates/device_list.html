@@ -1,0 +1,141 @@
+
+
+
+
+
+<!--device table-->
+
+
+<div class="form-grid"> 
+    <div class="grid-heading-row">
+    <div class="grid-row">
+    <div class="data-row row">
+<!--no column-->
+
+    <div class="row-index col col-xs-1">
+    <span>No.</span>
+    </div>
+    <!--Devicename column-->
+
+
+    <div class="col grid-static-col col-xs-2 ">
+    <div class="field-area" style="display: none;"></div><div class="static-area ellipsis">Device Name</div>
+    </div>
+<!--deviceIPaddress column-->
+
+
+ <div class="col grid-static-col col-xs-3 ">
+    <div class="field-area" style="display: none;"></div><div class="static-area ellipsis">Device IP Address</div>
+    </div>
+
+<!--status column-->
+
+    <div class="col grid-static-col col-xs-1 ">
+    <div class="field-area" style="display: none;"></div><div class="static-area ellipsis">Status</div>
+    </div>
+
+    <!--scanned column-->
+
+
+    <div class="col grid-static-col col-xs-3 ">
+    <div class="field-area" style="display: none;"></div><div class="static-area ellipsis">Scanned Date</div>
+    </div>
+
+   <!--scan column-->
+
+
+    <div class="col grid-static-col col-xs-2 ">
+    <div class="field-area" style="display: none;"></div><div class="static-area ellipsis">Scan</div>
+    </div>
+
+    </div>
+    </div>
+    </div> 
+
+{% if (device_list.length == 0) { %}
+    <div class="col-xs-12">
+        <h2 class="text-muted text-center">There is no Devices.</h2>
+    </div>
+{% } %}
+
+
+<!--Data Rows-->
+
+{% for (var i=0, l=device_list.length; i<l; i++) { %}
+
+<div class="grid-body" style="border-bottom: 2px solid #d1d8dd"> 
+    <div class="rows">
+    
+    <div class="grid-row" data-name="New Project Task 1" data-idx="1">
+    <div class="data-row row">
+<!--no row-->
+
+    <div class="row-index col col-xs-1">
+    <span> {{ i+1 }} </span>
+    </div>
+   
+    <div class="col grid-static-col col-xs-2 bold ">
+    <div class="field-area" style="display: none;"></div><div class="static-area ellipsis"> {{ device_list[i].device_name }}</div>
+    </div>
+
+<!--ip address row-->
+
+
+  <div class="col grid-static-col col-xs-3 bold ">
+    <div class="field-area" style="display: none;"></div><div class="static-area ellipsis"> {{  device_list[i].ip_address }}  </div>
+    </div>
+
+
+
+<!--status row-->
+
+    {% if (device_list[i].status == "Ready to process") { %}
+     <div class="col grid-static-col col-xs-1 bold ">
+    <span class="indicator green filterable"  data-filter="status,=,Active" id="status">  </span></div>
+	{% else %}
+<div class="col grid-static-col col-xs-1 bold ">
+    <span class="indicator red filterable" data-filter="status,=,Active">  </span></div>
+
+{% } %}
+
+<!--scanned date row-->
+
+   <div class="col grid-static-col col-xs-3 bold ">
+    <div class="field-area" style="display: none;"></div><div class="static-area ellipsis"> {{ device_list[i].scanned_date }}</div>
+    </div>
+
+  
+<!--button row-->
+    <div class="col grid-static-col col-xs-2 bold" data-fieldname="title" data-fieldtype="Data">
+    <div class="field-area" style="display: block;">
+    <button type="reset" class="btn btn-xs btn-default grid-add-row btn_fetch" data-dvno="{{ device_list[i].device_name }}" id="fetch-data">Fetch Data</button>
+    </div>  
+    </div>
+
+    </div>
+    </div>
+    </div>
+    </div>
+
+{% } %}
+
+<script>
+    $(document).ready(function(){
+    $(".btn_fetch").click(function(e){
+                console.log($(e.target).data("dvno"));
+      alert("Button was clicked.")
+    });
+});
+
+
+
+
+    $(".trygetdata").change(function(){
+    alert("The text has been changed.");
+    frappe.msgprint("script")
+
+    
+});
+    
+
+</script>
