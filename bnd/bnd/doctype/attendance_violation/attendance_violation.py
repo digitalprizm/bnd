@@ -45,6 +45,8 @@ class AttendanceViolation(Document):
 		attendance_doc.ot_hours = self.ot_hours
 		attendance_doc.schedule_time = self.schedule_time
 		attendance_doc.schedule_store = self.schedule_store
+		attendance_doc.deduction_days = self.deduction_days
+		attendance_doc.deduction_amount = self.deduction_amount
 		attendance_doc.insert()
 		attendance_doc.save()
 		attendance_doc.submit()
