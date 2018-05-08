@@ -140,10 +140,12 @@ final_confirmation_date, contract_end_date, date_of_retirement
 @frappe.whitelist(allow_guest=True)
 def get_shift_time_list(shift_name=None):
 	if shift_name:
-		shift_time_list = frappe.db.sql("""select  shift_name, start_time, end_time, no_of_hours, end_time_on_next_day
+		shift_time_list = frappe.db.sql("""select  shift_name, start_time, end_time, no_of_hours, end_time_on_next_day,
+			break_time, std_working_hours
 	    	from `tabShift Time` WHERE shift_name='{0}' """.format(shift_name),as_dict=1)
 	else:
-		shift_time_list = frappe.db.sql("""select  shift_name, start_time, end_time, no_of_hours, end_time_on_next_day
+		shift_time_list = frappe.db.sql("""select  shift_name, start_time, end_time, no_of_hours, end_time_on_next_day,
+			break_time, std_working_hours
 	    	from `tabShift Time`""".format(shift_name),as_dict=1)
 
 	return shift_time_list
@@ -243,11 +245,11 @@ def get_attendance_list(attendance_date=None):
 	if attendance_date:
 		attendance_list = frappe.db.sql("""select employee, employee_name, status, leave_type, attendance_date,
 		new_in_time,new_out_time, company, in_store, in_time, out_time, out_store, amended_from,
-		status1, status2,ot_hours, schedule_time, schedule_store,schedule_status, total_working_hours 
+		status1, status2,ot_hours, schedule_time, schedule_store,schedule_status, total_working_hours , deduction_days, deduction_amount
 			from `tabAttendance` WHERE attendance_date='{0}' """.format(attendance_date),as_dict=1)
 	else:
 		attendance_list = frappe.db.sql("""select employee, employee_name, status, new_in_time, new_out_time, leave_type, attendance_date, company, in_store, in_time, out_time, out_store, amended_from,
-			status1, status2,ot_hours, schedule_time, schedule_store,schedule_status, total_working_hours
+			status1, status2,ot_hours, schedule_time, schedule_store,schedule_status, total_working_hours, deduction_days, deduction_amount
 			from `tabAttendance`""".format(attendance_date),as_dict=1)
 
 	return attendance_list
