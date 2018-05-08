@@ -18,6 +18,7 @@ fixtures = ['Custom Field', 'Property Setter',"Print Format"]
 # include js, css files in header of desk.html
 app_include_css = "/assets/bnd/bnd.css"
 # app_include_js = "/assets/bnd/js/bnd.js"
+app_include_js = "/assets/js/bnd.min.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/bnd/css/bnd.css"

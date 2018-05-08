@@ -1,0 +1,9 @@
+{
+	"js/bnd.min.js": [
+		"public/js/templates/device_list.html",
+                "public/js/templates/data_list.html"
+	]
+}
+
+
+
