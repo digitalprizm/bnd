@@ -1,0 +1,60 @@
+
+<div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+<div class="link-field ui-front" style="position: relative; line-height: 1;">     
+<div class="awesomplete"> 
+        <div>Attendance Date: </div> &nbsp;&nbsp;
+<input type="date" id="attendance_date" name="attendance_date" class="attendance_date input-with-feedback form-control bold input-sm" placeholder="From Date" >
+</div>          
+</div></div>
+<button class="btn btn-primary btn-sm primary-action"  onclick="calling_attendance_api()" type="button" ><i class="visible-xs octicon octicon-check"></i><span class="hidden-xs">Get Previous Data</span></button>
+
+
+
+<script>
+var adate;
+$(document).ready(function(){
+    $("#attendance_date").change(function(e){
+      adate=$("#attendance_date").val();
+      console.log("adate>",adate);
+    });
+
+
+
+
+
+function calling_attendance_api(){
+   var $wrapper= $("#body_div").append("<div id=cover>API is calling... Please Wait... </div>");
+   $wrapper.fadeOut(100);
+   frappe.msgprint({
+        title: __("API is calling... Please Wait..."),
+        message: __("API is calling... Please Wait..."),
+        indicator: "red"
+ });
+
+    frappe.call({
+            method:"bnd.bnd.doctype.attendance_process.attendance_process.calling_attendance_api",
+           
+            callback: function(r){
+        
+        _result=r.message;
+        console.log("result>",_result);
+        frappe.msgprint({
+        title: __(_result),
+        message: __("API called Sucessfully."),
+        indicator: "red"
+ });
+ $wrapper.fadeIn(100);
+            }
+        });
+}
+</script>
+<style>
+    #cover {
+    background-color: red;
+    opacity: 0.5;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+</style>
