@@ -33,7 +33,12 @@ def get_data():
 					"type": "doctype",
 					"name": "HR Parameter",
 					"description": _("HR Parameter"),
-				},								
+				},	
+				{
+					"type": "doctype",
+					"name": "Attendance Process",
+					"description": _("Attendance Process"),
+				},							
 			]
 		},
 		{
