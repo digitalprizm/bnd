@@ -113,7 +113,7 @@ for (var e=0;e<_org_data.emp.length;e++){
 
 
 
-      _result=JSON.parse(r.message);
+      _result=JSON.parse(JSON.parse(r.message));
 
 
       console.log("dataafter parse>",_result);
@@ -132,7 +132,8 @@ else{
        indicator: "green"
 });
 $("#maintable thead tr").append("<th class=dynamic-th>"+div + "Status</div></th><th class=dynamic-th>"+div + "Message</div></th>");
-console.log("_result[i]",_result);
+console.log("_result>>",_result);
+console.log("_result[0]>"+_result[0]+"_result[1]>"+_result[1]+"_result[0][employee]>"+_result[0]["employee"]);
 
 for (var i=0;i<_result.length;i++ ){
     console.log(_result[i].employee,_result);
