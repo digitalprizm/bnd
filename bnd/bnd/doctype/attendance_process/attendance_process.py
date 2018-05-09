@@ -17,8 +17,8 @@ class AttendanceProcess(Document):
 
 
 @frappe.whitelist()
-def calling_attendance_api():
-	r = requests.get('http://192.168.16.194/subwayapi/api/AProcess?_date=20180312')
+def calling_attendance_api(process_date,enroll_number):
+	r = requests.get('http://192.168.16.194/subwayapi/api/AProcess?_date={0}&_enroll={1}'.format(process_date,enroll_number))
 	api=r.text
 	return api
 
