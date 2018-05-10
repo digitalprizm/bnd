@@ -230,9 +230,9 @@ function call_python_function(_datefrom, _dateto,_datestart)
  frappe.call({
             method:"bnd.bnd.doctype.shift_schedule_manual.shift_schedule_manual.load_existing_data",
             args: {
-           "from_date": new Date(_datefrom),
-           "to_date": new Date(_dateto),
-           "start_date": new Date(_datestart),
+           "from_date": moment(_datefrom).format("YYYYMMDD"),
+           "to_date": moment(_dateto).format("YYYYMMDD"),
+           "start_date": moment(_datestart).format("YYYYMMDD")
             },
             callback: function(r){
         console.log("loadexistingdata>",r);

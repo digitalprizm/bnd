@@ -3,84 +3,164 @@
 
 <div class="page-form flex">
         
-     Attendance Date: 
-        <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-        <div class="link-field ui-front" style="position: relative; line-height: 1;">     
-        <div class="awesomplete"> 
-        <input type="date" id="attendance_date" name="attendance_date" class="attendance_date input-with-feedback form-control bold input-sm" placeholder="From Date" >
-        </div>          
-        </div></div>
-        
-                
-        <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-        <div class="link-field ui-front" style="position: relative; line-height: 1;">     
-        <div class="awesomplete"> 
-                <button class="btn btn-primary btn-sm primary-action"  onclick="calling_attendance_api()" type="button" ><i class="visible-xs octicon octicon-check"></i><span class="hidden-xs">Get Previous Data</span></button>
-            </div>          
-        </div></div>
-        
-        
-        
-        </div>
+    Attendance Date: 
+       <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+       <div class="link-field ui-front" style="position: relative; line-height: 1;">     
+       <div class="awesomplete"> 
+       <input type="date" id="attendance_date" name="attendance_date" class="attendance_date input-with-feedback form-control bold input-sm" placeholder="From Date" >
+       </div>          
+       </div></div>
+       
+               
+       <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+       <div class="link-field ui-front" style="position: relative; line-height: 1;">     
+       <div class="awesomplete"> 
+               <button class="btn btn-primary btn-sm primary-action"  onclick="calling_attendance_api()" type="button" ><i class="visible-xs octicon octicon-check"></i><span class="hidden-xs">Process Attendance</span></button>
+           </div>          
+       </div></div>
+       </div>
+
+
+
+       <div style="overflow:scroll">
+           <table class="table table-bordered" id="maintable" style="width:auto;">
+             <thead>
+               <tr>
+                 <th><div class="content ellipsis" style="width: 100px; text-align: center;margin: auto;">
+                           Employee id
+                         </div></th>
+                        
+                         <th><div class="content ellipsis" style="width: 100px;text-align: center;margin: auto;">
+                            Employee
+                         </div></th>
+                         
+               </tr>
+             </thead>
+             
+             <tbody>
+             {% for (var i=0,l=attendance_list["emp"].length; i<l; i++) { %}   
+               <tr>
+                 
+                 <td class="empid" data-empenrollno="{{  attendance_list["emp"][i]["enroll_number"] }}" ><div >{{  attendance_list["emp"][i]["name"] }}</div></td>
+                 <td class="emp" data-emp="{{  attendance_list["emp"][i]["employee_name"] }}" ><div >{{  attendance_list["emp"][i]["employee_name"] }}</div></td>
+                 
+                  
+               </tr>
+               {% } %}
+               </tbody>
+           </table>
+           </div>
 
 <script>
+
+ 
+
+var _org_data ;
+var _result;
+
 var adate;
+var q="\'";
+var div="<div style="+q+"margin:auto;width:120px;"+q+">";
+
 $(document).ready(function(){
-    $("#attendance_date").change(function(e){
-      adate=$("#attendance_date").val();
-      console.log("adate>",adate);
 
-      adate=moment(adate);
-      console.log("moment>",adate);
 
-      adate=adate.format("YYYYMMDD");
-      console.log("format>",adate);
+frappe.call({
+            method:"bnd.api.attendance_list.load_data",
+           
+            callback: function(r){
+        
+        _org_data=r.message;
+        console.log("originaldata>",_org_data);
+            }
+        });
 
-    });
+
+   $("#attendance_date").change(function(e){
+     adate=$("#attendance_date").val();
+     adate=moment(adate);
+     adate=adate.format("YYYYMMDD");
+     console.log("format>",adate);
+
+
+
+   });
 
 
 });
 
 
 function calling_attendance_api(){
-   var $wrapper= $("#body_div").append("<div id=cover>API is calling... Please Wait... </div>");
-   $wrapper.fadeOut(100);
-   frappe.msgprint({
-        title: __("API is calling... Please Wait..."),
-        message: __("API is calling... Please Wait..."),
-        indicator: "red"
- });
+  var $wrapper= $("#body_div").append("<div id=cover>API is calling... Please Wait... </div>");
+  $wrapper.fadeOut(100);
+  frappe.msgprint({
+       title: __("Processing..."),
+       message: __("Please Wait while loading Page."),
+       indicator: "red"
+});
 
-    frappe.call({
-            method:"bnd.bnd.doctype.attendance_process.attendance_process.calling_attendance_api",
-            args: {
-           "attendance_date": adate
-            },
-            callback: function(r){
-        console.log("data.",r.message);
-       var _result=r.message;
-       
-        frappe.msgprint({
-        title: __(_result),
-        message: __("API called Sucessfully."),
-        indicator: "red"
- });
- $wrapper.fadeIn(100);
-            }
-        });
+for (var e=0;e<_org_data.emp.length;e++){
+   frappe.call({
+           method:"bnd.bnd.doctype.attendance_process.attendance_process.calling_attendance_api",
+           args: {
+          "process_date": adate,
+          "enroll_number":_org_data.emp[e].enroll_number
+          
+           },
+           callback: function(r){
+       console.log("datafrompython>",r.message);
+
+
+
+
+      _result=JSON.parse(JSON.parse(r.message));
+
+
+      console.log("dataafter parse>",_result);
+      var failedmsg={"Message":"An error has occurred."};
+      if (_result==failedmsg){
+   frappe.msgprint({
+       title: __(r.message),
+       message: __("Something went wrong."),
+       indicator: "red"
+});
 }
+else{
+       frappe.msgprint({
+       title: __(_result),
+       message: __("Attendance Processed Sucessfully."),
+       indicator: "green"
+});
+$("#maintable thead tr").append("<th class=dynamic-th>"+div + "Status</div></th><th class=dynamic-th>"+div + "Message</div></th>");
+console.log("_result>>",_result);
+console.log("_result[0]>"+_result[0]+"_result[1]>"+_result[1]+"_result[0][employee]>"+_result[0]["employee"]);
+
+for (var i=0;i<_result.length;i++ ){
+    console.log(_result[i].employee,_result);
+var row=$("#maintable tbody [data-empenrollno="+_result[i].employee+"]").parents("tr");
+console.log(row);
+   row.append("<td class=dynamic-td>"+div+_result[i].status+"</div></td><td class=dynamic-td>"+div+_result[i].message+"</div></td>");
+}
+         }
+           }
+             });
+}
+$wrapper.fadeIn(100);
+
+}
+
 </script>
 <style>
-    #cover {
-    background-color: red;
-    opacity: 0.5;
-    position: absolute;
-    height: 100%;
-    width: 100%;
+   #cover {
+   background-color: red;
+   opacity: 0.5;
+   position: absolute;
+   height: 100%;
+   width: 100%;
 }
 .page-form {    
-    border-bottom: none;
-    background-color: white;
-    }
+   border-bottom: none;
+   background-color: white;
+   }
 
 </style>

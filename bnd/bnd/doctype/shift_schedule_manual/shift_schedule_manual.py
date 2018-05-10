@@ -74,11 +74,12 @@ def passing_templatedata_to_python(data):
 
 @frappe.whitelist()
 def load_existing_data(from_date,to_date,start_date):
-	fdate = frappe.utils.data.format_datetime (from_date, "yyyyMMdd")
-	tdate = frappe.utils.data.format_datetime (to_date, "yyyyMMdd")
-	sdate = frappe.utils.data.format_datetime (start_date, "yyyyMMdd")
+	#frappe.msgprint(from_date,to_date,start_date)
+	#fdate = frappe.utils.data.format_datetime (from_date, "yyyyMMdd")
+	#tdate = frappe.utils.data.format_datetime (to_date, "yyyyMMdd")
+	#sdate = frappe.utils.data.format_datetime (start_date, "yyyyMMdd")
 	#frappe.msgprint("fdate  "+fdate+" todate  "+tdate)
-	myt_sql="CALL getschedule("+fdate+", "+tdate+", "+sdate+");"
+	myt_sql="CALL getschedule("+from_date+", "+to_date+", "+start_date+");"
 	#frappe.msgprint(str(myt_sql))
 	lastweekdetails=frappe.db.sql(myt_sql, as_dict=1)
 	#frappe.msgprint(lastweekdetails)
