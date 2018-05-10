@@ -39,6 +39,9 @@ doctype_js = {
 doc_events = {
 	"Salary Slip": {
 		"validate": "bnd.custom_methods.salary_slip",
+			},
+	"Leave Application": {
+		"validate": "bnd.custom_methods.create_attendance",
 			}
 }
 # Home Pages

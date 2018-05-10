@@ -3,6 +3,8 @@ import frappe
 from frappe.model.document import Document
 from frappe.utils import flt, time_diff_in_hours, get_datetime, getdate, today, cint, add_days 
 from frappe import _
+# from frappe.utils import (flt, getdate, get_first_day, get_last_day, date_diff,
+# 	add_months, add_days, formatdate, cint)
 
 @frappe.whitelist()
 def salary_slip(doc,method):
@@ -39,3 +41,53 @@ def salary_slip(doc,method):
 		absent_count=attendance_absent[0]
 		doc.total_present_days= str(present_count[0])
 		doc.total_absent_days = str(absent_count[0])
+
+
+@frappe.whitelist()
+def create_attendance(doc,method):
+	frappe.msgprint("hi from c m")
+	attendance_doc = frappe.new_doc("Attendance")
+	attendance_doc.employee = doc.employee
+	#if Leave application  is for 3 days, then it will create 3 attendance
+	attendance_doc.attendance_date = doc.from_date
+	#frappe.db.get value from Leave type, if leave type is LWP, 
+	# then mrk as absent, else mark as present
+	#frappe
+	# attendance_doc.status = doc.
+	attendance_doc.company = doc.company
+	attendance_doc.insert()
+	attendance_doc.save()
+	attendance_doc.submit()
+	# (attendance_doc.leave_application)_refference = self.name
+
+
+	leave_type = frappe.db.get_value("Leave Application","leave_type")
+	if leave_type == "LWP":
+	 	attendance_doc.status = "Absent"
+	else:
+		attendance_doc.status = "Present"
+	
+	# attendance_doc.employee_name = self.employee_name
+	# attendance_doc.in_time = self.in_time
+	# attendance_doc.out_time = self.out_time
+	# attendance_doc.new_in_time = self.amended_in_time
+	# attendance_doc.new_out_time = self.amended_out_time
+	# attendance_doc.in_store = self.amended_in_store
+	# attendance_doc.out_store = self.amended_out_store
+	# attendance_doc.total_working_hours = self.total_working_hours
+	# attendance_doc.status1 = self.amended_status1
+	# attendance_doc.status2 = self.amended_status2
+	# attendance_doc.ot_hours = self.ot_hours
+	# attendance_doc.schedule_time = self.schedule_time
+	# attendance_doc.schedule_store = self.schedule_store
+
+	# attendance_doc1.employee = self.employee
+	
+
+	# self.attendance = attendance_doc.name 
+	# self.attendance = attendance_doc1.name
+
+	# frappe.msgprint("""<html> <body>New attendance <a href="#Form/Attendance/{0}">{0}</a> is created</body>
+	# </html>""".format(attendance_doc.name, attendance_doc1.name))
+	
+	# frappe.msgprint("New Attendance {0} is created".format(attendance_doc.name, attendance_doc1.name))
