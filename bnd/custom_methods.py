@@ -33,16 +33,22 @@ def salary_slip(doc,method):
 		row.salary_component = "Attendance Violation"
 		row.amount =doc.deduction_amount
 
-		present="""Select count(*)
+	present="""Select count(*)
 	from `tabAttendance` where (status = 'Present' and attendance_date between '{0}' and '{1}') and employee='{2}' """.format(doc.start_date, doc.end_date, doc.employee)
-		attendance_present = frappe.db.sql(present,as_list=1,debug=1)
-		absent="""Select count(*)
+	attendance_present = frappe.db.sql(present,as_list=1,debug=1)
+	absent="""Select count(*)
 	from `tabAttendance` where (status = 'Absent' and attendance_date between '{0}' and '{1}') and employee='{2}' """.format(doc.start_date, doc.end_date, doc.employee)
-		attendance_absent = frappe.db.sql(absent,as_list=1,debug=1)
-		present_count=attendance_present[0]
-		absent_count=attendance_absent[0]
-		doc.total_present_days= str(present_count[0])
-		doc.total_absent_days = str(absent_count[0])
+	attendance_absent = frappe.db.sql(absent,as_list=1,debug=1)
+	present_count=attendance_present[0]
+	absent_count=attendance_absent[0]
+	doc.total_present_days= str(present_count[0])
+	doc.total_absent_days = str(absent_count[0])
+
+	ot_hours = """Select sum(ot_hours)
+	from `tabAttendance` where (attendance_date between '{0}' and '{1}') and employee='{2}' """.format(doc.start_date, doc.end_date, doc.employee)
+	ot_data = frappe.db.sql(ot_hours,as_list=1,debug=1)
+	ot=ot_data[0]
+	frappe.msgprint("OT Hours "+str(ot[0]))
 
 
 @frappe.whitelist()
@@ -61,6 +67,4 @@ def create_attendance(doc,method):
 		attendance_doc.insert()
 		attendance_doc.save()
 		attendance_doc.submit()
-	
 
-	
