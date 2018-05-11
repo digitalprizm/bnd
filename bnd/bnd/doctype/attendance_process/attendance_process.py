@@ -5,17 +5,21 @@
 from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
+from bnd.api.attendance_list import load_data
 import json
 import requests
 
 class AttendanceProcess(Document):
-	pass
+	def onload(self):
+		alist=load_data()
+		#frappe.msgprint("hii")
+		self.get("__onload").attendance_list = alist
 
 
 @frappe.whitelist()
-def calling_attendance_api():
-	r = requests.get('http://192.168.16.194/subwayapi/api/AProcess?_date=20180312')
-	api=json.loads(r.text)
+def calling_attendance_api(process_date,enroll_number):
+	r = requests.get('http://192.168.16.194/subwayapi/api/AProcess?_date={0}&_enroll={1}'.format(process_date,enroll_number))
+	api=r.text
 	return api
 
 	

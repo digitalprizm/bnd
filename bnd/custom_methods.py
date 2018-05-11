@@ -3,6 +3,10 @@ import frappe
 from frappe.model.document import Document
 from frappe.utils import flt, time_diff_in_hours, get_datetime, getdate, today, cint, add_days 
 from frappe import _
+from frappe.utils import cint, cstr, date_diff, flt, formatdate, getdate, get_link_to_form, \
+	comma_or, get_fullname
+# from frappe.utils import (flt, getdate, get_first_day, get_last_day, date_diff,
+# 	add_months, add_days, formatdate, cint)
 
 @frappe.whitelist()
 def salary_slip(doc,method):
@@ -45,4 +49,22 @@ def salary_slip(doc,method):
 	ot_data = frappe.db.sql(ot_hours,as_list=1,debug=1)
 	ot=ot_data[0]
 	frappe.msgprint("OT Hours "+str(ot[0]))
+
+
+@frappe.whitelist()
+def create_attendance(doc,method):
+	number_of_days = date_diff(doc.to_date, doc.from_date) + 1
+	number_of_days = int(number_of_days)
+	leave_type = doc.leave_type
+	for i in range(number_of_days) :
+		attendance_doc = frappe.new_doc("Attendance")
+		attendance_doc.employee = doc.employee
+		attendance_doc.attendance_date = doc.from_date
+		if leave_type == "LWP":
+	 		attendance_doc.status = "Absent"
+		else:
+			attendance_doc.status = "Present"
+		attendance_doc.insert()
+		attendance_doc.save()
+		attendance_doc.submit()
 
