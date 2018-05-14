@@ -11,8 +11,10 @@ import requests
 
 class AttendanceProcess(Document):
 	def onload(self):
-		alist=load_data()
-		#frappe.msgprint("hii")
+		r=requests.get('http://192.168.16.194/subtest/api/Aprocess/LastProcessDate')
+		api=json.loads(r.text)
+		process_date=api["_date"]
+		alist=load_data(process_date)
 		self.get("__onload").attendance_list = alist
 
 
@@ -31,4 +33,8 @@ def calling_attendance_date_api(process_date):
 	api=r.text
 	return api
 
-	
+
+
+
+
+

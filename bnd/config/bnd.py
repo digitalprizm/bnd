@@ -33,6 +33,11 @@ def get_data():
 					"type": "doctype",
 					"name": "HR Parameter",
 					"description": _("HR Parameter"),
+				},
+				{
+					"type": "doctype",
+					"name": "Shift Schedule Manual",
+					"description": _("Shift Schedule Manual"),
 				},	
 				{
 					"type": "doctype",
