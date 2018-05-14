@@ -16,6 +16,15 @@ class AttendanceViolation(Document):
 			frappe.throw(_("Only Attendance violation with status 'Approved' can be submitted"))
 
 		self.create_attendance()
+		self.call_dummy_api()
+
+	def call_dummy_api(self):
+		import requests
+		try:
+			url = 'http://localhost:52513/api/AProcess?_enroll=0&_datetimeFrom=20180204102211&_datetimeTo=20180204172211'
+			r = requests.get(url)	
+		except Exception as e:
+			pass
 
 	def create_attendance(self):
 		attendance_doc = frappe.new_doc("Attendance")
@@ -55,7 +64,7 @@ class AttendanceViolation(Document):
 		frappe.msgprint("""<html> <body>New attendance <a href="#Form/Attendance/{0}">{0}</a> is created</body>
 		</html>""".format(attendance_doc.name))
 		
-		frappe.msgprint("New Attendance {0} is created".format(attendance_doc.name))
+		# frappe.msgprint("New Attendance {0} is created".format(attendance_doc.name))
 
 	def on_cancel(self):
 		pass
