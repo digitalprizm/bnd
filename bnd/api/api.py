@@ -255,10 +255,18 @@ def get_attendance_list(attendance_date=None):
 	return attendance_list
 
 @frappe.whitelist(allow_guest=True)
-def create_attendance(employee=None,employee_name='', attendance_date='',in_store='',out_store='',in_time='00:00',out_time='00:00',company='',new_in_time='00:00',new_out_time='00:00',
+def create_attendance(employee=None,employee_name='', attendance_date='',in_store='',out_store='',in_time='',out_time='',company='',new_in_time='',new_out_time='',
 						status1='',status2='',total_working_hours='',ot_hours='',schedule_store='',schedule_status='',schedule_time=''):
 
 	attendance_doc = frappe.new_doc("Attendance")
+	if in_time == "":
+		in_time = "00:00"
+	if out_time == "":
+		out_time ="00:00"
+	if new_in_time =="":
+		new_in_time = "00:00"
+	if new_out_time =="":
+		new_out_time = "00:00"
 	attendance_doc.employee = employee
 	attendance_doc.employee_name = employee_name
 	attendance_doc.attendance_date = attendance_date
@@ -343,11 +351,19 @@ def get_leave_application(employee='',date=''):
 
 @frappe.whitelist(allow_guest=True)
 def create_attendance_violation(employee=None,employee_name='', attendance_date='',company='',store='',deduction_days='',
-	in_date='',violation_type='',in_time='00:00', out_time='00:00',out_date='',out_store='',violation_remark='',
-	amended_in_date='',amended_in_time='00:00',amended_out_time='00:00', amended_out_store='',amended_out_date='',attendance_status='',amended_in_store='',amended_status1='',amended_status2='',
+	in_date='',violation_type='',in_time='', out_time='',out_date='',out_store='',violation_remark='',
+	amended_in_date='',amended_in_time='',amended_out_time='', amended_out_store='',amended_out_date='',attendance_status='',amended_in_store='',amended_status1='',amended_status2='',
 	amended_status='',deduction_amount='',approver_comment='',status1='',status2='',ot_hours='',schedule_store='',schedule_status='',schedule_time=''):
 # 
 	attendance_violation_doc = frappe.new_doc("Attendance Violation")
+	if in_time == "":
+		in_time = "00:00"
+	if out_time == "":
+		out_time ="00:00"
+	if amended_in_time =="":
+		amended_in_time = "00:00"
+	if amended_out_time =="":
+		amended_out_time = "00:00"
 	attendance_violation_doc.employee = employee
 	attendance_violation_doc.employee_name = employee_name
 	attendance_violation_doc.attendance_date = attendance_date
@@ -357,6 +373,8 @@ def create_attendance_violation(employee=None,employee_name='', attendance_date=
 	attendance_violation_doc.deduction_days = deduction_days
 	attendance_violation_doc.in_date = in_date
 	attendance_violation_doc.violation_type = violation_type
+
+	print("\n\n\n\n\nin time",in_time)
 	attendance_violation_doc.in_time = get_time(in_time)
 	attendance_violation_doc.out_time = get_time(out_time)
 	attendance_violation_doc.out_date = out_date
@@ -397,7 +415,7 @@ def create_attendance_violation(employee=None,employee_name='', attendance_date=
 
 	except Exception as e:
 		error = True
-		frappe.local.message_log=False
+		# frappe.local.message_log=False
 		return { "status": "failed",
 		"message":"New Attendance Violation Is Not Created"
 				 }
