@@ -33,6 +33,11 @@ def get_data():
 					"type": "doctype",
 					"name": "HR Parameter",
 					"description": _("HR Parameter"),
+				},
+				{
+					"type": "doctype",
+					"name": "Shift Schedule Manual",
+					"description": _("Shift Schedule Manual"),
 				},	
 				{
 					"type": "doctype",
@@ -88,6 +93,13 @@ def get_data():
 			"label": _("Reports"),
 			"icon": "fa fa-list",
 			"items": [
+				
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Employees Information",
+					"doctype": "Employee"
+				},
 				{
 					"type": "report",
 					"is_query_report": True,

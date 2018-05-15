@@ -34,6 +34,7 @@ def get_data():
 			"type": "link",
 			"link": "List/Upload Shift Schedule"
 		},
+		
 		{
 			"module_name": "Attendance",
 			"_doctype": "Attendance",
