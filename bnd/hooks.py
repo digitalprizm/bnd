@@ -11,7 +11,7 @@ app_color = "grey"
 app_email = "contact@digitalprizm.net"
 app_license = "MIT"
 
-fixtures = ['Custom Field', 'Property Setter',"Print Format"]
+fixtures = ['Custom Field', 'Property Setter',"Print Format",'Report']
 # Includes in <head>
 # ------------------
 

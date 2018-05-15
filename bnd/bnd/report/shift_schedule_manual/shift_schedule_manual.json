@@ -1,0 +1,28 @@
+{
+ "add_total_row": 0,
+ "creation": "2018-05-15 13:05:23.261473",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "idx": 0,
+ "is_standard": "Yes",
+ "modified": "2018-05-15 13:05:24.791366",
+ "modified_by": "Administrator",
+ "module": "BnD",
+ "name": "Shift Schedule Manual",
+ "owner": "Administrator",
+ "ref_doctype": "Shift Schedule",
+ "report_name": "Shift Schedule Manual",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "HR User"
+  },
+  {
+   "role": "HR Manager"
+  }
+ ]
+}
