@@ -1,24 +1,22 @@
 <div class="page-form flex">
         
-  Attendance Date: 
+  Attendance Date:
      <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-     <div class="link-field ui-front" style="position: relative; line-height: 1;">     
-     <div class="awesomplete"> 
-     <input type="date" id="attendance_date" name="attendance_date" class="attendance_date input-with-feedback form-control bold input-sm" value={{ attendance_list["process_date"] }}  readonly>
-     </div>          
+     <div class="link-field ui-front" style="position: relative; line-height: 1;">
+     <div class="awesomplete">
+     <input type="date" id="attendance_date" name="attendance_date" class="attendance_date input-with-feedback form-control bold input-sm" value={{ attendance_list["process_date"] }} readonly>
+     </div>
      </div></div>
      
              
      <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-     <div class="link-field ui-front" style="position: relative; line-height: 1;">     
-     <div class="awesomplete"> 
-             <button class="btn btn-primary btn-sm primary-action"  onclick="calling_attendance_api()" type="button" ><i class="visible-xs octicon octicon-check"></i><span class="hidden-xs">Process Attendance</span></button>
-         </div>          
+     <div class="link-field ui-front" style="position: relative; line-height: 1;">
+     <div class="awesomplete">
+             <button class="btn btn-primary btn-sm primary-action" onclick="calling_attendance_api()" type="button" ><i class="visible-xs octicon octicon-check"></i><span 
+class="hidden-xs">Process Attendance</span></button>
+         </div>
      </div></div>
      </div>
-
-
-
      <div style="overflow:scroll" style="height:200px" >
          <table class="table table-bordered" id="maintable" style="width:auto">
            <thead>
@@ -35,31 +33,24 @@
            </thead>
            
            <tbody>
-           {% for (var i=0,l=attendance_list["emp"].length; i<l; i++) { %}   
+           {% for (var i=0,l=attendance_list["emp"].length; i<l; i++) { %}
              <tr>
                
-               <td class="empid" data-empenrollno="{{  attendance_list["emp"][i]["enroll_number"] }}" ><div >{{  attendance_list["emp"][i]["name"] }}</div></td>
-               <td class="emp" data-emp="{{  attendance_list["emp"][i]["employee_name"] }}" ><div >{{  attendance_list["emp"][i]["employee_name"] }}</div></td>
+               <td class="empid" data-empenrollno="{{ attendance_list["emp"][i]["enroll_number"] }}" ><div >{{ attendance_list["emp"][i]["name"] }}</div></td>
+               <td class="emp" data-emp="{{ attendance_list["emp"][i]["employee_name"] }}" ><div >{{ attendance_list["emp"][i]["employee_name"] }}</div></td>
                
                 
              </tr>
              {% } %}
              </tbody>
          </table>
-         </div>
-
-<script>
-var _org_data ;var atvioemp;var row;
-var _result;    var progressperunit,percentage;
-var adate;var x;var apiemployee;
-var q="\'";
-var div="<div style="+q+"margin:auto;width:120px;"+q+">";
-$(document).ready(function(){
+         </div> <script> var _org_data ;var atvioemp;var row; var _result; var progressperunit,percentage; var adate;var x;var apiemployee; var q="\'"; var div="<div style="+q+"margin:auto;width:120px;"+q+">";
+           $(document).ready(function(){
   adate=$("#attendance_date").val();
    adate=moment(adate);
    adate=adate.format("YYYYMMDD");
    console.log("format>",adate);
-frappe.call({
+    frappe.call({
           method:"bnd.api.attendance_list.load_data",
          args:{
           "process_date":adate
@@ -80,8 +71,34 @@ frappe.call({
   
   });
   console.log("apiemployeelist>>",apiemployee);
-          }
-      });
+  $("#maintable thead tr").append("<th class=dynamic-th>"+ div + "Indicator</div></th><th class=dynamic-th>" + div + "Status</div></th><th class=dynamic-th>" + div + "Message</div></th>");
+$.each(atvioemp,function(Idx,Item){
+    console.log(atvioemp);
+   var viorow= $("#maintable tbody [data-empenrollno=" +Item.enroll_number
+ + "]").parents("tr");
+     console.log(viorow);
+ viorow.append("<td class=dynamic-td>"+ div +" <span class="+q+"indicator orange "+q+"> </span></div></td>");
+ viorow.append("<td class=dynamic-td>" + div + "Pending</div></td><td class=dynamic-td>" + div + "Attendance Violation</div></td>");
+
+
+          });
+      }
+  
+  
+   
+                  
+});
+frappe.call({
+      method: "bnd.bnd.doctype.attendance_process.attendance_process.calling_attendance_date_api",
+      args: {
+        "process_date": adate
+      },
+      callback: function (r) {
+        var syncdata = r.message;
+        console.log("syncapidata>", r.message);
+      }
+});
+  
      
 });
 function calling_attendance_api() {
@@ -92,8 +109,7 @@ function calling_attendance_api() {
     
     width: 520px;
     border-radius: 25px;
-    border: 2px solid grey;
-"><center><b><div id="loader">0%</div></b></center></div>`;
+    border: 2px solid grey; "><center><b><div id="loader">0%</div></b></center></div>`;
     };
     d = new frappe.ui.Dialog
       ({
@@ -111,53 +127,26 @@ function calling_attendance_api() {
     
     $("[data-fieldname="+datafield+"]").css("border-radius"," 25px");
     d.show();
-    $("#maintable thead tr").append("<th class=dynamic-th>"+ div + "Indicator</div></th><th class=dynamic-th>" + div + "Status</div></th><th class=dynamic-th>" + div + "Message</div></th>");
-
- $.each(atvioemp,function(Idx,Item){
-    console.log(atvioemp);
-   var viorow= $("#maintable tbody [data-empenrollno=" +Item.enroll_number
- + "]").parents("tr");
- viorow.append("<td class=dynamic-td>"+ div +" <span class="+q+"indicator orange "+q+">  </span></div></td>");
- viorow.append("<td class=dynamic-td>" + div +  "Pending</div></td><td class=dynamic-td>" + div +  "Attendance Violation</div></td>");
-                  
-});
-
-
-
-    frappe.call({
-      method: "bnd.bnd.doctype.attendance_process.attendance_process.calling_attendance_date_api",
-
-
-      args: {
-        "process_date": adate
-
-      },
-      callback: function (r) {
-        var syncdata = r.message;
-        console.log("syncapidata>", r.message);
-
-        if (syncdata["status"] = "success") {
+     
+$.get("120.88.36.10:560/subtest/api/Aprocess?_date=20181125", function(data, status){
+        console.log("Data: " + data + "\nStatus: " + status);
+    });
+    
+        
           progressperunit = Math.floor(550 / apiemployee.length);
           $wrap.css("width", "0px");
           var progress = 0;
           for (var e = 0; e < apiemployee.length; e++) {
-
-
-
-
             frappe.call({
               method: "bnd.bnd.doctype.attendance_process.attendance_process.calling_attendance_api",
               args: {
                 "process_date": adate,
                 "enroll_number": apiemployee[e].enroll_number
-
               },
               async:true,
               callback: function (r) {
-
                  x = JSON.parse(r.message);
  console.log("datafrompython>", r.message);
-
                 if (x["Message"] == "An error has occurred.") {
                   frappe.msgprint({
                     title: __("Something went wrong."),
@@ -166,40 +155,22 @@ function calling_attendance_api() {
                   });
                   cover.fadeIn(100);
                 }
-
 else if(x=="[]"){
   
-
-
 }
-
                 else {
-
-
-
                   _result = JSON.parse(JSON.parse(r.message));
-
-
-
                   for (var i = 0; i < _result.length; i++) {
-                    console.log(_result[i].employee, _result);
-row = $("#maintable tbody [data-empenrollno=" + _result[i].employee + "]").parents("tr");
-                    console.log(row);
-
-if(_result[i].status=="unsucessfull"){
-  row.append("<td class=dynamic-td>"+ div +" <span class="+q+"indicator red "+q+">  </span></div></td>");
+                    console.log(_result[i].employee, _result); row = $("#maintable tbody [data-empenrollno=" + _result[i].employee + "]").parents("tr");
+                    console.log(row); if(_result[i].status=="unsucessfull"){
+  row.append("<td class=dynamic-td>"+ div +" <span class="+q+"indicator red "+q+"> </span></div></td>");
 }
 else{
-  row.append("<td class=dynamic-td>"+ div +" <span class="+q+"indicator green "+q+">  </span></div></td>");
+  row.append("<td class=dynamic-td>"+ div +" <span class="+q+"indicator green "+q+"> </span></div></td>");
   }
-
 row.append("<td class=dynamic-td>" + div + _result[i].status + "</div></td><td class=dynamic-td>" + div + _result[i].message + "</div></td>");
                   
-
                   cover.fadeIn(100);
-
-
-
                 }
                
                 progress = progress + progressperunit;
@@ -209,22 +180,15 @@ row.append("<td class=dynamic-td>" + div + _result[i].status + "</div></td><td c
                 percentage=Math.round((progress/550)*100);
                 $("#loader").text(percentage+"%");
                 console.log("progress>>", progress,"percn>>",percentage);
-
-
               }
               }
             });
-
           }
-        }
+        
+
+    
 }
-      });
-
-
-
-}
-</script>
-<style>
+</script> <style>
  #cover {
  background-color: red;
  opacity: 0.5;
@@ -232,7 +196,7 @@ row.append("<td class=dynamic-td>" + div + _result[i].status + "</div></td><td c
  height: 100%;
  width: 100%;
 }
-.page-form {    
+.page-form {
  border-bottom: none;
  background-color: white;
  }
