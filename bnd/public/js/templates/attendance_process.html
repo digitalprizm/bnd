@@ -1,203 +1,188 @@
 <div class="page-form flex">
-        
-  Attendance Date:
-     <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-     <div class="link-field ui-front" style="position: relative; line-height: 1;">
-     <div class="awesomplete">
-     <input type="date" id="attendance_date" name="attendance_date" class="attendance_date input-with-feedback form-control bold input-sm" value={{ attendance_list["process_date"] }} readonly>
-     </div>
-     </div></div>
-     
-             
-     <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-     <div class="link-field ui-front" style="position: relative; line-height: 1;">
-     <div class="awesomplete">
-             <button class="btn btn-primary btn-sm primary-action" onclick="calling_attendance_api()" type="button" ><i class="visible-xs octicon octicon-check"></i><span 
-class="hidden-xs">Process Attendance</span></button>
-         </div>
-     </div></div>
-     </div>
-     <div style="overflow:scroll" style="height:200px" >
-         <table class="table table-bordered" id="maintable" style="width:auto">
-           <thead>
-             <tr>
-               <th><div class="content ellipsis" style="width: 100px; text-align: center;margin: auto;">
-                         Employee id
-                       </div></th>
-                      
-                       <th><div class="content ellipsis" style="width: 100px;text-align: center;margin: auto;">
-                          Employee
-                       </div></th>
-                       
-             </tr>
-           </thead>
-           
-           <tbody>
-           {% for (var i=0,l=attendance_list["emp"].length; i<l; i++) { %}
-             <tr>
-               
-               <td class="empid" data-empenrollno="{{ attendance_list["emp"][i]["enroll_number"] }}" ><div >{{ attendance_list["emp"][i]["name"] }}</div></td>
-               <td class="emp" data-emp="{{ attendance_list["emp"][i]["employee_name"] }}" ><div >{{ attendance_list["emp"][i]["employee_name"] }}</div></td>
-               
+  <button onclick="testme()">Anup</button>
+Attendance Date: 
+<div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+<div class="link-field ui-front" style="position: relative; line-height: 1;">     
+<div class="awesomplete"> 
+<input type="date" id="attendance_date" name="attendance_date" class="attendance_date input-with-feedback form-control bold input-sm" value={{ attendance_list["process_date"] }}  readonly>
+</div>          
+</div></div>
+
+       
+<div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+<div class="link-field ui-front" style="position: relative; line-height: 1;">     
+<div class="awesomplete"> 
+       <button class="btn btn-primary btn-sm primary-action"  onclick="testme2()" type="button" ><i class="visible-xs octicon octicon-check"></i><span class="hidden-xs">Process Attendance</span></button>
+   </div>          
+</div></div>
+</div>
+
+
+
+<div style="overflow:scroll" style="height:200px" >
+   <table class="table table-bordered" id="maintable" style="width:auto">
+     <thead>
+       <tr>
+         <th><div class="content ellipsis" style="width: 100px; text-align: center;margin: auto;">
+                   Employee id
+                 </div></th>
                 
-             </tr>
-             {% } %}
-             </tbody>
-         </table>
-         </div> <script> var _org_data ;var atvioemp;var row; var _result; var progressperunit,percentage; var adate;var x;var apiemployee; var q="\'"; var div="<div style="+q+"margin:auto;width:120px;"+q+">";
-           $(document).ready(function(){
-  adate=$("#attendance_date").val();
-   adate=moment(adate);
-   adate=adate.format("YYYYMMDD");
-   console.log("format>",adate);
-    frappe.call({
-          method:"bnd.api.attendance_list.load_data",
-         args:{
-          "process_date":adate
-         },
-          callback: function(r){
-      
-      _org_data=r.message;
-      console.log("originaldata>",_org_data);
-      var allemp= _org_data.emp;
-      console.log("allempdata>",allemp);
-      
- apiemployee =$.grep(allemp , function(element, index) {
-  return element.violationcount<=0;
-  
-  });
-  atvioemp =$.grep(allemp , function(element, index) {
-  return element.violationcount>0;
-  
-  });
-  console.log("apiemployeelist>>",apiemployee);
-  $("#maintable thead tr").append("<th class=dynamic-th>"+ div + "Indicator</div></th><th class=dynamic-th>" + div + "Status</div></th><th class=dynamic-th>" + div + "Message</div></th>");
-$.each(atvioemp,function(Idx,Item){
-    console.log(atvioemp);
-   var viorow= $("#maintable tbody [data-empenrollno=" +Item.enroll_number
- + "]").parents("tr");
-     console.log(viorow);
- viorow.append("<td class=dynamic-td>"+ div +" <span class="+q+"indicator orange "+q+"> </span></div></td>");
- viorow.append("<td class=dynamic-td>" + div + "Pending</div></td><td class=dynamic-td>" + div + "Attendance Violation</div></td>");
-
-
-          });
-      }
-  
-  
-   
-                  
-});
+                 <th><div class="content ellipsis" style="width: 100px;text-align: center;margin: auto;">
+                    Employee
+                 </div></th>
+                 
+       </tr>
+     </thead>
+     
+     <tbody>
+     {% for (var i=0,l=attendance_list["emp"].length; i<l; i++) { %}   
+       <tr>
+         
+         <td class="empid" data-empenrollno="{{  attendance_list["emp"][i]["enroll_number"] }}" ><div >{{  attendance_list["emp"][i]["name"] }}</div></td>
+         <td class="emp" data-emp="{{  attendance_list["emp"][i]["employee_name"] }}" ><div >{{  attendance_list["emp"][i]["employee_name"] }}</div></td>
+         
+          
+       </tr>
+       {% } %}
+       </tbody>
+   </table>
+   </div>
+   <script>
+var _org_data ;var atvioemp;var row;
+var _result;    var progressperunit,percentage;
+var adate;var x;var apiemployee;
+var q="\'";
+var div="<div style="+q+"margin:auto;width:120px;"+q+">";
+$(document).ready(function(){
+adate=$("#attendance_date").val();
+adate=moment(adate);
+adate=adate.format("YYYYMMDD");
 frappe.call({
-      method: "bnd.bnd.doctype.attendance_process.attendance_process.calling_attendance_date_api",
-      args: {
-        "process_date": adate
-      },
-      callback: function (r) {
-        var syncdata = r.message;
-        console.log("syncapidata>", r.message);
-      }
-});
-  
-     
-});
-function calling_attendance_api() {
-    var cover = $("#body_div").append("<div id=cover>API is calling... Please Wait... </div>");
-    cover.fadeOut(100);
-    var slot_html = function (frm) {
-      return `<div id="outerdiv" style="
-    
-    width: 520px;
-    border-radius: 25px;
-    border: 2px solid grey; "><center><b><div id="loader">0%</div></b></center></div>`;
-    };
-    d = new frappe.ui.Dialog
-      ({
-        title: __("Please Wait while Processing..."),
-        fields: [{ fieldtype: "HTML", fieldname: "claim_date" }],
-        primary_action_label: __("Close"),
-        primary_action: function (frm) {
-          d.hide();
-        }
-      });
-    $wrap = d.fields_dict.claim_date.$wrapper;
-    $wrap.html(slot_html);
-    d.no_cancel();
-    var datafield="claim_date";
-    
-    $("[data-fieldname="+datafield+"]").css("border-radius"," 25px");
-    d.show();
-     
-$.get("120.88.36.10:560/subtest/api/Aprocess?_date=20181125", function(data, status){
-        console.log("Data: " + data + "\nStatus: " + status);
-    });
-    
-        
-          progressperunit = Math.floor(550 / apiemployee.length);
-          $wrap.css("width", "0px");
-          var progress = 0;
-          for (var e = 0; e < apiemployee.length; e++) {
-            frappe.call({
-              method: "bnd.bnd.doctype.attendance_process.attendance_process.calling_attendance_api",
-              args: {
-                "process_date": adate,
-                "enroll_number": apiemployee[e].enroll_number
-              },
-              async:true,
-              callback: function (r) {
-                 x = JSON.parse(r.message);
- console.log("datafrompython>", r.message);
-                if (x["Message"] == "An error has occurred.") {
-                  frappe.msgprint({
-                    title: __("Something went wrong."),
-                    message: __("Attendance Process Operation Failed."),
-                    indicator: "red"
-                  });
-                  cover.fadeIn(100);
-                }
-else if(x=="[]"){
-  
-}
-                else {
-                  _result = JSON.parse(JSON.parse(r.message));
-                  for (var i = 0; i < _result.length; i++) {
-                    console.log(_result[i].employee, _result); row = $("#maintable tbody [data-empenrollno=" + _result[i].employee + "]").parents("tr");
-                    console.log(row); if(_result[i].status=="unsucessfull"){
-  row.append("<td class=dynamic-td>"+ div +" <span class="+q+"indicator red "+q+"> </span></div></td>");
-}
-else{
-  row.append("<td class=dynamic-td>"+ div +" <span class="+q+"indicator green "+q+"> </span></div></td>");
-  }
-row.append("<td class=dynamic-td>" + div + _result[i].status + "</div></td><td class=dynamic-td>" + div + _result[i].message + "</div></td>");
-                  
-                  cover.fadeIn(100);
-                }
-               
-                progress = progress + progressperunit;
-                $wrap.css("background-color", "blue");
-                $("#loader").css("color","red");
-                $wrap.css("width", progress + "px");
-                percentage=Math.round((progress/550)*100);
-                $("#loader").text(percentage+"%");
-                console.log("progress>>", progress,"percn>>",percentage);
-              }
-              }
-            });
-          }
-        
+    method:"bnd.api.attendance_list.load_data",
+   args:{
+    "process_date":adate
+   },
+    callback: function(r){
 
+_org_data=r.message;
+var allemp= _org_data.emp;
+
+apiemployee =$.grep(allemp , function(element, index) {
+return element.violationcount<=0;
+
+});
+atvioemp =$.grep(allemp , function(element, index) {
+return element.violationcount>0;
+
+});
+$("#maintable thead tr").append("<th class=dynamic-th>"+ div + "Indicator</div></th><th class=dynamic-th>" + div + "Status</div></th><th class=dynamic-th>" + div + "Message</div></th>");
+
+$.each(atvioemp,function(Idx,Item){
+var viorow= $("#maintable tbody [data-empenrollno=" +Item.enroll_number
++ "]").parents("tr");
+viorow.append("<td class=dynamic-td>"+ div +" <span class="+q+"indicator orange "+q+">  </span></div></td>");
+viorow.append("<td class=dynamic-td>" + div +  "Pending</div></td><td class=dynamic-td>" + div +  "Attendance Violation</div></td>");
+            
+});
+    }
+});
+
+});
+
+function testme()
+{
+console.log(adate);
+
+
+     $.ajax({
+      url:"http://120.88.36.10:560/subtest/api/Aprocess?_date="+adate,
+    type: "GET"  , 
+success:function(_data)
+{
+console.log("sync data->",_data);
+}
+     });
+}
+
+function testme2(){
+console.log("calling api");
+var slot_html = function (frm) {
+return `<div id="outerdiv" style="
+
+width: 550px;
+border-radius: 25px;
+border: 2px solid grey; "><center><b><div id="loader">0%</div></b></center></div>`;
+};
+d = new frappe.ui.Dialog
+({
+  title: __("Please Wait while Processing..."),
+  fields: [{ fieldtype: "HTML", fieldname: "claim_date" }],
+  primary_action_label: __("Close"),
+  primary_action: function (frm) {
+    d.hide();
+  }
+});
+$wrap = d.fields_dict.claim_date.$wrapper;
+$wrap.html(slot_html);
+d.no_cancel();
+var datafield="claim_date";
+
+$("[data-fieldname="+datafield+"]").css("border-radius"," 25px");
+d.show();
+progressperunit = 550 / apiemployee.length;
+var progress = 0;
+    $wrap.css("width", "0px");
     
+    
+
+
+for (var e = 0; e < apiemployee.length; e++) {
+console.log("emp->"+apiemployee[e]["enroll_number"]);
+
+$.ajax({
+url: "http://120.88.36.10:560/subtest/api/Aprocess?_date="+adate+"&_enroll="+apiemployee[e]["enroll_number"],
+type: "GET"  ,
+
+
+
+success:function(_data)
+{
+console.log("return data->",_data);
+_data=JSON.parse(_data);
+if(_data.length>0){
+            row = $("#maintable tbody [data-empenrollno=" + _data[0].employee + "]").parents("tr");
+              console.log(row);
+              row.append("<td class=dynamic-td>"+ div +" <span class="+q+"indicator green "+q+"> </span></div></td>");
+              row.append("<td class=dynamic-td>" + div + _data[0].status + "</div></td><td class=dynamic-td>" + div + _data[0].message + "</div></td>");
 }
-</script> <style>
- #cover {
- background-color: red;
- opacity: 0.5;
- position: absolute;
- height: 100%;
- width: 100%;
+          
+progress = progress + progressperunit;
+          $wrap.css("background-color", "blue");
+          $("#loader").css("color","red");
+          $wrap.css("width", progress + "px");
+        var  percentage=Math.floor(progress/550)*100;
+          $("#loader").text(percentage+"%");
+          console.log("progress>>", progress,"percn>>",percentage);
 }
-.page-form {
- border-bottom: none;
- background-color: white;
- }
+})
+
+
+}
+}
+     </script>
+
+
+<style>
+#cover {
+display:none;
+background-color: red;
+opacity: 0.5;
+position: absolute;
+height: 100%;
+width: 100%;
+}
+.page-form {    
+border-bottom: none;
+background-color: white;
+}
 </style>
