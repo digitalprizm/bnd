@@ -1,247 +1,247 @@
 <div class="page-form flex">
-<div>Schedule For :</div>
-&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;<div>From Date: </div> &nbsp;&nbsp;
-<div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-<div class="link-field ui-front" style="position: relative; line-height: 1;">     
-<div class="awesomplete"> 
-<input type="date" id="from" name="fromdate" class="filterdate input-with-feedback form-control bold input-sm" placeholder="From Date" >
-</div>          
-</div></div>
-&nbsp;&nbsp;<div>To Date: </div> &nbsp;&nbsp;
-<div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-<div class="link-field ui-front" style="position: relative; line-height: 1;">     
-<div class="awesomplete"> 
-<input type="date" id="to" name="todate" class="filterdate input-with-feedback form-control bold input-sm" placeholder="To Date">
-</div>          
-</div></div>
-
-<div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-<div class="link-field ui-front" style="position: relative; line-height: 1;">     
-<div class="awesomplete"> 
- <button id="myButton1" onclick="_GetData()" value="Upload New Data">Upload New Data</button>
-</div>          
-</div></div>
-
-
-
-</div>
-
-
-
-
-
-
-
-<div class="page-form flex">
-<div>Search Store :</div>
-&nbsp;&nbsp;&nbsp;
-&nbsp;
-<div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-<div class="link-field ui-front" style="position: relative; line-height: 1;">     
-<div class="awesomplete"> 
-
-<select type="text" id="filter-store" name="employee-filter" autocomplete="off" class="store input-with-feedback form-control input-sm " data-store=" {{  data_list[\"store\"][i]  }} ">
-<option selected value="0">Select Store</option>
-
-       {% for (var t=0, z=data_list["store"].length; t<z; t++) { %}
-<option>{{  data_list["store"][t][0] }}</option>
-         {% } %}
-
-</select>
-</div>          
-</div></div>
-
-</div>
-
-
-
-
-
-
-<div class="page-form flex">
-<div> Copy Schedule: </div>
-&nbsp;&nbsp;<div>From Date: </div> &nbsp;&nbsp;
-<div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-<div class="link-field ui-front" style="position: relative; line-height: 1;">    
-<div class="awesomplete"> 
-<input type="date" id="fromdate" name="fromdate" class="newdate input-with-feedback form-control bold input-sm" placeholder="From Date" >
-</div>          
-</div></div>
-
-&nbsp;&nbsp;<div>To Date: </div> &nbsp;&nbsp;
-<div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-<div class="link-field ui-front" style="position: relative; line-height: 1;">     
-<div class="awesomplete">  
-<input type="date" id="todate" name="todate" class="newdate input-with-feedback form-control bold input-sm" placeholder="To Date">
-</div>          
-</div></div>
-
-<div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-<div class="link-field ui-front" style="position: relative; line-height: 1;">     
-<div class="awesomplete"> 
-<button class="btn btn-primary btn-sm primary-action"  id="BtnSubmit" type="button" ><i class="visible-xs octicon octicon-check"></i><span class="hidden-xs">Get Previous Data</span></button>
-</div>          
-</div></div>
-
-</div>
-
-
-
-
-
-<div style="overflow:scroll">
-<table class="table table-bordered" id="maintable" style="width:auto;">
-  <thead>
-    <tr>
-      <th><div class="content ellipsis" style="width: 100px; text-align: center;margin: auto;">
-                Employee id
-              </div></th>
-             
-              <th><div class="content ellipsis" style="width: 100px;text-align: center;margin: auto;">
-                 Employee
-              </div></th>
-              <th><div class="content ellipsis" style="width: 100px;text-align: center;margin: auto;">
-               Company
-              </div></th>
-              <th><div class="content ellipsis" style="width: 100px;text-align: center;margin: auto;">
-                Store
-              </div></th>
-    </tr>
-  </thead>
+  <div>Schedule For :</div>
+  &nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;<div>From Date: </div> &nbsp;&nbsp;
+  <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+  <div class="link-field ui-front" style="position: relative; line-height: 1;">     
+  <div class="awesomplete"> 
+  <input type="date" id="from" name="fromdate" class="filterdate input-with-feedback form-control bold input-sm" placeholder="From Date" >
+  </div>          
+  </div></div>
+  &nbsp;&nbsp;<div>To Date: </div> &nbsp;&nbsp;
+  <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+  <div class="link-field ui-front" style="position: relative; line-height: 1;">     
+  <div class="awesomplete"> 
+  <input type="date" id="to" name="todate" class="filterdate input-with-feedback form-control bold input-sm" placeholder="To Date">
+  </div>          
+  </div></div>
   
-  <tbody>
-  {% for (var i=0,l=data_list["emp"].length; i<l; i++) { %}   
-    <tr>
-      
-      <td class="empid" data-empid="{{  data_list["emp"][i]["name"] }}" ><div >{{  data_list["emp"][i]["name"] }}</div></td>
-      <td class="emp" data-emp="{{  data_list["emp"][i]["employee_name"] }}" ><div >{{  data_list["emp"][i]["employee_name"] }}</div></td>
-      <td class="company"> <div class="content ellipsis" " >
-         {{  data_list["emp"][i]["company"] }}
-          </div></td>
-          <td style="padding-top: 20px;"> <select type="text" autocomplete="off" class="store " data-store=" {{  data_list[\"store\"][i]  }} ">
-<option selected value="0">Select Store</option>
-
-       {% for (var t=0, z=data_list["store"].length; t<z; t++) { %}
-<option>{{  data_list["store"][t][0] }}</option>
-         {% } %}
-
-</select></td>
-    </tr>
-    {% } %}
-    </tbody>
-</table>
-</div>
-
-
-<!-- trial strats -->
-
- 
-<!-- trial ends -->
-
-          
-
-
-<script>  
-var employee="";
-var store="";
-var shift="";
-var columns = [];
-var q="\'";
-
-
-
-
-
-
-
- $(document).ready(function(){
-
-
-  var _org_data ;
-frappe.call({
-            method:"bnd.api.data_list.load_data",
-           
-            callback: function(r){
+  <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+  <div class="link-field ui-front" style="position: relative; line-height: 1;">     
+  <div class="awesomplete"> 
+   <button id="myButton1" onclick="_GetData()" value="Upload New Data">Upload New Data</button>
+  </div>          
+  </div></div>
+  
+  
+  
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  <div class="page-form flex">
+  <div>Search Store :</div>
+  &nbsp;&nbsp;&nbsp;
+  &nbsp;
+  <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+  <div class="link-field ui-front" style="position: relative; line-height: 1;">     
+  <div class="awesomplete"> 
+  
+  <select type="text" id="filter-store" name="employee-filter" autocomplete="off" class="store input-with-feedback form-control input-sm " data-store=" {{  data_list[\"store\"][i]  }} ">
+  <option selected value="0">Select Store</option>
+  
+         {% for (var t=0, z=data_list["store"].length; t<z; t++) { %}
+  <option>{{  data_list["store"][t][0] }}</option>
+           {% } %}
+  
+  </select>
+  </div>          
+  </div></div>
+  
+  </div>
+  
+  
+  
+  
+  
+  
+  <div class="page-form flex">
+  <div> Copy Schedule: </div>
+  &nbsp;&nbsp;<div>From Date: </div> &nbsp;&nbsp;
+  <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+  <div class="link-field ui-front" style="position: relative; line-height: 1;">    
+  <div class="awesomplete"> 
+  <input type="date" id="fromdate" name="fromdate" class="newdate input-with-feedback form-control bold input-sm" placeholder="From Date" >
+  </div>          
+  </div></div>
+  
+  &nbsp;&nbsp;<div>To Date: </div> &nbsp;&nbsp;
+  <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+  <div class="link-field ui-front" style="position: relative; line-height: 1;">     
+  <div class="awesomplete">  
+  <input type="date" id="todate" name="todate" class="newdate input-with-feedback form-control bold input-sm" placeholder="To Date">
+  </div>          
+  </div></div>
+  
+  <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+  <div class="link-field ui-front" style="position: relative; line-height: 1;">     
+  <div class="awesomplete"> 
+  <button class="btn btn-primary btn-sm primary-action"  id="BtnSubmit" type="button" ><i class="visible-xs octicon octicon-check"></i><span class="hidden-xs">Get Previous Data</span></button>
+  </div>          
+  </div></div>
+  
+  </div>
+  
+  
+  
+  
+  
+  <div style="overflow:scroll">
+  <table class="table table-bordered" id="maintable" style="width:auto;">
+    <thead>
+      <tr>
+        <th><div class="content ellipsis" style="width: 100px; text-align: center;margin: auto;">
+                  Employee id
+                </div></th>
+               
+                <th><div class="content ellipsis" style="width: 100px;text-align: center;margin: auto;">
+                   Employee
+                </div></th>
+                <th><div class="content ellipsis" style="width: 100px;text-align: center;margin: auto;">
+                 Company
+                </div></th>
+                <th><div class="content ellipsis" style="width: 100px;text-align: center;margin: auto;">
+                  Store
+                </div></th>
+      </tr>
+    </thead>
+    
+    <tbody>
+    {% for (var i=0,l=data_list["emp"].length; i<l; i++) { %}   
+      <tr>
         
-        _org_data=r.message;
-        console.log("originaldata>",_org_data);
-            }
-        });
-$(".filterdate").change(function(e){
-      
-         
-         
-         var fdate=$("#from").val();
-         
-         var tdate=$("#to").val();
-      if (fdate!="" && tdate!="") {
-          generatetable(fdate,tdate);
-          
-      }   
-      
-    });
-$("#filter-store").change(function(e){
-  var store_filter=$("#filter-store").val();
-  var not_matching_row=[];
-var notmatchData =$.grep( _org_data.emp, function(element, index) {
-  return element.store!=store_filter;
+        <td class="empid" data-empid="{{  data_list["emp"][i]["name"] }}" ><div >{{  data_list["emp"][i]["name"] }}</div></td>
+        <td class="emp" data-emp="{{  data_list["emp"][i]["employee_name"] }}" ><div >{{  data_list["emp"][i]["employee_name"] }}</div></td>
+        <td class="company"> <div class="content ellipsis" " >
+           {{  data_list["emp"][i]["company"] }}
+            </div></td>
+            <td style="padding-top: 20px;"> <select type="text" autocomplete="off" class="store " data-store=" {{  data_list[\"store\"][i]  }} ">
+  <option selected value="0">Select Store</option>
   
-  });
-  console.log(notmatchData);
-  $.each(notmatchData,function(Idx,Item){
-    not_matching_row.push($(".emp[data-emp="+q+Item.employee_name+q+"]").parents("tr"));
+         {% for (var t=0, z=data_list["store"].length; t<z; t++) { %}
+  <option>{{  data_list["store"][t][0] }}</option>
+           {% } %}
+  
+  </select></td>
+      </tr>
+      {% } %}
+      </tbody>
+  </table>
+  </div>
+  
+  
+  <!-- trial strats -->
+  
    
-});
-  $.each(not_matching_row,function(Idx,Item){
-$(Item.hide());
-  });
-  if (store_filter=="0"){
-$(".emp").parents("tr").show();
-}
-});
-var newfdate,newtdate;
-$(".newdate").change(function(e){
-      
-         
-         
-         newfdate=$("#fromdate").val();
-         
-         newtdate=$("#todate").val();
-      
-    });
-$("#BtnSubmit").click(function (){
- var sdate=$("#from").val();
- if(sdate==""){
-  frappe.msgprint({
-        title: __("From Date and To Date of <b>Schedule for</b> field is Mandatory."),
-        message: __("From Date and To Date of <b>Schedule for</b> field are not selected. Please select it first to copy previous Schedule."),
-        indicator: "red"
- });
-}
-else {
-call_python_function(newfdate,newtdate,sdate);
-console.log("calling python function and seting values.;");
-}
-});
-});
-function call_python_function(_datefrom, _dateto,_datestart)
-{
- frappe.call({
-            method:"bnd.bnd.doctype.shift_schedule_manual.shift_schedule_manual.load_existing_data",
-            args: {
-           "from_date": moment(_datefrom).format("YYYYMMDD"),
-           "to_date": moment(_dateto).format("YYYYMMDD"),
-           "start_date": moment(_datestart).format("YYYYMMDD")
-            },
-            callback: function(r){
-        console.log("loadexistingdata>",r);
-        _SetData(r.message);
-            }
-        });
+  <!-- trial ends -->
   
-}
- function generatetable(_datefrom, _dateto)
+            
+  
+  
+  <script>  
+  var employee="";
+  var store="";
+  var shift="";
+  var columns = [];
+  var q="\'";
+  
+  
+  
+  
+  
+  
+  
+   $(document).ready(function(){
+  
+  
+    var _org_data ;
+  frappe.call({
+              method:"bnd.api.data_list.load_data",
+             
+              callback: function(r){
+          
+          _org_data=r.message;
+          console.log("originaldata>",_org_data);
+              }
+          });
+  $(".filterdate").change(function(e){
+        
+           
+           
+           var fdate=$("#from").val();
+           
+           var tdate=$("#to").val();
+        if (fdate!="" && tdate!="") {
+            generatetable(fdate,tdate);
+            
+        }   
+        
+      });
+  $("#filter-store").change(function(e){
+    var store_filter=$("#filter-store").val();
+    var not_matching_row=[];
+  var notmatchData =$.grep( _org_data.emp, function(element, index) {
+    return element.store!=store_filter;
+    
+    });
+    console.log(notmatchData);
+    $.each(notmatchData,function(Idx,Item){
+      not_matching_row.push($(".emp[data-emp="+q+Item.employee_name+q+"]").parents("tr"));
+     
+  });
+    $.each(not_matching_row,function(Idx,Item){
+  $(Item.hide());
+    });
+    if (store_filter=="0"){
+  $(".emp").parents("tr").show();
+  }
+  });
+  var newfdate,newtdate;
+  $(".newdate").change(function(e){
+        
+           
+           
+           newfdate=$("#fromdate").val();
+           
+           newtdate=$("#todate").val();
+        
+      });
+  $("#BtnSubmit").click(function (){
+   var sdate=$("#from").val();
+   if(sdate==""){
+    frappe.msgprint({
+          title: __("From Date and To Date of <b>Schedule for</b> field is Mandatory."),
+          message: __("From Date and To Date of <b>Schedule for</b> field are not selected. Please select it first to copy previous Schedule."),
+          indicator: "red"
+   });
+  }
+  else {
+  call_python_function(newfdate,newtdate,sdate);
+  console.log("calling python function and seting values.;");
+  }
+  });
+  });
+  function call_python_function(_datefrom, _dateto,_datestart)
+  {
+   frappe.call({
+              method:"bnd.bnd.doctype.shift_schedule_manual.shift_schedule_manual.load_existing_data",
+              args: {
+             "from_date": moment(_datefrom).format("YYYYMMDD"),
+             "to_date": moment(_dateto).format("YYYYMMDD"),
+             "start_date": moment(_datestart).format("YYYYMMDD")
+              },
+              callback: function(r){
+          console.log("loadexistingdata>",r);
+          _SetData(r.message);
+              }
+          });
+    
+  }
+  function generatetable(_datefrom, _dateto)
  {
     var _from = moment(_datefrom);
     var today =moment();
@@ -249,10 +249,15 @@ function call_python_function(_datefrom, _dateto,_datestart)
     console.log(_from);
     columns = [];
     
-
-
-
-
+    if (_from<=today){
+      
+        frappe.msgprint({
+        title: __("You Can not Select Previous dates."),
+        message: __("You Can not upload shift schedule for Previous dates."),
+        indicator: "red"
+ });
+    }
+    else{
     
     
     $("#maintable th.dynamic-th,#maintable td.dynamic-td").remove();
@@ -270,120 +275,107 @@ function call_python_function(_datefrom, _dateto,_datestart)
     {  
        
       
-
       $("#maintable tbody tr").append("<td class=dynamic-td>"+div+"<select class=\"+classname+\" data-day=\"+columns[i]+\" ><option selected value=0> Select Shift</option>{% for (var t=0, l=data_list[\"shift\"].length; t<l; t++) { %}<option value=\'{{  data_list[\"shift\"][t][0] }}\'>{{  data_list[\"shift\"][t][0] }}</option>{% } %}</select></div></td>");
-
-
     }
     $("td").addClass("data-table-cell noselect");
     $("#maintable thead tr th div").addClass("content ellipsis");
     $("#maintable tbody tr td div").addClass("content ellipsis");
     $("#maintable tbody tr td div select").addClass("input-with-feedback form-control input-sm");
  call_python_function(_datefrom, _dateto,_datefrom);
- setting_weekly_off(_datefrom, _dateto);
-}
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function setting_weekly_off(_datefrom, _dateto)
-{ 
-  var _from = moment(_datefrom);
-  var _to = moment(_dateto);
-  
-  console.log("from",_from);
-  
-  while(_from <= _to) 
-  {
-    if (_from.format("dddd")=="Friday")
-     {
-    console.log("weekoff>",_from.format("dddd"),_from);
-    var date=_from.format("YYYY-MM-DD");
-    console.log("formatedfrom",date);
-    $(".shift[data-day="+date+"]").val("WO");
-     }
-     _from.add(1,"days");
-  }
 }
- function _GetData()
- {   
-    var _data = [];
-    $.each($(".shift"),function(Idx,Item){
-      
-      var _emp, _store, _shift, _day, _row;
-      _shift = $(Item).val();
-      _day = $(Item).data("day");
-      _row = $(Item).parents("tr");
-      _emp = $(".emp",_row).text().trim();
-      _empid = $(".empid",_row).text().trim();
-      _company = $(".company",_row).text().trim();
-      _store = $(".store",_row).val();
- if(_shift!=0 && _store!=0) {
-      _data.push({"Shift":_shift,"Day":moment(_day).format("YYYY-MM-DD"),"Employee":_emp,"Store":_store,"Empid":_empid,"Company":_company});
+ }
+
+  
+  
+  
+  
+  
+  
+  
+  
+  function setting_weekly_off(_datefrom, _dateto)
+  { 
+    var _from = moment(_datefrom);
+    var _to = moment(_dateto);
+    
+    console.log("from",_from);
+    
+    while(_from <= _to) 
+    {
+      if (_from.format("dddd")=="Friday")
+       {
+      console.log("weekoff>",_from.format("dddd"),_from);
+      var date=_from.format("YYYY-MM-DD");
+      console.log("formatedfrom",date);
+      $(".shift[data-day="+date+"]").val("WO");
+       }
+       _from.add(1,"days");
     }
-    });
-    
-    console.log("Sent Data>",_data);
-    
- frappe.call({
-            method:"bnd.bnd.doctype.shift_schedule_manual.shift_schedule_manual.passing_templatedata_to_python",
-            args: {
-           "data" : _data
-    
-            },
-            callback: function(r){
-        console.log(r); 
-            }
-        });
-}
-function _SetData(_data)  {
-  $.each(_data,function(Idx,Item){
-    var rowww = $(".emp[data-emp="+q+Item.employee_name+q+"]").parents("tr");
-    console.log("Quote>",rowww);
-    $(".store",rowww).val(Item.store);
-    
-    $(".shift[data-day="+Item.attendance_date+"]",rowww).val(Item.shift_time);
-    
-   });
-}
-</script>
-
-
-<style type="text/css">
-  td{
-    background-color: rgb(245, 247, 250);
-    
-    text-align: center;
   }
-  th{
-    text-align: center;
+   function _GetData()
+   {   
+      var _data = [];
+      $.each($(".shift"),function(Idx,Item){
+        
+        var _emp, _store, _shift, _day, _row;
+        _shift = $(Item).val();
+        _day = $(Item).data("day");
+        _row = $(Item).parents("tr");
+        _emp = $(".emp",_row).text().trim();
+        _empid = $(".empid",_row).text().trim();
+        _company = $(".company",_row).text().trim();
+        _store = $(".store",_row).val();
+   if(_shift!=0 && _store!=0) {
+        _data.push({"Shift":_shift,"Day":moment(_day).format("YYYY-MM-DD"),"Employee":_emp,"Store":_store,"Empid":_empid,"Company":_company});
+      }
+      });
+      
+      console.log("Sent Data>",_data);
+      
+   frappe.call({
+              method:"bnd.bnd.doctype.shift_schedule_manual.shift_schedule_manual.passing_templatedata_to_python",
+              args: {
+             "data" : _data
+      
+              },
+              callback: function(r){
+          console.log(r); 
+              }
+          });
   }
-  .ellipsis{
-    width:120px;
+  function _SetData(_data)  {
+    $.each(_data,function(Idx,Item){
+      var rowww = $(".emp[data-emp="+q+Item.employee_name+q+"]").parents("tr");
+      console.log("Quote>",rowww);
+      $(".store",rowww).val(Item.store);
+      
+      $(".shift[data-day="+Item.attendance_date+"]",rowww).val(Item.shift_time);
+      
+     });
   }
+  </script>
   
-  .form-page{
-    background-color: rgb(245, 247, 250);
-  }
-  .ellipsis{
-    width:unset;
-  }
   
-</style>
+  <style type="text/css">
+    td{
+      background-color: rgb(245, 247, 250);
+      
+      text-align: center;
+    }
+    th{
+      text-align: center;
+    }
+    .ellipsis{
+      width:120px;
+    }
+    
+    .form-page{
+      background-color: rgb(245, 247, 250);
+    }
+    .ellipsis{
+      width:unset;
+    }
+    
+  </style>
+  

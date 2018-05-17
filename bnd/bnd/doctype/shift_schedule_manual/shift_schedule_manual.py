@@ -29,7 +29,7 @@ def passing_templatedata_to_python(data):
 	d=ast.literal_eval(data)
 	action=""
 	doc=""
-	#frappe.msgprint(str(d))
+	frappe.msgprint(str(d))
 	
 	
 	for i in range(0,len(d)):
