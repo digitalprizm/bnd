@@ -1,10 +1,9 @@
 <div class="page-form flex">
-  <button onclick="testme()">Anup</button>
 Attendance Date: 
 <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
 <div class="link-field ui-front" style="position: relative; line-height: 1;">     
 <div class="awesomplete"> 
-<input type="date" id="attendance_date" name="attendance_date" class="attendance_date input-with-feedback form-control bold input-sm" value={{ attendance_list["process_date"] }}  readonly>
+<input type="date" id="attendance_date" name="attendance_date" class="attendance_date input-with-feedback form-control bold input-sm" value={{ attendance_list["process_date"] }}  >
 </div>          
 </div></div>
 
@@ -12,7 +11,7 @@ Attendance Date:
 <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
 <div class="link-field ui-front" style="position: relative; line-height: 1;">     
 <div class="awesomplete"> 
-       <button class="btn btn-primary btn-sm primary-action"  onclick="testme2()" type="button" ><i class="visible-xs octicon octicon-check"></i><span class="hidden-xs">Process Attendance</span></button>
+       <button class="btn btn-primary btn-sm primary-action"  onclick="testme()" type="button" ><i class="visible-xs octicon octicon-check"></i><span class="hidden-xs">Process Attendance</span></button>
    </div>          
 </div></div>
 </div>
@@ -100,6 +99,7 @@ console.log(adate);
 success:function(_data)
 {
 console.log("sync data->",_data);
+testme2();
 }
      });
 }
@@ -160,7 +160,7 @@ progress = progress + progressperunit;
           $wrap.css("background-color", "blue");
           $("#loader").css("color","red");
           $wrap.css("width", progress + "px");
-        var  percentage=Math.floor(progress/550)*100;
+        var  percentage=Math.round((progress/550)*100);
           $("#loader").text(percentage+"%");
           console.log("progress>>", progress,"percn>>",percentage);
 }
@@ -169,15 +169,15 @@ progress = progress + progressperunit;
 
 }
 }
-     </script>
+     </script>2
 
 
 <style>
 #cover {
 display:none;
-background-color: red;
+background-col2
 opacity: 0.5;
-position: absolute;
+position: abso2
 height: 100%;
 width: 100%;
 }
