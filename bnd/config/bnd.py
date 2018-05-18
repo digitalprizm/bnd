@@ -130,6 +130,18 @@ def get_data():
 					"name": "Employee Details Summery",
 					"doctype": "Employee"
 				},
+{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Device Report",
+					"doctype": "Employee"
+				},
+{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Shift Schedule Manual Report",
+					"doctype": "Employee"
+				},
 			]
 		},
 		

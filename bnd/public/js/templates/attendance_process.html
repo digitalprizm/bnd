@@ -22,6 +22,7 @@ Attendance Date:
    <table class="table table-bordered" id="maintable" style="width:auto">
      <thead>
        <tr>
+          
          <th><div class="content ellipsis" style="width: 100px; text-align: center;margin: auto;">
                    Employee id
                  </div></th>
@@ -36,25 +37,48 @@ Attendance Date:
      <tbody>
      {% for (var i=0,l=attendance_list["emp"].length; i<l; i++) { %}   
        <tr>
-         
+        
+           
          <td class="empid" data-empenrollno="{{  attendance_list["emp"][i]["enroll_number"] }}" ><div >{{  attendance_list["emp"][i]["name"] }}</div></td>
          <td class="emp" data-emp="{{  attendance_list["emp"][i]["employee_name"] }}" ><div >{{  attendance_list["emp"][i]["employee_name"] }}</div></td>
          
-          
        </tr>
        {% } %}
        </tbody>
    </table>
    </div>
    <script>
-var _org_data ;var atvioemp;var row;
+var _org_data ;var atvioemp,employeewithnovio,allemp;var selectiveemp=[];var row;
 var _result;    var progressperunit,percentage;
-var adate;var x;var apiemployee;
-var q="\'";
+var adate;var x;var apiemployee; var attemp, today;
+var q="\'";var selectivecontroller;
 var div="<div style="+q+"margin:auto;width:120px;"+q+">";
 $(document).ready(function(){
-adate=$("#attendance_date").val();
+  $("#maintable thead tr").append("<th class=dynamic-th>"+ div + "Indicator</div></th><th class=dynamic-th>" + div + "Status</div></th><th class=dynamic-th>" + div + "Message</div></th>");
+
+  checking_date_and_loading_date();
+$("#attendance_date").change(function(e){
+  $("#maintable td.dynamic-td").remove();
+  checking_date_and_loading_date();
+});
+
+
+});
+
+
+
+function checking_date_and_loading_date()
+{
+  adate=$("#attendance_date").val();
 adate=moment(adate);
+var today=moment();
+if(adate>today){
+  frappe.msgprint({
+        title: __("Attendance can not be marked for future dates"),
+        message: __("Attendance can not be marked for future dates"),
+        indicator: "red"
+ });
+}
 adate=adate.format("YYYYMMDD");
 frappe.call({
     method:"bnd.api.attendance_list.load_data",
@@ -64,17 +88,25 @@ frappe.call({
     callback: function(r){
 
 _org_data=r.message;
-var allemp= _org_data.emp;
+ 
+allemp=_org_data.emp;
+
+
+
 
 apiemployee =$.grep(allemp , function(element, index) {
-return element.violationcount<=0;
+return element.violationcount==0 && element.attendancecount==0  ;
 
 });
+
 atvioemp =$.grep(allemp , function(element, index) {
-return element.violationcount>0;
+return element.violationcount>0 ;
 
 });
-$("#maintable thead tr").append("<th class=dynamic-th>"+ div + "Indicator</div></th><th class=dynamic-th>" + div + "Status</div></th><th class=dynamic-th>" + div + "Message</div></th>");
+attemp=$.grep(allemp , function(element, index) {
+return  element.attendancecount>0;
+
+});
 
 $.each(atvioemp,function(Idx,Item){
 var viorow= $("#maintable tbody [data-empenrollno=" +Item.enroll_number
@@ -83,10 +115,18 @@ viorow.append("<td class=dynamic-td>"+ div +" <span class="+q+"indicator orange 
 viorow.append("<td class=dynamic-td>" + div +  "Pending</div></td><td class=dynamic-td>" + div +  "Attendance Violation</div></td>");
             
 });
+$.each(attemp,function(Idx,Item){
+var attrow= $("#maintable tbody [data-empenrollno=" +Item.enroll_number
++ "]").parents("tr");
+attrow.append("<td class=dynamic-td>"+ div +" <span class="+q+"indicator orange "+q+">  </span></div></td>");
+attrow.append("<td class=dynamic-td>" + div +  "Pending</div></td><td class=dynamic-td>" + div +  "Attendance</div></td>");
+            
+});
+    
     }
 });
+}
 
-});
 
 function testme()
 {
@@ -106,6 +146,7 @@ testme2();
 
 function testme2(){
 console.log("calling api");
+
 var slot_html = function (frm) {
 return `<div id="outerdiv" style="
 
