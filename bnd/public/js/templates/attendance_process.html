@@ -22,12 +22,18 @@
        <table class="table table-bordered" id="maintable" style="width:auto">
          <thead>
            <tr>
+              <th>
+                  <div class="content ellipsis" style="text-align: center;margin: auto;">
+                      <input type="checkbox" id="select-all-emp" >
+                  </div>
+                </th>
               
-             <th><div class="content ellipsis" style="width: 100px; text-align: center;margin: auto;">
-                       Employee id
+              
+             <th><div class="content ellipsis" style="text-align: center;margin: auto;">
+                       Series
                      </div></th>
                     
-                     <th><div class="content ellipsis" style="width: 100px;text-align: center;margin: auto;">
+                     <th><div class="content ellipsis" style="text-align: center;margin: auto;">
                         Employee
                      </div></th>
                      
@@ -37,7 +43,11 @@
          <tbody>
          {% for (var i=0,l=attendance_list["emp"].length; i<l; i++) { %}   
            <tr>
-              
+              <td class="selective-emp" data-checkdemp="{{  attendance_list["emp"][i]["enroll_number"] }}">
+
+                  <input type="checkbox" value="{{  attendance_list["emp"][i]["enroll_number"] }}" data-canprocess="{{  attendance_list["emp"][i]["canprocess"] }}">
+                </td>
+                
                
              <td class="empid" data-empenrollno="{{  attendance_list["emp"][i]["enroll_number"] }}" ><div >{{  attendance_list["emp"][i]["name"] }}</div></td>
              <td class="emp" data-emp="{{  attendance_list["emp"][i]["employee_name"] }}" ><div >{{  attendance_list["emp"][i]["employee_name"] }}</div></td>
@@ -48,21 +58,30 @@
        </table>
        </div>
        <script>
-    var _org_data ;var atvioemp,employeewithnovio,allemp;var selectiveemp=[];var row;
+    var _org_data ;var atvioemp,employeewithnovio,allemp;var selectiveemp;var row;
     var _result;    var progressperunit,percentage;
     var adate;var x;var apiemployee; var attemp, today;
     var q="\'";var selectivecontroller;
     var process_date={{ attendance_list["process_date"] }};
-    var div="<div style="+q+"margin:auto;width:120px;"+q+">";
+    var div="<div style="+q+"margin:auto;"+q+">";
     $(document).ready(function(){
-      $("#maintable thead tr").append("<th class=dynamic-th>"+ div + "Indicator</div></th><th class=dynamic-th>" + div + "Status</div></th><th class=dynamic-th>" + div + "Message</div></th>");
+      $("#maintable thead tr").append("<th class=dynamic-th>"+ div + "</div></th><th class=dynamic-th>" + div + "Status</div></th><th class=dynamic-th>" + div + "Message</div></th>");
     
       checking_date_and_loading_date();
     $("#attendance_date").change(function(e){
       $("#maintable td.dynamic-td").remove();
       checking_date_and_loading_date();
     });
-    
+   
+    $("#select-all-emp").change(function (e) {
+      if($("#select-all-emp").prop("checked")==true){
+        $(".selective-emp input").prop("checked","checked");      
+      }
+      else{
+        $(".selective-emp input").prop("checked","");      
+      }
+      
+    });
     
     });
     
@@ -79,7 +98,8 @@
             message: __("Attendance can not be marked for future dates"),
             indicator: "red"
      });
-     $("#processbtn").attr("disabled", "disabled");
+     $("#processbtn").prop("disabled", "disabled");
+
 
      
     }
@@ -99,10 +119,7 @@
     
     
     
-    apiemployee =$.grep(allemp , function(element, index) {
-    return element.violationcount==0 && element.attendancecount==0  ;
-    
-    });
+   
     
     atvioemp =$.grep(allemp , function(element, index) {
     return element.violationcount>0 ;
@@ -135,9 +152,36 @@
     
     function testme()
     {
-      
-      $("#processbtn").attr("disabled", "disabled");
+      selectivecontroller = $(".selective-emp input[data-canprocess=1]:checked");
+      if(selectivecontroller.length == 0){
+        frappe.msgprint({
+            title: __("No Employees to process."),
+            message: __("No Employees to process."),
+            indicator: "red"
+     });
+        return;
+      }
+
+      $("#processbtn").prop("disabled", "disabled");
+
+if (selectivecontroller){
+        apiemployee=[];
+
+for(var t=0;t<selectivecontroller.length;t++){
+
+  apiemployee.push({"enroll_number":$(selectivecontroller[t]).val()});
+}
+
+
+}
+else{
+  apiemployee =$.grep(allemp , function(element, index) {
+    return element.violationcount==0 && element.attendancecount==0  ;
     
+    });
+}
+
+
       
     console.log(adate);
    
@@ -188,7 +232,6 @@
     
     
     for (var e = 0; e < apiemployee.length; e++) {
-    console.log("emp->"+apiemployee[e]["enroll_number"]);
     
     $.ajax({
     url: "http://120.88.36.10:560/subtest/api/Aprocess?_date="+adate+"&_enroll="+apiemployee[e]["enroll_number"],
@@ -202,7 +245,6 @@
     _data=JSON.parse(_data);
     if(_data.length>0){
                 row = $("#maintable tbody [data-empenrollno=" + _data[0].employee + "]").parents("tr");
-                  console.log(row);
                   row.append("<td class=dynamic-td>"+ div +" <span class="+q+"indicator green "+q+"> </span></div></td>");
                   row.append("<td class=dynamic-td>" + div + _data[0].status + "</div></td><td class=dynamic-td>" + div + _data[0].message + "</div></td>");
     }
@@ -213,7 +255,18 @@
               $wrap.css("width", progress + "px");
             var  percentage=Math.round((progress/550)*100);
               $("#loader").text(percentage+"%");
-              console.log("progress>>", progress,"percn>>",percentage);
+              if(percentage==100){
+                d.hide();
+                $("#processbtn").prop("disabled", "");
+                
+                frappe.msgprint({
+            title: __("Message"),
+            message: __("Attendance Process completed sucessfully."),
+            indicator: "green"
+     });
+
+
+              }
     }
     })
     
@@ -236,5 +289,9 @@
   .page-form {
     border-bottom: none;
     background-color: white;
+  }
+
+  #maintable th,#maintable td {
+    padding: 4px;
   }
 </style>
