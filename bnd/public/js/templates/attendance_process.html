@@ -258,7 +258,12 @@ else{
               if(percentage==100){
                 d.hide();
                 $("#processbtn").prop("disabled", "");
-
+                
+                frappe.msgprint({
+            title: __("Message"),
+            message: __("Attendance Process completed sucessfully."),
+            indicator: "green"
+     });
 
 
               }
