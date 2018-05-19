@@ -14,9 +14,23 @@
            <button class="btn btn-primary btn-sm primary-action" id="processbtn"  onclick="testme()" type="button" ><i class="visible-xs octicon octicon-check"></i><span class="hidden-xs">Process Attendance</span></button>
        </div>          
     </div></div>
+
+<div class="form-group form-group-sm ui-front">
+  <div class="awesomplete">
+    <input id="search-emp" type="text" class="form-control" placeholder="Search for Employees.." aria-haspopup="true" autocomplete="off"
+      aria-autocomplete="list" onkeyup="myFunction()" style="
+      text-indent: 25px;">
+    <ul hidden=""></ul>
+    <span class="visually-hidden" role="status" aria-live="assertive" aria-relevant="additions"></span>
+  </div>
+  <span class="octicon octicon-search navbar-search-icon" style="
+      position: relative;
+      right: -3px;
+      top: -25px;">
+    </span>
+</div>
+    
     </div>
-    
-    
     
     <div style="overflow:scroll" style="height:200px" >
        <table class="table table-bordered" id="maintable" style="width:auto">
@@ -82,11 +96,25 @@
       }
       
     });
+
+    
+  
+ 
     
     });
     
     
-    
+    function myFunction(){
+      var $rows = $("#maintable tbody tr");
+$("#search-emp").keyup(function() {
+    var val = $.trim($("#search-emp").val()).replace(/ +/g, " ").toLowerCase();
+    $("#maintable tbody tr").show().filter(function() {
+        var text = $(this).text().replace(/\s+/g, " ").toLowerCase();
+        return !~text.indexOf(val);
+    }).hide();
+
+});
+    }
     function checking_date_and_loading_date()
     {
       adate=$("#attendance_date").val();
@@ -294,4 +322,5 @@ else{
   #maintable th,#maintable td {
     padding: 4px;
   }
+
 </style>
