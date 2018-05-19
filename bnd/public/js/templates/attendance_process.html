@@ -89,10 +89,10 @@
    
     $("#select-all-emp").change(function (e) {
       if($("#select-all-emp").prop("checked")==true){
-        $(".selective-emp input").prop("checked","checked");      
+        $(".selective-emp input:visible").prop("checked","checked");      
       }
       else{
-        $(".selective-emp input").prop("checked","");      
+        $(".selective-emp input:visible").prop("checked","");      
       }
       
     });
