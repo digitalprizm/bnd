@@ -5,23 +5,25 @@
   <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
   <div class="link-field ui-front" style="position: relative; line-height: 1;">     
   <div class="awesomplete"> 
-  <input type="date" id="from" name="fromdate" class="filterdate input-with-feedback form-control bold input-sm" placeholder="From Date" >
+    <input type="date" id="from" name="fromdate" class="filterdate input-with-feedback form-control bold input-sm" placeholder="From Date" style="
+    width: 180px;">
   </div>          
   </div></div>
-  &nbsp;&nbsp;<div>To Date: </div> &nbsp;&nbsp;
+  &nbsp;&nbsp;<div style="text-indent: 30px;">To Date: </div> &nbsp;&nbsp;
   <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
   <div class="link-field ui-front" style="position: relative; line-height: 1;">     
   <div class="awesomplete"> 
-  <input type="date" id="to" name="todate" class="filterdate input-with-feedback form-control bold input-sm" placeholder="To Date">
+    <input type="date" id="to" name="todate" class="filterdate input-with-feedback form-control bold input-sm" placeholder="To Date" style="width: 180px;">
   </div>          
   </div></div>
   
-  <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-  <div class="link-field ui-front" style="position: relative; line-height: 1;">     
-  <div class="awesomplete"> 
-   <button id="myButton1" onclick="_GetData()" value="Upload New Data">Upload New Data</button>
-  </div>          
-  </div></div>
+  <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">   
+    <div class="link-field ui-front" style="position: relative;line-height: 1;padding-left: 20px;">       
+       <div class="awesomplete">   
+           <button id="myButton1" onclick="_GetData()" value="Upload New Data" style="padding-left: 20px;" class="btn btn-primary btn-sm primary-action">Upload New Data</button> 
+            </div>           
+  </div>
+</div>
   
   
   
@@ -65,24 +67,25 @@
   <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
   <div class="link-field ui-front" style="position: relative; line-height: 1;">    
   <div class="awesomplete"> 
-  <input type="date" id="fromdate" name="fromdate" class="newdate input-with-feedback form-control bold input-sm" placeholder="From Date" >
-  </div>          
+    <input type="date" id="fromdate" name="fromdate" class="newdate input-with-feedback form-control bold input-sm" placeholder="From Date" style="width: 180px;">  </div>          
   </div></div>
   
-  &nbsp;&nbsp;<div>To Date: </div> &nbsp;&nbsp;
+  &nbsp;&nbsp;<div style="text-indent: 30px;">To Date: </div> &nbsp;&nbsp;
   <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
   <div class="link-field ui-front" style="position: relative; line-height: 1;">     
   <div class="awesomplete">  
-  <input type="date" id="todate" name="todate" class="newdate input-with-feedback form-control bold input-sm" placeholder="To Date">
-  </div>          
-  </div></div>
-  
-  <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-  <div class="link-field ui-front" style="position: relative; line-height: 1;">     
-  <div class="awesomplete"> 
-  <button class="btn btn-primary btn-sm primary-action"  id="BtnSubmit" type="button" ><i class="visible-xs octicon octicon-check"></i><span class="hidden-xs">Get Previous Data</span></button>
-  </div>          
-  </div></div>
+    <input type="date" id="todate" name="todate" class="newdate input-with-feedback form-control bold input-sm" placeholder="To Date" style="width: 180px;"> 
+ </div></div>
+ 
+ <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;"> 
+     <div class="link-field ui-front" style="position: relative;line-height: 1;position: relative;line-height: 1;padding-left: 20px;">     
+          <div class="awesomplete"> 
+               <button class="btn btn-primary btn-sm primary-action" id="BtnSubmit" type="button">
+                 <i class="visible-xs octicon octicon-check"></i><span class="hidden-xs">Get Previous Data</span>
+                </button> 
+  </div>        
+     </div>
+    </div>
   
   </div>
   
