@@ -16,7 +16,7 @@ fixtures = ['Custom Field', 'Property Setter',"Print Format",'Report']
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/bnd/css/bnd.css"
+app_include_css = "/assets/bnd/bnd.css"
 # app_include_js = "/assets/bnd/js/bnd.js"
 app_include_js = "/assets/js/bnd.min.js"
 
@@ -39,6 +39,9 @@ doctype_js = {
 doc_events = {
 	"Salary Slip": {
 		"validate": "bnd.custom_methods.salary_slip",
+			},
+	"Leave Application": {
+		"validate": "bnd.custom_methods.create_attendance",
 			}
 }
 # Home Pages

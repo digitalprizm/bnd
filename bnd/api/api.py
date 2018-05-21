@@ -140,10 +140,12 @@ final_confirmation_date, contract_end_date, date_of_retirement
 @frappe.whitelist(allow_guest=True)
 def get_shift_time_list(shift_name=None):
 	if shift_name:
-		shift_time_list = frappe.db.sql("""select  shift_name, start_time, end_time, no_of_hours, end_time_on_next_day
+		shift_time_list = frappe.db.sql("""select  shift_name, start_time, end_time, no_of_hours, end_time_on_next_day,
+			break_time, std_working_hours
 	    	from `tabShift Time` WHERE shift_name='{0}' """.format(shift_name),as_dict=1)
 	else:
-		shift_time_list = frappe.db.sql("""select  shift_name, start_time, end_time, no_of_hours, end_time_on_next_day
+		shift_time_list = frappe.db.sql("""select  shift_name, start_time, end_time, no_of_hours, end_time_on_next_day,
+			break_time, std_working_hours
 	    	from `tabShift Time`""".format(shift_name),as_dict=1)
 
 	return shift_time_list
@@ -243,20 +245,28 @@ def get_attendance_list(attendance_date=None):
 	if attendance_date:
 		attendance_list = frappe.db.sql("""select employee, employee_name, status, leave_type, attendance_date,
 		new_in_time,new_out_time, company, in_store, in_time, out_time, out_store, amended_from,
-		status1, status2,ot_hours, schedule_time, schedule_store,schedule_status, total_working_hours 
+		status1, status2,ot_hours, schedule_time, schedule_store,schedule_status, total_working_hours , deduction_days, deduction_amount
 			from `tabAttendance` WHERE attendance_date='{0}' """.format(attendance_date),as_dict=1)
 	else:
 		attendance_list = frappe.db.sql("""select employee, employee_name, status, new_in_time, new_out_time, leave_type, attendance_date, company, in_store, in_time, out_time, out_store, amended_from,
-			status1, status2,ot_hours, schedule_time, schedule_store,schedule_status, total_working_hours
+			status1, status2,ot_hours, schedule_time, schedule_store,schedule_status, total_working_hours, deduction_days, deduction_amount
 			from `tabAttendance`""".format(attendance_date),as_dict=1)
 
 	return attendance_list
 
 @frappe.whitelist(allow_guest=True)
-def create_attendance(employee=None,employee_name='', attendance_date='',in_store='',out_store='',in_time='00:00',out_time='00:00',company='',new_in_time='00:00',new_out_time='00:00',
+def create_attendance(employee=None,employee_name='', attendance_date='',in_store='',out_store='',in_time='',out_time='',company='',new_in_time='',new_out_time='',
 						status1='',status2='',total_working_hours='',ot_hours='',schedule_store='',schedule_status='',schedule_time=''):
 
 	attendance_doc = frappe.new_doc("Attendance")
+	if in_time == "":
+		in_time = "00:00"
+	if out_time == "":
+		out_time ="00:00"
+	if new_in_time =="":
+		new_in_time = "00:00"
+	if new_out_time =="":
+		new_out_time = "00:00"
 	attendance_doc.employee = employee
 	attendance_doc.employee_name = employee_name
 	attendance_doc.attendance_date = attendance_date
@@ -280,14 +290,17 @@ def create_attendance(employee=None,employee_name='', attendance_date='',in_stor
 		attendance_doc.save(ignore_permissions=True)
 		attendance_doc.submit()
 		frappe.db.commit()
-		return { "message":"New Attendance {0} Is Created".format(employee),
-			"status": "success","user_message":"New Attendance {0} Is Created".format(employee)}
+		return { 
+		"status": "success",
+		"message":"New Attendance {0} Is Created".format(employee)
+			}
 	except Exception as e:
-		error = True
-		return { "message":"New Attendance  Is Not Created",
-			"status": "failed",
-			"user_message":"New Attendance Is Not Created",
-			"error": e }
+		frappe.local.message_log=False
+		return { 
+		"status": "failed",
+		"message":"New Attendance  Is Not Created"
+			
+			}
 
 
 # end attendance
@@ -338,11 +351,19 @@ def get_leave_application(employee='',date=''):
 
 @frappe.whitelist(allow_guest=True)
 def create_attendance_violation(employee=None,employee_name='', attendance_date='',company='',store='',deduction_days='',
-	in_date='',violation_type='',in_time='00:00', out_time='00:00',out_date='',out_store='',violation_remark='',
-	amended_in_date='',amended_in_time='00:00',amended_out_time='00:00', amended_out_store='',amended_out_date='',attendance_status='',amended_in_store='',amended_status1='',amended_status2='',
+	in_date='',violation_type='',in_time='', out_time='',out_date='',out_store='',violation_remark='',
+	amended_in_date='',amended_in_time='',amended_out_time='', amended_out_store='',amended_out_date='',attendance_status='',amended_in_store='',amended_status1='',amended_status2='',
 	amended_status='',deduction_amount='',approver_comment='',status1='',status2='',ot_hours='',schedule_store='',schedule_status='',schedule_time=''):
 # 
 	attendance_violation_doc = frappe.new_doc("Attendance Violation")
+	if in_time == "":
+		in_time = "00:00"
+	if out_time == "":
+		out_time ="00:00"
+	if amended_in_time =="":
+		amended_in_time = "00:00"
+	if amended_out_time =="":
+		amended_out_time = "00:00"
 	attendance_violation_doc.employee = employee
 	attendance_violation_doc.employee_name = employee_name
 	attendance_violation_doc.attendance_date = attendance_date
@@ -352,6 +373,8 @@ def create_attendance_violation(employee=None,employee_name='', attendance_date=
 	attendance_violation_doc.deduction_days = deduction_days
 	attendance_violation_doc.in_date = in_date
 	attendance_violation_doc.violation_type = violation_type
+
+	print("\n\n\n\n\nin time",in_time)
 	attendance_violation_doc.in_time = get_time(in_time)
 	attendance_violation_doc.out_time = get_time(out_time)
 	attendance_violation_doc.out_date = out_date
@@ -384,15 +407,18 @@ def create_attendance_violation(employee=None,employee_name='', attendance_date=
 		attendance_violation_doc.save(ignore_permissions=True)
 		frappe.db.commit()
 		# frappe.msgprint( " Employee attedance created successfull")
-		return { "message":"New Attendance Violation {0} Is Created".format(employee),
-				"status": "success","user_message":"New Attendance {0} Is Created".format(employee)}
+		return { 
+		"status": "success",
+		"message":"New Attendance Violation {0} Is Created".format(employee)
+				
+				}
 
 	except Exception as e:
 		error = True
-		return { "message":"New Attendance Violation Is Not Created",
-				"status": "failed",
-				"user_message":"New Attendance Is Not Created",
-				"error": e }
+		# frappe.local.message_log=False
+		return { "status": "failed",
+		"message":"New Attendance Violation Is Not Created"
+				 }
 
 #end attendance violation
 
