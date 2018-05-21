@@ -149,6 +149,13 @@ def get_data():
 					"name": "Shift Schedule Manual Report",
 					"doctype": "Shift Schedule"
 				},
+				
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Attendance Violation Register",
+					"doctype": "Attendance Violation"
+				},
 			]
 		},
 		
