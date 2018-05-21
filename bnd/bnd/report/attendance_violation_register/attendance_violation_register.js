@@ -8,7 +8,8 @@ frappe.query_reports["Attendance Violation Register"] = {
 			"fieldname":"employee_name",
 			"label": __("Employee Name"),
 			"fieldtype": "Link",
-			"options": "Employee"
+			"options": "Employee",
+			"width": "60px"
 			
 		}
 	]

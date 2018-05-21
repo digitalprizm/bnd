@@ -7,7 +7,7 @@ def execute(filters=None):
 
 
 	dict=frappe.db.sql("CALL `violation_report`('{0}')".format(filters['employee_name']), as_dict=1);
-
+	
 
 	columns = get_columns(dict)
 	data= get_values_list(dict)
@@ -31,18 +31,3 @@ def get_values_list(data):
 				val.append(data[idx][_key])
 			rows.append(val)		
 	return rows
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
