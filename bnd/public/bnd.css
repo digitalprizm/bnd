@@ -1,0 +1,184 @@
+html, body{
+	font-size: 16px !important;
+}
+.app-icon .inner, .app-icon i{
+	font-size:50px !important;
+}
+.case-wrapper {
+    width: 200px !important;
+    height: 200px !important;
+}
+.result * {
+    font-size: 16px !important;
+}
+.case-label {
+	font-size: 16px !important;
+}
+
+.control-label {
+	color: #000000	 !important;
+	font-size: 16px;
+	letter-spacing: 0.5px;	
+}
+.form-control{
+	font-size: 16px !important;
+}
+
+
+
+/*icon size*/
+
+.app-icon .inner, .app-icon i {
+    font-size: 50px !important;
+    min-width: 50px !important;
+}
+
+/*navbar font size */
+
+.navbar a {
+    font-size: 16px !important;
+}    
+/* icon align center*/
+.case-wrapper {
+    width: 190px !important;
+    height: 190px !important;
+}
+
+ /*nav search logo */
+.navbar .navbar-search-icon {
+    
+    right: 35px !important;
+    top: 0px !important;
+    padding: 4px 8px !important;
+}
+
+/* nav menu and refresh button font size */
+
+.btn-sm, .btn-group-sm > .btn {
+    padding: 5px 10px !important;
+    font-size: 16px !important;
+}    
+
+/* Doctr and case remove bold */
+
+.indicator, .indicator-right {
+    font-weight: normal !important;
+}
+
+.list-id {
+    font-weight: normal !important;
+}
+
+/*  Result Dropdown Font size */
+
+.dropdown-menu {
+    font-size: 16px !important;
+}
+
+/* case cell report Font size 16px */
+
+.slick-cell, .slick-headerrow-column ,
+.slick-header-column, .slick-header-columns,
+.slick-headerrow-column input{
+    font-size: 16px !important;
+}  
+
+/*.slick-header-column.ui-state-default {
+    line-height: 26px !important;
+}  */
+
+/* input box Size of row hight */
+.slickgrid_172475 .slick-headerrow-columns {
+    height: 38px !important;
+}
+.slick-headerrow-column.ui-state-default {
+    padding: 8px 4px !important;
+}
+
+.ui-state-default.slick-headerrow-column{
+    height: 40px !important;
+    padding: 3px 4px!important;
+    /* margin: 0px; */
+}
+
+
+a.small{
+	font-size: 100% !important;
+}
+
+small, .small{
+	font-size: 100% !important;
+}
+
+.timeline-head .comment-input-header{
+    padding: 14px 15px !important;
+}
+
+.btn-xs, .btn-group-xs > .btn{
+	font-size: 16px !important;
+}
+
+h6.uppercase, .h6.uppercase{
+	font-size: 16px !important;
+}
+.sidebar-menu h6, .sidebar-menu .h6{
+	font-size: 16px !important;
+}
+.layout-side-section{
+	font-size: 16px !important;
+}
+.fc-time{
+  font-size: 15px !important;
+  color: #000 !important;
+}
+.fc-title {
+    font-size: 16px !important;
+     color: #000 !important;
+}
+.fa.fa-building-o{
+    color: white !important;
+}
+
+ul li.list-link[data-view="Kanban"],
+ul li.list-link[data-view="Gantt"]{
+	display:none !important;
+}
+
+a.module-link[data-name="Buying"],
+a.module-link[data-name="CRM"],
+a.module-link[data-name="Setup"],
+a.module-link[data-name="HR"],
+a.module-link[data-name="Learn"],
+a.module-link[data-name="Selling"],
+a.module-link[data-name="Stock"],
+a.module-link[data-name="Website"],
+a.module-link[data-name="Manufacturing"],
+a.module-link[data-name="Projects"], 
+a.module-link[data-name="Schools"], 
+a.module-link[data-name="Developer"], 
+a.module-link[data-name="Contacts"], 
+a.module-link[data-name="Support"], 
+a.module-link[data-name="Maintenance"], 
+a.module-link[data-name="Integrations"]{
+  display: None !important;
+}
+
+.help-message-wrapper {
+    display: none!important;
+}
+.btn-print-edit,.btn-print-preview,.btn-print-print{
+    display: none!important;
+}
+/*a[href="https://css-tricks.com"] {
+  color: #E18728;
+}*/
+
+/*li.dropdown.dropdown-navbar-new-comments.dropdown-mobile {
+     display: none !important; 
+}*/
+li.dropdown.dropdown-help.dropdown-mobile {
+    display: none !important;
+}
+li.user-progress {
+    display: none !important;
+}

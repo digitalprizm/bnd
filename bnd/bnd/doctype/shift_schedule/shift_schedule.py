@@ -12,6 +12,7 @@ class ShiftSchedule(Document):
 	def validate(self):
 		self.validate_linked_data()
 		self.validate_duplicate_record()
+		self.validate_shift_type()
 
 	def validate_linked_data(self):
 		if self.employee:
@@ -19,6 +20,12 @@ class ShiftSchedule(Document):
 		if self.shift_time:
 			self.start_time = frappe.db.get_value("Shift Time", self.shift_time, "start_time")	
 			self.end_time = frappe.db.get_value("Shift Time", self.shift_time, "end_time")	
+
+
+	def validate_shift_type(self):
+		shift_type = frappe.db.get_value("Employee", self.employee, "shift_type")	
+		if shift_type != "Rotational":
+			frappe.throw("Shift Type for Employee {0} should be Rotational".format(self.employee))
 
 	def validate_duplicate_record(self):
 		res = frappe.db.sql("""select name 

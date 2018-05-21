@@ -2,8 +2,6 @@
 # Copyright (c) 2018, Digitalprizm and contributors
 # For license information, please see license.txt
 
-
-from __future__ import unicode_literals
 import frappe
 from frappe.utils import cstr, add_days, date_diff
 from frappe import _
@@ -91,22 +89,7 @@ def add_header_get_data(w, args):
 		
 	return w
 def add_data(w, args):
-	# customers = get_active_customers()
-	# existing_attendance_records = get_existing_attendance_records(args)
-	# date = ""
-	# for customer in customers:
-	# 	existing_attendance = {}
-	# 	if existing_attendance_records \
-	# 		and tuple([date, customer.name]) in existing_attendance_records:
-	# 			existing_attendance = existing_attendance_records[tuple([date, customer.name])]
-	# 	row = [
-	# 		existing_attendance and existing_attendance.name or "",
-	# 		customer.name, customer.first_name,
-	# 		existing_attendance and existing_attendance.status or "",
-	# 		existing_attendance and existing_attendance.leave_type or "", customer.first_name,
-	# 		existing_attendance and existing_attendance.naming_series or get_naming_series(),
-	# 	]
-	# 	w.writerow(row)
+	
 	return w
 
 def get_active_customers():
