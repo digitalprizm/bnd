@@ -33,28 +33,26 @@
   
   
   <div class="page-form flex">
-    <div>Search Store :</div>
-    &nbsp;&nbsp;&nbsp; &nbsp;
-    <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-      <div class="link-field ui-front" style="position: relative; line-height: 1;">
-        <div class="awesomplete">
-  
-          <select type="text" id="filter-store" name="employee-filter" autocomplete="off" class="filter-store input-with-feedback form-control input-sm "
-            data-store=" {{  data_list[\" store\ "][i]  }} ">
-            <option selected value="0">Select Store</option>
-  
-            {% for (var t=0, z=data_list["store"].length; t<z; t++) { %} 
-            <option>{{ data_list["store"][t][0] }}</option>
-              {% } %}
-  
-          </select>
-        </div>
+      <div>Search Store :</div>
+      &nbsp;&nbsp;&nbsp;
+      &nbsp;
+      <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+      <div class="link-field ui-front" style="position: relative; line-height: 1;">     
+      <div class="awesomplete"> 
+      
+      <select type="text" id="filter-store" name="employee-filter" autocomplete="off" class="filter-store input-with-feedback form-control input-sm " >
+      <option selected value="0">Select Store</option>
+      
+             {% for (var t=0, z=data_list["store"].length; t<z; t++) { %}
+      <option>{{  data_list["store"][t][0] }}</option>
+               {% } %}
+      
+      </select>
+      </div>          
+      </div></div>
+      
       </div>
-    </div>
-  
-  </div>
-  
-  
+      
   
   
   
@@ -93,45 +91,6 @@
 
 
 <!-- trial starts-->
-
-
-
-<div class="page-form flex">
-    <div>Set Default Values :</div>
-    &nbsp;&nbsp;&nbsp; &nbsp;
-
-
-<div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;"> 
-  <div class="link-field ui-front" style="position: relative;line-height: 1;position: relative;line-height: 1;padding-left: 20px;">     
-       <div class="awesomplete"> 
-            <button class="btn btn-primary btn-sm primary-action" id="ResetBtn" type="button">
-              <i class="visible-xs octicon octicon-check"></i><span class="hidden-xs">Reset Data</span>
-             </button> 
-</div>        
-  </div>
- </div>
-
-
-
-    <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-      <div class="link-field ui-front" style="position: relative; line-height: 1;">
-        <div class="awesomplete">
-  
-          <select type="text" id="set-store" name="set-store" autocomplete="off" class="set-store input-with-feedback form-control input-sm "
-            data-store=" {{  data_list[\" store\ "][i]  }} ">
-            <option selected value="0">Select Store</option>
-  
-            {% for (var t=0, z=data_list["store"].length; t<z; t++) { %} 
-            <option>{{ data_list["store"][t][0] }}</option>
-              {% } %}
-  
-          </select>
-        </div>
-      </div>
-    </div>
-  
-  </div>
-    
 
 
 
