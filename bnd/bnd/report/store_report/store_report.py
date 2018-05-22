@@ -7,9 +7,6 @@ import frappe
 def execute(filters=None):
 	if not filters: filters = {'store_name':''}
 
-
-	if filters:
-		frappe.msgprint(str(filters['store_name']))
 	dict=frappe.db.sql("CALL `StoreListReport`(%s);",(filters['store_name']), as_dict=1);
 
 
