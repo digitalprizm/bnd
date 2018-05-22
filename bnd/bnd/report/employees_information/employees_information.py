@@ -8,8 +8,6 @@ def execute(filters=None):
 	if not filters: filters = {'employee_name':''}
 
 
-	if filters:
-		frappe.msgprint(str(filters['employee_name']))
 	dict=frappe.db.sql("CALL `employeereport`(%s);",(filters['employee_name']), as_dict=1);
 
 
