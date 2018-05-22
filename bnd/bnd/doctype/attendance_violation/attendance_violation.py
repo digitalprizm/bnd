@@ -21,7 +21,7 @@ class AttendanceViolation(Document):
 	def call_dummy_api(self):
 		import requests
 		try:
-			url = 'http://localhost:52513/api/AProcess?_enroll=0&_datetimeFrom=20180204102211&_datetimeTo=20180204172211'
+			url = 'http://120.88.36.10:560/Subtest/api/AProcess?_enroll=0&_datetimeFrom=20180204102211&_datetimeTo=20180204172211'
 			r = requests.get(url)	
 		except Exception as e:
 			pass
