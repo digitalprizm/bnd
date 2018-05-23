@@ -1,6 +1,3 @@
-# Copyright (c) 2013, Digitalprizm and contributors
-# For license information, please see license.txt
-
 from __future__ import unicode_literals
 import frappe
 
@@ -8,8 +5,9 @@ def execute(filters=None):
 	if not filters: filters = {'employee_name':''}
 
 
-	dict=frappe.db.sql("CALL `employeereport`(%s);",(filters['employee_name']), as_dict=1);
 
+	dict=frappe.db.sql("CALL `violation_report`('{0}')".format(filters['employee_name']), as_dict=1);
+	
 
 	columns = get_columns(dict)
 	data= get_values_list(dict)
@@ -33,18 +31,3 @@ def get_values_list(data):
 				val.append(data[idx][_key])
 			rows.append(val)		
 	return rows
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

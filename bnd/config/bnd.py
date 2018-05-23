@@ -130,17 +130,31 @@ def get_data():
 					"name": "Employee Details Summery",
 					"doctype": "Employee"
 				},
-{
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Store Report",
+					"doctype": "Store"
+				},
+
+				{
 					"type": "report",
 					"is_query_report": True,
 					"name": "Device Report",
-					"doctype": "Employee"
+					"doctype": "Device"
 				},
-{
+				{
 					"type": "report",
 					"is_query_report": True,
 					"name": "Shift Schedule Manual Report",
-					"doctype": "Employee"
+					"doctype": "Shift Schedule"
+				},
+				
+				{
+					"type": "report",
+					"is_query_report": True,
+					"name": "Attendance Violation Register",
+					"doctype": "Attendance Violation"
 				},
 			]
 		},

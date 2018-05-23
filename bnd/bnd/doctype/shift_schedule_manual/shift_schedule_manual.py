@@ -29,7 +29,7 @@ def passing_templatedata_to_python(data):
 	d=ast.literal_eval(data)
 	action=""
 	doc=""
-	frappe.msgprint(str(d))
+	# frappe.msgprint(str(d))
 	
 	
 	for i in range(0,len(d)):
@@ -61,7 +61,12 @@ def passing_templatedata_to_python(data):
 
 	
 	
-	frappe.msgprint("Record "+action+" Sucessfully");
+	
+	if action:
+		frappe.msgprint("Record "+action+" Sucessfully")
+	else:
+		frappe.msgprint("Select from date and to date of schedule for section and set shift schedule to upload.",raise_exception=1)
+		
 	return "Done"
 	
 	

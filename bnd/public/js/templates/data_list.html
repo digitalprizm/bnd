@@ -5,28 +5,27 @@
   <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
   <div class="link-field ui-front" style="position: relative; line-height: 1;">     
   <div class="awesomplete"> 
-  <input type="date" id="from" name="fromdate" class="filterdate input-with-feedback form-control bold input-sm" placeholder="From Date" >
+    <input type="date" id="from" name="fromdate" class="filterdate input-with-feedback form-control bold input-sm" placeholder="From Date" style="
+    width: 180px;">
   </div>          
   </div></div>
-  &nbsp;&nbsp;<div>To Date: </div> &nbsp;&nbsp;
+  &nbsp;&nbsp;<div style="text-indent: 30px;">To Date: </div> &nbsp;&nbsp;
   <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
   <div class="link-field ui-front" style="position: relative; line-height: 1;">     
   <div class="awesomplete"> 
-  <input type="date" id="to" name="todate" class="filterdate input-with-feedback form-control bold input-sm" placeholder="To Date">
+    <input type="date" id="to" name="todate" class="filterdate input-with-feedback form-control bold input-sm" placeholder="To Date" style="width: 180px;">
   </div>          
   </div></div>
-  
   <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-  <div class="link-field ui-front" style="position: relative; line-height: 1;">     
-  <div class="awesomplete"> 
-   <button id="myButton1" onclick="_GetData()" value="Upload New Data">Upload New Data</button>
-  </div>          
-  </div></div>
-  
+    <div class="link-field ui-front" style="position: relative;line-height: 1;padding-left: 20px;">
+      <div class="awesomplete">
+        <button id="myButton1" onclick="_GetData()" value="Upload New Data" style="padding-left: 20px;" class="btn btn-primary btn-sm primary-action">Upload New Data</button>
+      </div>
+    </div>
+  </div>
   
   
   </div>
-  
   
   
   
@@ -34,27 +33,26 @@
   
   
   <div class="page-form flex">
-  <div>Search Store :</div>
-  &nbsp;&nbsp;&nbsp;
-  &nbsp;
-  <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-  <div class="link-field ui-front" style="position: relative; line-height: 1;">     
-  <div class="awesomplete"> 
-  
-  <select type="text" id="filter-store" name="employee-filter" autocomplete="off" class="store input-with-feedback form-control input-sm " data-store=" {{  data_list[\"store\"][i]  }} ">
-  <option selected value="0">Select Store</option>
-  
-         {% for (var t=0, z=data_list["store"].length; t<z; t++) { %}
-  <option>{{  data_list["store"][t][0] }}</option>
-           {% } %}
-  
-  </select>
-  </div>          
-  </div></div>
-  
-  </div>
-  
-  
+      <div>Search Store :</div>
+      &nbsp;&nbsp;&nbsp;
+      &nbsp;
+      <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
+      <div class="link-field ui-front" style="position: relative; line-height: 1;">     
+      <div class="awesomplete"> 
+      
+      <select type="text" id="filter-store" name="employee-filter" autocomplete="off" class="filter-store input-with-feedback form-control input-sm " >
+      <option selected value="0">Select Store</option>
+      
+             {% for (var t=0, z=data_list["store"].length; t<z; t++) { %}
+      <option>{{  data_list["store"][t][0] }}</option>
+               {% } %}
+      
+      </select>
+      </div>          
+      </div></div>
+      
+      </div>
+      
   
   
   
@@ -65,26 +63,42 @@
   <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
   <div class="link-field ui-front" style="position: relative; line-height: 1;">    
   <div class="awesomplete"> 
-  <input type="date" id="fromdate" name="fromdate" class="newdate input-with-feedback form-control bold input-sm" placeholder="From Date" >
-  </div>          
+    <input type="date" id="fromdate" name="fromdate" class="newdate input-with-feedback form-control bold input-sm" placeholder="From Date" style="width: 180px;">  </div>          
   </div></div>
   
-  &nbsp;&nbsp;<div>To Date: </div> &nbsp;&nbsp;
-  <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-  <div class="link-field ui-front" style="position: relative; line-height: 1;">     
-  <div class="awesomplete">  
-  <input type="date" id="todate" name="todate" class="newdate input-with-feedback form-control bold input-sm" placeholder="To Date">
-  </div>          
-  </div></div>
-  
-  <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">
-  <div class="link-field ui-front" style="position: relative; line-height: 1;">     
-  <div class="awesomplete"> 
-  <button class="btn btn-primary btn-sm primary-action"  id="BtnSubmit" type="button" ><i class="visible-xs octicon octicon-check"></i><span class="hidden-xs">Get Previous Data</span></button>
-  </div>          
-  </div></div>
+  &nbsp;&nbsp;<div style="text-indent: 30px;">To Date: </div> &nbsp;&nbsp;
+  <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;">  
+     <div class="link-field ui-front" style="position: relative; line-height: 1;"> 
+              <div class="awesomplete">   
+                   <input type="date" id="todate" name="todate" class="newdate input-with-feedback form-control bold input-sm" placeholder="To Date" style="width: 180px;"> 
+                    </div>           
+  </div>
+</div>
+
+
+ <div class="form-group frappe-control input-max-width col-md-2 has-error" title="" style="z-index: 1;"> 
+     <div class="link-field ui-front" style="position: relative;line-height: 1;position: relative;line-height: 1;padding-left: 20px;">     
+          <div class="awesomplete"> 
+               <button class="btn btn-primary btn-sm primary-action" id="BtnSubmit" type="button">
+                 <i class="visible-xs octicon octicon-check"></i><span class="hidden-xs">Get Previous Data</span>
+                </button> 
+  </div>        
+     </div>
+    </div>
   
   </div>
+
+
+
+<!-- trial starts-->
+
+
+
+
+
+<!-- trial ends-->
+
+
   
   
   
@@ -170,12 +184,21 @@
           });
   $(".filterdate").change(function(e){
         
-           
+    
            
            var fdate=$("#from").val();
            
            var tdate=$("#to").val();
         if (fdate!="" && tdate!="") {
+          $("#myButton1").prop("disabled", "");
+          if(fdate>tdate){
+            frappe.msgprint({
+              title: __("From Date should be <b>less than</b> To Date. "),
+              message: __("From Date should be <b>less than</b> To Date."),
+              indicator: "red"
+       });
+       $("#myButton1").prop("disabled", "disabled");
+          }
             generatetable(fdate,tdate);
             
         }   
@@ -188,7 +211,6 @@
     return element.store!=store_filter;
     
     });
-    console.log(notmatchData);
     $.each(notmatchData,function(Idx,Item){
       not_matching_row.push($(".emp[data-emp="+q+Item.employee_name+q+"]").parents("tr"));
      
@@ -208,6 +230,18 @@
            newfdate=$("#fromdate").val();
            
            newtdate=$("#todate").val();
+
+           if (newfdate!="" && newtdate!="") {
+            $("#BtnSubmit").prop("disabled", "");
+            if(newfdate>newtdate){
+              frappe.msgprint({
+                title: __("From Date should be <b>less than</b> To Date. "),
+                message: __("From Date should be <b>less than</b> To Date."),
+                indicator: "red"
+         });
+         $("#BtnSubmit").prop("disabled", "disabled");
+            }
+          } 
         
       });
   $("#BtnSubmit").click(function (){
@@ -223,6 +257,18 @@
   call_python_function(newfdate,newtdate,sdate);
   console.log("calling python function and seting values.;");
   }
+  });
+
+  
+  $("#ResetBtn").click(function (){
+    console.log("reseting all values.");
+    $("#from").val(0);
+    $("#to").val(0);
+    $(".store").val(0);
+    $(".shift").val(0);
+    $("fromdate").val(0);
+    $("todate").val(0);
+
   });
   });
   function call_python_function(_datefrom, _dateto,_datestart)
@@ -246,7 +292,6 @@
     var _from = moment(_datefrom);
     var today =moment();
     var _to = moment(_dateto);
-    console.log(_from);
     columns = [];
     
     if (_from<=today){
@@ -270,7 +315,6 @@
     }
  
    var classname ="shift form-control";
-   console.log("columnsvalue>",columns);
     for(var i=0;i<columns.length;i++)
     {  
        
@@ -299,15 +343,12 @@
     var _from = moment(_datefrom);
     var _to = moment(_dateto);
     
-    console.log("from",_from);
     
     while(_from <= _to) 
     {
       if (_from.format("dddd")=="Friday")
        {
-      console.log("weekoff>",_from.format("dddd"),_from);
       var date=_from.format("YYYY-MM-DD");
-      console.log("formatedfrom",date);
       $(".shift[data-day="+date+"]").val("WO");
        }
        _from.add(1,"days");
@@ -347,7 +388,7 @@
   function _SetData(_data)  {
     $.each(_data,function(Idx,Item){
       var rowww = $(".emp[data-emp="+q+Item.employee_name+q+"]").parents("tr");
-      console.log("Quote>",rowww);
+     
       $(".store",rowww).val(Item.store);
       
       $(".shift[data-day="+Item.attendance_date+"]",rowww).val(Item.shift_time);

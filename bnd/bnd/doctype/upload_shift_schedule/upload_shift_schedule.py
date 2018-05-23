@@ -141,8 +141,8 @@ def upload():
 	from frappe.utils.csvutils import check_record, import_doc
 
 	for i, row in enumerate(rows[4:]):
-		print("in for loop\n\n")
-		print("row[1]",row[1])
+		# print("in for loop\n\n")
+		# print("row[1]",row[1])
 		if not row: continue
 		row_idx = i + 3
 		d = frappe._dict(zip(columns, row))
@@ -151,46 +151,45 @@ def upload():
 		d["store"] = row[3]
 		# d["attendance_date"] = rows[3][4]
 
-		print("row\n")
-		print(row)
+		# print("row\n")
+		# print(row)
 		new_date_list = []
 		new_shift_time_list = []
-		print("new logic\n")
+		# print("new logic\n")
 		for i in rows[3]:
 			new_date_list.append(i)
 		new_date_list=new_date_list[4:]
 
 
 		new_shift_time_list=row[4:]
-		print("\n new new_date_list",new_date_list)
-		print("\n new new_shift_time_list",new_shift_time_list)
-		print(len(new_shift_time_list),"new_shift_time_list\n")
-		# print(row[1])
-		# length_of_dates=len(new_shift_time_list)
+
 		length_of_dates=8
 
 		for i in range(length_of_dates-1):
-			print("\n",i)
 			print(new_shift_time_list[i])
-			print(new_date_list[i])
-			d["attendance_date"] = new_date_list[i]
-			d["shift_time"] = new_shift_time_list[i]			
+			print(type(str(new_date_list[i])))
 
-			import datetime
-			# new_date = datetime.datetime.strptime(row[11],'%d-%b-%y').strftime('%d-%m-%Y')
-			# d["date"] = new_date
+			if new_shift_time_list[i] is not None:
+				d["attendance_date"] = new_date_list[i]
+				d["shift_time"] = new_shift_time_list[i]			
 
-			if d.name:
-				d["docstatus"] = frappe.db.get_value("Shift Schedule", d.name, "docstatus")
+				import datetime
+				# new_date = datetime.datetime.strptime(row[11],'%d-%b-%y').strftime('%d-%m-%Y')
+				# d["date"] = new_date
 
-			try:
-				check_record(d)
-				ret.append(import_doc(d, "Shift Schedule", 1, row_idx, submit=True))
-			except Exception, e:
-				error = True
-				ret.append('Error for row (#%d) %s : %s' % (row_idx,
-					len(row)>1 and row[1] or "", cstr(e)))
-				frappe.errprint(frappe.get_traceback())
+				if d.name:
+					d["docstatus"] = frappe.db.get_value("Shift Schedule", d.name, "docstatus")
+
+				try:
+					check_record(d)
+					ret.append(import_doc(d, "Shift Schedule", 1, row_idx, submit=True))
+				except Exception, e:
+					error = True
+					ret.append('Error for row (#%d) %s : %s' % (row_idx,
+						len(row)>1 and row[1] or "", cstr(e)))
+					frappe.errprint(frappe.get_traceback())
+			else:
+				pass
 
 	if error:
 		frappe.db.rollback()
