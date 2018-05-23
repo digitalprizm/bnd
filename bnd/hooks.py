@@ -40,8 +40,11 @@ doc_events = {
 	"Salary Slip": {
 		"validate": "bnd.custom_methods.salary_slip",
 			},
-	"Leave Application": {
-		"validate": "bnd.custom_methods.create_attendance",
+	# "Leave Application": {
+	# 	"validate": "bnd.custom_methods.create_attendance",
+	# 		},
+	"Employee": {
+		"validate": "bnd.custom_methods.employee_reg_validate",
 			}
 }
 # Home Pages
