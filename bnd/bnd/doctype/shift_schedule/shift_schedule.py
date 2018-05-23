@@ -15,7 +15,7 @@ class ShiftSchedule(Document):
 		self.validate_linked_data()
 		self.validate_duplicate_record()
 		self.validate_shift_type()
-		self.shift_schedule()
+		self.validate_attendance_date()
 
 	def validate_linked_data(self):
 		if self.employee:
@@ -38,7 +38,7 @@ class ShiftSchedule(Document):
 			(self.employee, self.attendance_date, self.name))
 		if res:
 			frappe.throw(_("Shift Schedule for employee {0} is already created").format(self.employee))
-	def shift_schedule(self):
+	def validate_attendance_date(self):
 		attendance_date = self.attendance_date
 		date = frappe.utils.nowdate()
 		if attendance_date < date:

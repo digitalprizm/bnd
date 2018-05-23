@@ -11,7 +11,7 @@ class ShiftScheduleException(Document):
 	def validate(self):
 		self.validate_duplicate_record()
 		self.get_shift_schedule()
-		self.shift_schedule_exception()
+		self.validate_attendance_date()
 
 	def get_shift_schedule(self):
 		data=frappe.db.sql("""select employee, employee_name, 
@@ -32,7 +32,7 @@ class ShiftScheduleException(Document):
 			frappe.throw(("Shift schedule exception for employee {0} is already created").format(self.employee))
 
 		
-	def shift_schedule_exception(self):
+	def validate_attendance_date(self):
 		attendance_date = self.attendance_date
 		date = now.strftime("%Y-%m-%d")
 		if attendance_date<date:
