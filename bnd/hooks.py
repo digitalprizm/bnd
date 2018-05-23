@@ -47,10 +47,10 @@ doc_events = {
 		"validate": "bnd.custom_methods.employee_reg_validate",
 			},
 	"Shift Schedule Exception": {
-		"validate": "bnd.custom_methods.shift_schedule_exception",
+		"validate": "bnd.bnd.doctype.shift_schedule_exception",
 			},
 	"Shift Schedule": {
-		"validate": "bnd.custom_methods.shift_schedule",
+		"validate": "bnd.bnd.doctype.shift_schedule",
 			}
 }
 # Home Pages

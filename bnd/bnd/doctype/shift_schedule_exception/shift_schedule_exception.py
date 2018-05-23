@@ -5,11 +5,13 @@
 from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
-
+import datetime
+now = datetime.datetime.now()
 class ShiftScheduleException(Document):
 	def validate(self):
 		self.validate_duplicate_record()
 		self.get_shift_schedule()
+		self.shift_schedule_exception()
 
 	def get_shift_schedule(self):
 		data=frappe.db.sql("""select employee, employee_name, 
@@ -30,3 +32,8 @@ class ShiftScheduleException(Document):
 			frappe.throw(("Shift schedule exception for employee {0} is already created").format(self.employee))
 
 		
+	def shift_schedule_exception(self):
+		attendance_date = self.attendance_date
+		date = now.strftime("%Y-%m-%d")
+		if attendance_date<date:
+			frappe.throw("Attendance Date Can Not Less Than To Current Date")

@@ -6,13 +6,16 @@ from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
 from frappe import _
-
+import datetime
+from frappe import utils
+now = datetime.datetime.now()
 
 class ShiftSchedule(Document):
 	def validate(self):
 		self.validate_linked_data()
 		self.validate_duplicate_record()
 		self.validate_shift_type()
+		self.shift_schedule()
 
 	def validate_linked_data(self):
 		if self.employee:
@@ -35,3 +38,9 @@ class ShiftSchedule(Document):
 			(self.employee, self.attendance_date, self.name))
 		if res:
 			frappe.throw(_("Shift Schedule for employee {0} is already created").format(self.employee))
+	def shift_schedule(self):
+		attendance_date = self.attendance_date
+		date = frappe.utils.nowdate()
+		if attendance_date < date:
+			frappe.throw("Attendance Date Can Not Less Than To Todays Date")
+		
