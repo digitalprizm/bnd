@@ -5,6 +5,8 @@ from frappe.utils import flt, time_diff_in_hours, get_datetime, getdate, today, 
 from frappe import _
 from frappe.utils import cint, cstr, date_diff, flt, formatdate, getdate, get_link_to_form, \
 	comma_or, get_fullname
+import datetime
+now = datetime.datetime.now()
 # from frappe.utils import (flt, getdate, get_first_day, get_last_day, date_diff,
 # 	add_months, add_days, formatdate, cint)
 
@@ -112,5 +114,20 @@ def employee_reg_validate(doc,method):
 		# 	frappe.throw("Resignation Letter Date Can Not Be Blank")
 		else:
 		 if relieving_date<=resignation_letter_date:
-			frappe.throw("Relieving Date must be greater than Resignation Letter Date"+'<br>'+"Relieving Date Is"+" : "+str(relieving_date)+" <br>"+"Resignation Letter Date Is"+' : '+str(resignation_letter_date))
+			frappe.throw("Relieving Date Must Be Greater Than Resignation Letter Date"+'<br>'+"Relieving Date Is"+" : "+str(relieving_date)+" <br>"+"Resignation Letter Date Is"+' : '+str(resignation_letter_date))
 		
+
+@frappe.whitelist()
+def shift_schedule_exception(doc,method):
+	attendance_date = doc.attendance_date
+	date=now.strftime("%Y-%m-%d")
+	if attendance_date<date:
+		
+		frappe.throw("Attendance Date Can Not Less Than To Current Date")
+
+@frappe.whitelist()
+def shift_schedule(doc,method):
+	attendance_date = doc.attendance_date
+	date=now.strftime("%Y-%m-%d")
+	if attendance_date<date:
+		frappe.throw("Attendance Date Can Not Less Than To Todays Date")
