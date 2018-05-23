@@ -108,26 +108,13 @@ def employee_reg_validate(doc,method):
 	# frappe.msgprint("relieving_date"+relieving_date+" <br>"+"resignation_letter_date"+resignation_letter_date)
 	if resignation_letter_date:
 
-		if relieving_date is None or resignation_letter_date is None:
+		if relieving_date is None:
 			frappe.throw("Resignation Letter Date And Relieving Date Can Not Be None")
 		# elif resignation_letter_date is None:
 		# 	frappe.throw("Resignation Letter Date Can Not Be Blank")
 		else:
 		 if relieving_date<=resignation_letter_date:
-			frappe.throw("Relieving Date Must Be Greater Than Resignation Letter Date"+'<br>'+"Relieving Date Is"+" : "+str(relieving_date)+" <br>"+"Resignation Letter Date Is"+' : '+str(resignation_letter_date))
+			frappe.throw("Relieving Date Must Be Greater Than Resignation Letter Date")
 		
 
-@frappe.whitelist()
-def shift_schedule_exception(doc,method):
-	attendance_date = doc.attendance_date
-	date=now.strftime("%Y-%m-%d")
-	if attendance_date<date:
-		
-		frappe.throw("Attendance Date Can Not Less Than To Current Date")
 
-@frappe.whitelist()
-def shift_schedule(doc,method):
-	attendance_date = doc.attendance_date
-	date=now.strftime("%Y-%m-%d")
-	if attendance_date<date:
-		frappe.throw("Attendance Date Can Not Less Than To Todays Date")
