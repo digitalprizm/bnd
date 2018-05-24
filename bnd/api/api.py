@@ -166,7 +166,7 @@ def get_shift_schedule_list(attendance_date=None,store=None,employee=None):
 				end as enroll_number,
 			leave_type, attendance_date, company, store, shift_time, start_time, end_time, amended_from\
 	    	FROM `tabShift Schedule` 
-	    	WHERE attendance_date='{0}' and store='{1}'""".format(attendance_date,store),as_dict=1)
+	    	WHERE attendance_date='{0}' and store='{1}' and docstatus = 1""".format(attendance_date,store),as_dict=1)
 	elif attendance_date and employee:
 		shift_schedule_details = frappe.db.sql("""select  employee_name, 
 			employee, 
@@ -177,7 +177,7 @@ def get_shift_schedule_list(attendance_date=None,store=None,employee=None):
 				end as enroll_number,
 			leave_type, attendance_date, company, store, shift_time, start_time, end_time, amended_from\
 	    	FROM `tabShift Schedule` 
-	    	WHERE attendance_date='{0}' and employee='{1}'""".format(attendance_date,employee),as_dict=1)
+	    	WHERE attendance_date='{0}' and employee='{1}' and docstatus = 1""".format(attendance_date,employee),as_dict=1)
 	else:
 		shift_schedule_details = frappe.db.sql("""select  employee_name, employee, 
 			case when (1=1)
@@ -207,7 +207,7 @@ def get_shift_schedule_exception_list(attendance_date=None):
 			attendance_date, company, amended_from, shift_schedule_old_time, 
 			old_store_location, shift_schedule, shift_schedule__new_time,new_shift_start_time, new_shift_end_time, 
 			store_location, store_location_out, new_store_location, reason, comment\
-	    	from `tabShift Schedule Exception` WHERE attendance_date='{0}'""".format(attendance_date),as_dict=1)
+	    	from `tabShift Schedule Exception` WHERE attendance_date='{0}' and docstatus = 1""".format(attendance_date),as_dict=1)
 	else:
 		shift_schedule_exception_details = frappe.db.sql("""select  employee_name, 
 			employee, 
