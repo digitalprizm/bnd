@@ -22,8 +22,11 @@ class ShiftScheduleException(Document):
 		if data:
 			self.old_store_location = data[0].store
 			self.shift_schedule_old_time = data[0].shift_time
+			self.store_location = data[0].store
+			self.shift_schedule__new_time = data[0].shift_time
 		else :
 			frappe.msgprint("Shift schedule is Not found")
+		
 	def validate_duplicate_record(self):
 		res = frappe.db.sql("""select name from `tabShift Schedule Exception` where employee = %s and attendance_date = %s
 			and name != %s and docstatus = 1""",
