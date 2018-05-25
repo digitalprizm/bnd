@@ -19,11 +19,25 @@ class ShiftScheduleException(Document):
 			from `tabShift Schedule` 
 			where employee='{0}' and attendance_date ='{1}'and docstatus='1' limit 1
 		 """.format(self.employee,self.attendance_date), as_dict=1)
+		
+		data1=frappe.db.sql("""select break_time,ot_hrs 
+			from `tabShift Time`""", as_dict=1)
+		if data1:
+			self.break_time = data1[0].break_time
+			self.ot_hrs = data1[0].ot_hrs
+			a = self.ot_hrs
+			b = self.break_time
+			# frappe.msgprint("break_time"+str(b)+"<br>"+"ot_hrs"+str(a))
+		
 		if data:
 			self.old_store_location = data[0].store
 			self.shift_schedule_old_time = data[0].shift_time
 			self.store_location = data[0].store
 			self.shift_schedule__new_time = data[0].shift_time
+			time = self.shift_schedule_old_time
+			self.new_shift_start_time = time[0:7].replace("-", ' ',4)
+			self.new_shift_end_time = time[7:].replace("-", ' ')
+			# frappe.msgprint("New Shift Start Time"+str(time[0:7]).replace("-", ' ')+"<br>"+"New Shift End Time"+str(time[7:]).replace("-", ' '))
 		else :
 			frappe.msgprint("Shift schedule is Not found")
 		
