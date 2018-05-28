@@ -20,8 +20,8 @@ def salary_slip(doc,method):
 		doc.deduction_days = deduction[0]
 		doc.deduction_amount = deduction[1]
 		if doc.deduction_amount >= 1 or doc.deduction_days >=1 :
-			frappe.msgprint('Deduction days:'+ str(doc.deduction_days) )
-			frappe.msgprint('Deduction amount:'+ str(doc.deduction_amount) )
+			frappe.msgprint('Deduction Days: '+ str(doc.deduction_days) )
+			frappe.msgprint('Deduction Amount: '+ str(doc.deduction_amount) )
 
 	flag = False
 	for i in doc.deductions:
@@ -63,20 +63,38 @@ def salary_slip(doc,method):
 	from `tabAttendance` where (attendance_date between '{0}' and '{1}') and employee='{2}' """.format(doc.start_date, doc.end_date, doc.employee)
 	ot_data = frappe.db.sql(ot_hours,as_list=1,debug=1)
 	ot=ot_data[0]
-	frappe.msgprint("OT Hours "+str(ot[0]))
+	# frappe.msgprint("OT Hours "+str(ot[0]))
 	a = 0
 	for i in doc.earnings:
 		# print("\n",i.amount)
 		# frappe.msgprint(str(i.salary_component)+str(i.amount))
 		if i.salary_component!="Housing Allow":
 			a =a+i.amount
-	frappe.msgprint("earnings"+str(a))
+	frappe.msgprint("Total Earnings without HA: "+str(a))
 	b =0
 	for j in doc.deductions:
 		b = b+j.amount
-	frappe.msgprint("deductions"+str(b))
+	frappe.msgprint("Total Deductions: "+str(b))
 	total_absent_days = doc.total_absent_days
-	frappe.msgprint("total_absent_days"+str(total_absent_days))
+	frappe.msgprint("Total Absent Days from Attendance: "+str(total_absent_days))
+
+	deductions_days_amt = (a+b)*12/360
+	print(deductions_days_amt)
+
+
+
+	flag_deduction_days = False
+	for i in doc.deductions:
+		if i.salary_component == "Violation Deduction Days":
+			flag = True
+			i.amount = deductions_days_amt*doc.deduction_days
+	if flag_deduction_days:
+		pass
+	elif doc.deduction_amount >= 1:
+		row = doc.append('deductions', {})
+		row.salary_component = "Violation Deduction Days"
+		row.amount = deductions_days_amt*doc.deduction_days
+
 # @frappe.whitelist()
 # def create_attendance(doc,method):
 
