@@ -1,19 +1,19 @@
 html, body{
 	font-size: 16px !important;
 }
-.app-icon .inner, .app-icon i{
+/*.app-icon .inner, .app-icon i{
 	font-size:50px !important;
-}
-.case-wrapper {
-    width: 200px !important;
-    height: 200px !important;
-}
+}*/
+/*.case-wrapper {
+    width: 128px !important;
+    height: 130px !important;
+}*/
 .result * {
     font-size: 16px !important;
 }
-.case-label {
+/*.case-label {
 	font-size: 16px !important;
-}
+}*/
 
 .control-label {
 	color: #000000	 !important;
@@ -28,10 +28,10 @@ html, body{
 
 /*icon size*/
 
-.app-icon .inner, .app-icon i {
+/*.app-icon .inner, .app-icon i {
     font-size: 50px !important;
     min-width: 50px !important;
-}
+}*/
 
 /*navbar font size */
 
@@ -39,10 +39,10 @@ html, body{
     font-size: 16px !important;
 }    
 /* icon align center*/
-.case-wrapper {
+/*.case-wrapper {
     width: 190px !important;
     height: 190px !important;
-}
+}*/
 
  /*nav search logo */
 .navbar .navbar-search-icon {
@@ -144,13 +144,9 @@ ul li.list-link[data-view="Gantt"]{
 	display:none !important;
 }
 
-a.module-link[data-name="Buying"],
-a.module-link[data-name="CRM"],
+
 a.module-link[data-name="Setup"],
-a.module-link[data-name="HR"],
 a.module-link[data-name="Learn"],
-a.module-link[data-name="Selling"],
-a.module-link[data-name="Stock"],
 a.module-link[data-name="Website"],
 a.module-link[data-name="Manufacturing"],
 a.module-link[data-name="Projects"], 
